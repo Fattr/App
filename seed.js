@@ -1,25 +1,50 @@
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/fittr-dev");
 require('./app/models/user.js');
+require('./app/models/deviceData.js');
 
-console.log('Deleting database');
-mongoose.connection.collections['users'].drop( function(err) {
-    console.log('Users collection dropped');
-});
-
-console.log('Seeding users database');
 
 var User = mongoose.model('User');
 var userData = [
-  { name: 'Nick Loveridge', email: 'nick@fusemedia.ca', username: 'nick', password: 'test', provider: 'local' },
-  { name: 'Fred', email: 'fred@hackreactor.com', username: 'fred', password: 'test', provider: 'local' }
+  { name: 'Nick Loveridge', email: 'nick@fusemedia.ca', username: 'nick', password: 'test', provider: 'local', 
+    devices: [{ name: 'flex', company: 'fitbit', active: true, visible: true }]
+  },
+  { name: 'Fred', email: 'fred@hackreactor.com', username: 'fred', password: 'test', provider: 'local',
+    devices: [{ name: 'flex', company: 'fitbit', active: true, visible: true }]
+  }
 ];
 
-for(var i = 0; i < userData.length; i++) {
-  console.log('Saving user', userData[i])
-  var testUser = new User(userData[i]);
-  testUser.save(function(err) {
-    if(err) console.log('There was an error creating a user', err);
-    console.log('User saved!');
+var total = userData.length, result = [];
+
+function saveUsers(callback){
+  var user = new User(userData.pop());
+
+  user.save(function(err, saved){
+    if (err) throw err; //handle error
+
+    if (--total) {
+      saveUsers(callback);
+    } else {
+      // make the callback
+      callback();
+    }
+
   });
 }
+
+var seedDeviceData = function(cb) {
+  console.log('Seeding device data');
+}
+
+
+console.log('Deleting database');
+mongoose.connection.collections['users'].drop( function(err) {
+  console.log('Users collection dropped');
+
+  saveUsers(function() {
+    console.log('All users saved.');
+  });
+});
+
+
+// Seed the test devices
