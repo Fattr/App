@@ -1,4 +1,0 @@
-Fittr
-=====
-
-Quantify myself
