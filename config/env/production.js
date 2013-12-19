@@ -1,5 +1,5 @@
 module.exports = {
-    db: "mongodb://localhost/mean",
+    db: "mongodb://localhost/fittr",
     app: {
         name: "MEAN - A Modern Stack - Production"
     },
