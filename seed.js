@@ -32,8 +32,10 @@ function saveUsers(callback){
   });
 }
 
-var seedDeviceData = function(cb) {
+var saveDeviceData = function(cb) {
   console.log('Seeding device data');
+
+  // find fred and get his fitbit device id.
 }
 
 
