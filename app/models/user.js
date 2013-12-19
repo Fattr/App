@@ -23,7 +23,20 @@ var UserSchema = new Schema({
     facebook: {},
     twitter: {},
     github: {},
-    google: {}
+    google: {},
+
+    // A user can have many devices devices: [{ _id: ObjectId(), name: 'flex', company: 'fitbit', active: true, visible: true }]
+    // In the device-data collection, the document (row) will correspond to the _id column above.
+    devices: [
+      new Schema({
+        name: String,
+        company: String,
+        active: Boolean,
+        visible: Boolean,
+      })
+    ],
+    active: Boolean,
+    showPublicly: Boolean
 });
 
 /**
