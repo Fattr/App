@@ -8,9 +8,12 @@ module.exports = function(app, passport, auth) {
 
     // User specific devices
     app.get('/users/devices', users.devices);
-    app.get('/users/devices/data/:id', function(req, res, next){
+
+    app.get('/users/devices/data/:id/:from?/:to?', function(req, res, next){
         var deviceId = req.params.id;
-        users.deviceData(req, res, deviceId);
+        var dateFrom = req.params.from;
+        var dateTo   = req.params.to;
+        users.deviceData(req, res, deviceId, dateFrom, dateTo);
     })
 
     //Setting up the users api

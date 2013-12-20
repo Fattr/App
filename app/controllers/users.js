@@ -93,10 +93,27 @@ exports.devices = function(req, res) {
 };
 
 // FIXME: handle no data returned.
-exports.deviceData = function(req, res, deviceId) {
-    var deviceData = FitbitSteps.find({ deviceId: deviceId }, function(err, stats){
+exports.deviceData = function(req, res, deviceId, dateFrom, dateTo) {
+    // FIXME: Verify user has access to this data.
+    var query = { deviceId: deviceId };
+
+    dateFrom = (dateFrom === '-') ? undefined : dateFrom;
+    dateTo = (dateTo === '-') ? undefined : dateTo;
+
+    if(dateFrom !== undefined && dateTo !== undefined) {
+        query.date = { $gte: dateFrom, $lte: dateTo };
+    } else {
+        if(dateFrom !== undefined) {
+            query.date = { $gte: dateFrom };
+        }
+
+        if(dateTo !== undefined) {
+            query.date = { $lte: dateTo };
+        }
+    }
+
+    var deviceData = FitbitSteps.find(query, function(err, stats){
         if(err) return console.log('Error retrieving stats', err);
-        // console.log(stats);
         res.jsonp(stats || null);
     });
 };
