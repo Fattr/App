@@ -4,27 +4,3 @@
 
 
 
-<div>
-  <div ng-controller="TabsDemoCtrl">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">User Devices</h3>
-    </div>
-    <div class="panel-body">
-      <tabset>
-        <tab heading="Static Tab">I'm using this hard-coded tab as a palceholder, the rest of the tabs will be dynaically generated</tab>
-        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
-          {{tab.content}}
-        </tab>
-        <tab select="alertMe()">
-          <tab-heading>
-            <i class="icon-bell"></i> Select me for alert!
-          </tab-heading>
-          I've got an HTML heading, and a select callback. Pretty cool!
-        </tab>
-      </tabset>
-    </div>
-  </div>
-</div>
-
-</div>
