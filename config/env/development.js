@@ -8,6 +8,10 @@ module.exports = {
         clientSecret: "APP_SECRET",
         callbackURL: "http://localhost:3000/auth/facebook/callback"
     },
+    fitbit: {
+        consumerKey: '5f870af02f9b4d91bb78d5019712d2f5',
+        consumerSecret: '9fbfae13f0f74514bfb2022581576bdd'
+    },
     twitter: {
         clientID: "CONSUMER_KEY",
         clientSecret: "CONSUMER_SECRET",
@@ -23,4 +27,4 @@ module.exports = {
         clientSecret: "Hnb0mmEgHZn7sa0wAaaeIYYY",
         callbackURL: "http://127.0.0.1:3000/auth/google/callback"
     }
-}
+};
