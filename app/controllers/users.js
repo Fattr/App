@@ -92,30 +92,73 @@ exports.devices = function(req, res) {
     res.jsonp(req.user.devices || null);
 };
 
+// Helper function
+// FIXME: Find a better place for this.
+exports.canAccessDevice = function(userId, deviceId, callback) {
+    if(!userId) return false;
+    if(!deviceId) return false;
+    var hasAccess = false;
+
+    var query = { _id: userId, 'devices._id': deviceId };
+    User.find(query, function(err, devices){
+        if(err) {
+            console.log('Error retrieving device list', err);
+        } else {
+            console.log('Devices length:', devices.length);
+            if(devices.length > 0) {
+                hasAccess = true;
+            }
+        }
+        callback(hasAccess);
+    });
+};
+
 // FIXME: handle no data returned.
+// FIXME: find better way to hand auth on a per-device basis - abstract it out.
 exports.deviceData = function(req, res, deviceId, dateFrom, dateTo) {
-    // FIXME: Verify user has access to this data.
-    var query = { deviceId: deviceId };
 
-    dateFrom = (dateFrom === '-') ? undefined : dateFrom;
-    dateTo = (dateTo === '-') ? undefined : dateTo;
-
-    if(dateFrom !== undefined && dateTo !== undefined) {
-        query.date = { $gte: dateFrom, $lte: dateTo };
-    } else {
-        if(dateFrom !== undefined) {
-            query.date = { $gte: dateFrom };
-        }
-
-        if(dateTo !== undefined) {
-            query.date = { $lte: dateTo };
-        }
+    // No user logged in.
+    if(!req.user) {
+        res.jsonp(null);
+        return;
     }
 
-    var deviceData = FitbitSteps.find(query, function(err, stats){
-        if(err) return console.log('Error retrieving stats', err);
-        res.jsonp(stats || null);
+    // console.log('User info', req.user);
+    exports.canAccessDevice(req.user._id, deviceId, function(hasAccess) {
+        if(!hasAccess) {
+            console.log('WARNING: User id:', req.user._id, 'is trying to access device', deviceId);
+            res.jsonp(null);
+            return;
+        }
+
+        var query = { deviceId: deviceId };
+
+        dateFrom = (dateFrom === '-') ? undefined : dateFrom;
+        dateTo = (dateTo === '-') ? undefined : dateTo;
+
+        if(dateFrom !== undefined && dateTo !== undefined) {
+            query.date = { $gte: dateFrom, $lte: dateTo };
+        } else {
+            if(dateFrom !== undefined) {
+                query.date = { $gte: dateFrom };
+            }
+
+            if(dateTo !== undefined) {
+                query.date = { $lte: dateTo };
+            }
+        }
+
+        FitbitSteps.find(query, function(err, stats){
+            if(err) {
+                // return console.log('Error retrieving stats', err)
+                console.log('Error retrieving stats', err);
+                res.jsonp(null);
+            }
+            res.jsonp(stats || null);
+        });
+
     });
+
 };
 
 /**
