@@ -72,7 +72,7 @@ var saveDeviceData = function(deviceId, cb) {
     // Remove commas from strings.
     for(var key in deviceData[i]) {
       if(key !== 'date' && key !== 'deviceId') {
-        console.log('Replacing comma on key', key, deviceData[i][key]);
+        // console.log('Replacing comma on key', key, deviceData[i][key]);
         deviceData[i][key] = deviceData[i][key].replace(/,/g, "");
       }
     }
@@ -94,17 +94,16 @@ csv()
   return row;
 })
 .on('record', function(row,index){
-  // console.log('#'+index+' '+JSON.stringify(row));
+  console.log(JSON.stringify(row));
   // Skip the header file.
   if( index > 0 ) {
     obj = {
       date: row[1],
-      caloriesBurned: row[0],
+      caloriesBurned: row[2],
       steps: row[3],
-      distance: row[3], 
-      seditaryMin: row[5], 
-      lightActMin: row[6], 
-      fairlyActMin: row[7], 
+      distance: row[4], 
+      seditaryMin: row[6], 
+      lightActMin: row[7], 
       fairlyActMin: row[8], 
       veryActMin: row[9] 
     };

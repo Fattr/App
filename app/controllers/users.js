@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    FitbitSteps = mongoose.model('FitbitSteps');
 
 /**
  * Auth callback
@@ -82,6 +83,22 @@ exports.create = function(req, res) {
  */
 exports.me = function(req, res) {
     res.jsonp(req.user || null);
+};
+
+/**
+ * List of user devices
+ */
+exports.devices = function(req, res) {
+    res.jsonp(req.user.devices || null);
+};
+
+// FIXME: handle no data returned.
+exports.deviceData = function(req, res, deviceId) {
+    var deviceData = FitbitSteps.find({ deviceId: deviceId }, function(err, stats){
+        if(err) return console.log('Error retrieving stats', err);
+        // console.log(stats);
+        res.jsonp(stats || null);
+    });
 };
 
 /**

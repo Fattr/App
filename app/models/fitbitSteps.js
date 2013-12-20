@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema
+    Schema = mongoose.Schema;
 
 /**
  * Device Data Schema
