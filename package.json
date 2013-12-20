@@ -39,7 +39,8 @@
     "grunt": "latest",
     "grunt-cli": "latest",
     "grunt-env": "latest",
-    "mongo-migrate": "0.0.6"
+    "mongo-migrate": "0.0.6",
+    "csv": "~0.3.6"
   },
   "devDependencies": {
     "supertest": "latest",
