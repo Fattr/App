@@ -15,8 +15,7 @@ angular.module('mean').config(['$routeProvider',
         templateUrl: 'views/articles/view.html'
     }).
     when('/dashboard', {
-        templateUrl: 'views/Dashboard/dashboard.html',
-        controller: 'DashboardCtrl'
+        templateUrl: 'views/Dashboard/dashboard.html'
     }).
     when('/', {
         templateUrl: 'views/index.html'
