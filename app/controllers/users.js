@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    FitbitSteps = mongoose.model('FitbitSteps');
 
 /**
  * Auth callback
@@ -82,6 +83,39 @@ exports.create = function(req, res) {
  */
 exports.me = function(req, res) {
     res.jsonp(req.user || null);
+};
+
+/**
+ * List of user devices
+ */
+exports.devices = function(req, res) {
+    res.jsonp(req.user.devices || null);
+};
+
+// FIXME: handle no data returned.
+exports.deviceData = function(req, res, deviceId, dateFrom, dateTo) {
+    // FIXME: Verify user has access to this data.
+    var query = { deviceId: deviceId };
+
+    dateFrom = (dateFrom === '-') ? undefined : dateFrom;
+    dateTo = (dateTo === '-') ? undefined : dateTo;
+
+    if(dateFrom !== undefined && dateTo !== undefined) {
+        query.date = { $gte: dateFrom, $lte: dateTo };
+    } else {
+        if(dateFrom !== undefined) {
+            query.date = { $gte: dateFrom };
+        }
+
+        if(dateTo !== undefined) {
+            query.date = { $lte: dateTo };
+        }
+    }
+
+    var deviceData = FitbitSteps.find(query, function(err, stats){
+        if(err) return console.log('Error retrieving stats', err);
+        res.jsonp(stats || null);
+    });
 };
 
 /**

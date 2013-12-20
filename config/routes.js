@@ -6,6 +6,16 @@ module.exports = function(app, passport, auth) {
     app.get('/signout', users.signout);
     app.get('/users/me', users.me);
 
+    // User specific devices
+    app.get('/users/devices', users.devices);
+
+    app.get('/users/devices/data/:id/:from?/:to?', function(req, res, next){
+        var deviceId = req.params.id;
+        var dateFrom = req.params.from;
+        var dateTo   = req.params.to;
+        users.deviceData(req, res, deviceId, dateFrom, dateTo);
+    })
+
     //Setting up the users api
     app.post('/users', users.create);
 
