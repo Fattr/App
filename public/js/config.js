@@ -1,6 +1,5 @@
 //Setting up route
-angular.module('mean').config(['$routeProvider',
-  function($routeProvider) {
+angular.module('mean').config(function($routeProvider,$locationProvider){
     $routeProvider.
     when('/articles', {
         templateUrl: 'views/articles/list.html'
@@ -23,8 +22,7 @@ angular.module('mean').config(['$routeProvider',
     otherwise({
         redirectTo: '/'
     });
-  }
-]);
+});
 
 //Setting HTML5 Location Mode
 angular.module('mean').config(['$locationProvider',

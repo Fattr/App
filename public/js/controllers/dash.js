@@ -1,73 +1,22 @@
 angular.module('mean.dashboard')
 
-.controller('DashboardCtrl', function  ($scope) {
+.factory('fitbit', function($http, $location) {
+  var services = {
+    auth: function() {
+      console.log('called');
+      $http({
+        method: 'GET',
+        url: 'http://127.0.0.1:8000/auth/fitbit'
+      }).then(function(result) {
+        window.location = result.data;
+      });
+    }
+  };
+  return services;
+})
+.controller('DashboardCtrl', function  ($scope, fitbit) {
   $scope.name = 'dash';
-  $scope.chartConfig = {
-  "options": {
-    "chart": {
-      "type": "areaspline"
-    },
-    "plotOptions": {
-      "series": {
-        "stacking": ""
-      }
-    }
-  },
-  "series": [
-    {
-      "name": "Some data",
-      "data": [
-        1,
-        2,
-        4,
-        7,
-        3
-      ],
-      "id": "series-0"
-    },
-    {
-      "name": "Some data 3",
-      "data": [
-        3,
-        1,
-        null,
-        5,
-        2
-      ],
-      "connectNulls": true,
-      "id": "series-1"
-    },
-    {
-      "name": "Some data 2",
-      "data": [
-        5,
-        2,
-        2,
-        3,
-        5
-      ],
-      "type": "column",
-      "id": "series-2"
-    },
-    {
-      "name": "My Super Column",
-      "data": [
-        1,
-        1,
-        2,
-        3,
-        2
-      ],
-      "type": "column",
-      "id": "series-3"
-    }
-  ],
-  "title": {
-    "text": "Hello"
-  },
-  "credits": {
-    "enabled": true
-  },
-  "loading": false
-}
+  $scope.auth = function() {
+    fitbit.auth();
+  }
 });
