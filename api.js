@@ -1,5 +1,5 @@
 var express = require('express'),
-    fitbitClient = require('fitbit-js')('5f870af02f9b4d91bb78d5019712d2f5', '9fbfae13f0f74514bfb2022581576bdd', 'http://127.0.0.1:3000/#!/dashboard');
+    fitbitClient = require('fitbit-js')('5f870af02f9b4d91bb78d5019712d2f5', '9fbfae13f0f74514bfb2022581576bdd', 'http://127.0.0.1:3000/ ');
 
 var api = express();
 
