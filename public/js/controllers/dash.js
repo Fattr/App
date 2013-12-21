@@ -6,6 +6,8 @@ angular.module('mean.dashboard')
       $http({
         method: 'GET',
         url: 'http://127.0.0.1:8000/auth/fitbit'
+      }).success(function(data) {
+        console.log(data);
       });
     }
   };

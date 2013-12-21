@@ -1,9 +1,25 @@
 var express = require('express'),
-    fitbitClient = require('fitbit-js');
-
-    console.log('fit',fitbitClient);
+    fitbitClient = require('fitbit-js')('5f870af02f9b4d91bb78d5019712d2f5', '9fbfae13f0f74514bfb2022581576bdd', 'http://127.0.0.1:3000/#!/dashboard');
 
 var api = express();
+
+var allowCrossDomain = function(req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+  // intercept OPTIONS method
+  if (req.method == 'OPTIONS') {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+};
+
+api.use(allowCrossDomain);
+api.use(express.bodyParser());
+api.use(express.methodOverride());
 
 
 var token;
