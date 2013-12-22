@@ -1,50 +1,47 @@
 var express = require('express'),
-    fitbitClient = require('fitbit-js')('5f870af02f9b4d91bb78d5019712d2f5', '9fbfae13f0f74514bfb2022581576bdd', 'http://127.0.0.1:3000/ ');
+    config = require('./public/api_config');
 
-var api = express();
 
-var allowCrossDomain = function(req, res, next) {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-  // intercept OPTIONS method
-  if (req.method == 'OPTIONS') {
-    res.send(200);
-  }
-  else {
-    next();
-  }
-};
+var app = express();
+app.use(express.bodyParser());
+app.use(express.cookieParser('sess'));
+app.use(config.allowCrossDomain);
 
-api.use(allowCrossDomain);
-api.use(express.bodyParser());
-api.use(express.methodOverride());
 
+
+var PORT = process.argv[4] || 8553;
+
+var fitbitClient = require('fitbit-js')(config.consumerKey, config.consumerSecret,
+                                  'http://localhost:' + PORT);
 
 var token;
-api.get('/auth/fitbit', function (req, res) {
+app.get('/', function (req, res) {
+  console.log(req.method);
   fitbitClient.getAccessToken(req, res, function (error, newToken) {
     if(newToken) {
       token = newToken;
+      // res.writeHead(200, {'Content-Type':'text/html'});
+      res.redirect('http://127.0.0.1:3000/#!/dashboard');
     }
   });
 });
 
-api.get('/getStuff', function (req, res) {
-  fitbitClient.apiCall('GET', '/user/-/activities/date/2013-12-19.json',
+app.get('/getStuff', function (req, res) {
+  fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
     {token: {oauth_token_secret: token.oauth_token_secret,
              oauth_token: token.oauth_token}},
     function(err, resp, json) {
+      console.log("Bang!",arguments)
       if (err) return res.send(err, 500);
       res.json(json);
   });
 });
 
-api.get('/cookie', function(req, res) {
+app.get('/cookie', function(req, res) {
   res.send('wahoo!');
 });
 
-var port = 8000;
-api.listen(port);
-console.log('running');
+
+app.listen(PORT);
+console.log('listening at http://localhost:' + PORT + '/');
