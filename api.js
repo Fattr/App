@@ -16,6 +16,7 @@ var fitbitClient = require('fitbit-js')(config.consumerKey, config.consumerSecre
 
 var token;
 app.get('/', function (req, res) {
+  console.log('user', req.user);
   console.log('Serving a ' + req.method + ' request');
   fitbitClient.getAccessToken(req, res, function (error, newToken) {
     if(newToken) {
