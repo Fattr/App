@@ -29,5 +29,5 @@ angular.module('mean.dashboard')
   };
   $scope.getData = function(){
     fitbit.getData();
-  }
+  };
 });
