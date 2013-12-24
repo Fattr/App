@@ -10,60 +10,60 @@ module.exports = function(app, passport, auth) {
     app.get('/users/devices', users.devices);
 
     app.get('/users/devices/data/:id/:from?/:to?', function(req, res, next){
-        var deviceId = req.params.id;
-        var dateFrom = req.params.from;
-        var dateTo   = req.params.to;
-        users.deviceData(req, res, deviceId, dateFrom, dateTo);
-    })
+      var deviceId = req.params.id;
+      var dateFrom = req.params.from;
+      var dateTo   = req.params.to;
+      users.deviceData(req, res, deviceId, dateFrom, dateTo);
+    });
 
     //Setting up the users api
     app.post('/users', users.create);
 
     //Setting the local strategy route
     app.post('/users/session', passport.authenticate('local', {
-        failureRedirect: '/signin',
-        failureFlash: true
+      failureRedirect: '/signin',
+      failureFlash: true
     }), users.session);
 
     //Setting the facebook oauth routes
     app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: ['email', 'user_about_me'],
-        failureRedirect: '/signin'
+      scope: ['email', 'user_about_me'],
+      failureRedirect: '/signin'
     }), users.signin);
 
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        failureRedirect: '/signin'
+      failureRedirect: '/signin'
     }), users.authCallback);
 
     //Setting the github oauth routes
     app.get('/auth/github', passport.authenticate('github', {
-        failureRedirect: '/signin'
+      failureRedirect: '/signin'
     }), users.signin);
 
     app.get('/auth/github/callback', passport.authenticate('github', {
-        failureRedirect: '/signin'
+      failureRedirect: '/signin'
     }), users.authCallback);
 
     //Setting the twitter oauth routes
     app.get('/auth/twitter', passport.authenticate('twitter', {
-        failureRedirect: '/signin'
+      failureRedirect: '/signin'
     }), users.signin);
 
     app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-        failureRedirect: '/signin'
+      failureRedirect: '/signin'
     }), users.authCallback);
 
     //Setting the google oauth routes
     app.get('/auth/google', passport.authenticate('google', {
-        failureRedirect: '/signin',
-        scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-        ]
+      failureRedirect: '/signin',
+      scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+      ]
     }), users.signin);
 
     app.get('/auth/google/callback', passport.authenticate('google', {
-        failureRedirect: '/signin'
+      failureRedirect: '/signin'
     }), users.authCallback);
 
     //Finish with setting up the userId param
@@ -84,4 +84,4 @@ module.exports = function(app, passport, auth) {
     var index = require('../app/controllers/index');
     app.get('/', index.render);
 
-};
+  };

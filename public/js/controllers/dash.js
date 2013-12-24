@@ -10,12 +10,12 @@ angular.module('mean.dashboard')
         window.location = data.data;
       });
     },
-    getData: function() {
+    getData: function(callback) {
       $http({
         method: "GET",
         url: "http://127.0.0.1:8553/getStuff"
       }).then(function(data) {
-        console.log('angular',data);
+        callback(data);
       });
     }
   };
@@ -27,7 +27,12 @@ angular.module('mean.dashboard')
   $scope.auth = function() {
     fitbit.auth();
   };
+  $scope.display = function(data) {
+    console.log('gots the data');
+    $scope.data = data;
+  };
   $scope.getData = function(){
-    fitbit.getData();
-  }
+    fitbit.getData($scope.display);
+  };
+
 });
