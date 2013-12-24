@@ -25,13 +25,13 @@ app.get('/', function (req, res) {
     }
   });
 });
-
+console.log('token', token);
 app.get('/getStuff', function (req, res) {
   fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
     {token: {oauth_token_secret: token.oauth_token_secret,
              oauth_token: token.oauth_token}},
     function(err, resp, json) {
-      console.log('bah!!');
+      console.log('toke', token);
       if (err) return res.send(err, 500);
       res.send(json);
   });
