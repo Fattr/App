@@ -2,25 +2,23 @@
 
 // Declare app level module which depends on filters, and services
 
-angular.module('myApp', [
-  'myApp.controllers',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives'
-]).
-config(function ($routeProvider, $locationProvider) {
+angular.module('Fittr', [
+  'ngRoute'
+])
+.config(function ($routeProvider, $locationProvider) {
   $routeProvider.
-    when('/view1', {
-      templateUrl: 'partials/partial1',
-      controller: 'MyCtrl1'
+    when('/signup', {
+      templateUrl: '../views/signup.html',
+      controller: 'Signup'
     }).
-    when('/view2', {
-      templateUrl: 'partials/partial2',
-      controller: 'MyCtrl2'
+    when('/dashboard', {
+      templateUrl: '../views/dashboard.html',
+      controller: 'Dashboard'
+    }).
+    when('/signout', {
+      redirectTo: '/'
     }).
     otherwise({
-      redirectTo: '/view1'
+      redirectTo: '/'
     });
-
-  $locationProvider.html5Mode(true);
 });

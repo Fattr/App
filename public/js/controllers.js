@@ -2,26 +2,14 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('AppCtrl', function ($scope, $http) {
-
-    $http({
-      method: 'GET',
-      url: '/api/name'
-    }).
-    success(function (data, status, headers, config) {
-      $scope.name = data.name;
-    }).
-    error(function (data, status, headers, config) {
-      $scope.name = 'Error!'
-    });
+angular.module('Fittr')
+  .controller('AppCtrl', function ($scope, $http) {
+    $scope.name = 'Fittr';
+  }).
+  controller('Signup', function ($scope) {
+    $scope.name = 'Signup';
 
   }).
-  controller('MyCtrl1', function ($scope) {
-    // write Ctrl here
-
-  }).
-  controller('MyCtrl2', function ($scope) {
-    // write Ctrl here
-
+  controller('Dashboard', function ($scope) {
+    $scope.name = 'Dash';
   });
