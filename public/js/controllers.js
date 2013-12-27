@@ -21,7 +21,7 @@ controller('Signup', function ($scope, $http) {
 
 }).
 controller('Dashboard', function ($scope) {
-  $scope.name = 'Dash';
+  $scope.name = 'Dashboard';
 }).
 controller('ChartCtrl', function ($scope) {
   $scope.data = data;
