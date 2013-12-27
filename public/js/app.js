@@ -3,7 +3,8 @@
 // Declare app level module which depends on filters, and services
 
 angular.module('Fittr', [
-  'ngRoute'
+  'ngRoute',
+  'nvd3ChartDirectives'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
   console.log('HTTP stuff',$httpProvider.defaults);
