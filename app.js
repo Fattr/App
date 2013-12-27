@@ -74,10 +74,7 @@ app.configure(function(){
 
 //--------------------------------------------------------//
 
-// app.get('views/*', auth, function(req, res) {
-//   console.log('dash auth', req.isAuthenticated());
-//   res.sendfile(__dirname + '/public/index.html');
-// });
+
 var token = {};
 app.get('/getStuff', function (req, res) {
   fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
@@ -91,11 +88,6 @@ app.get('/getStuff', function (req, res) {
 app.get('/', function(req, res) {
   console.log('auth',req.isAuthenticated());
   res.sendfile(__dirname + '/public/index.html');
-});
-
-app.get('/', function(req, res) {
-  console.log('auth',req.isAuthenticated());
-	res.sendfile(__dirname + '/public/index.html');
 });
 
 //---------------------------------------------------------//
