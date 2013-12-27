@@ -59,14 +59,6 @@ app.configure(function(){
   }
 });
 
-var auth = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    res.send(401);
-  } else {
-    next();
-  }
-};
-
 //--------------------------------------------------------//
 
 // app.get('views/*', auth, function(req, res) {
@@ -104,5 +96,13 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-app.listen(3000);
+var auth = function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.send(401);
+  } else {
+    next();
+  }
+};
+
+app.listen(app.get('port'));
 console.log('I hears ya on localhost:3000');

@@ -7,7 +7,7 @@ angular.module('Fittr')
   $scope.name = 'Fittr';
 }).
 controller('Signup', function ($scope, $http) {
-  $scope.name = 'Signup';
+  $scope.name = 'Mase';
   $scope.auth = function() {
     $http({
       method: 'GET',

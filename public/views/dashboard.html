@@ -1,13 +1,14 @@
 <h2>{{name}}</h2>
+<h3>Welcome back {{user.displayName}}</h3>
 
 <div ng-controller="ChartCtrl">
-  <nvd3-stacked-area-chart
-      data="exampleData"
-        id="exampleId"
-        showXAxis="true"
-        showYAxis="true"
-        width="550"
-        height="350">
-          <svg></svg>
-    </nvd3-stacked-area-chart>
+	<nvd3-stacked-area-chart
+	data="exampleData"
+	id="exampleId"
+	showXAxis="true"
+	showYAxis="true"
+	width="550"
+	height="350">
+	<svg></svg>
+</nvd3-stacked-area-chart>
 </div>
