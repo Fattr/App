@@ -11,7 +11,7 @@ controller('Signup', function ($scope, $http) {
 	$scope.auth = function() {
 		$http({
 			method: 'GET',
-			url: 'http://127.0.0.1:3000/auth/facebook'
+			url: 'auth/facebook'
 		}).success(function(data) {
 			console.log('data', data);
 		}).error(function() {

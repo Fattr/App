@@ -5,7 +5,10 @@
 angular.module('Fittr', [
   'ngRoute'
 ])
-.config(function ($routeProvider, $locationProvider) {
+.config(function ($routeProvider, $locationProvider, $httpProvider) {
+  console.log('HTTP stuff',$httpProvider.defaults);
+  $httpProvider.defaults.XDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
   $routeProvider.
     when('/signup', {
       templateUrl: '../views/signup.html',

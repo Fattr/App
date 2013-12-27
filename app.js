@@ -5,9 +5,10 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var allowCrossDomain = function(req, res, next) {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
   res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+  console.log('cors', req.method);
   if (req.method === 'OPTIONS') {
     res.send(200);
   }
@@ -97,8 +98,6 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
-
-
 
 app.listen(3000);
 console.log('I hears ya on localhost:3000');
