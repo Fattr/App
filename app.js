@@ -73,8 +73,7 @@ app.configure(function(){
 var token = {};
 app.get('/getStuff', function (req, res) {
   fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
-    {token: {oauth_token_secret: token.oauth_token_secret,
-             oauth_token: token.oauth_token}},
+    {token: token},
     function(err, resp, json) {
       if (err) return res.send(err, 500);
       res.json(json);
