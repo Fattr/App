@@ -39,7 +39,7 @@ passport.use(new FacebookStrategy({
 ));
 //-------------------------------------------------//
 
-app.configure(function(){ 
+app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -98,6 +98,11 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   }
 );
+
+app.post('/logout', function(req, res) {
+  req.logOut();
+  res.send(200);
+});
 
 app.listen(3000);
 console.log('I hears ya on localhost:3000');

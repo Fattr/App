@@ -1,0 +1,30 @@
+{
+  "name": "Fittr",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Hendrixer/Fittr",
+  "authors": [
+    "Mehul Patel <mehul8@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.2.6",
+    "angular-cookie": "*",
+    "bootstrap-css-only": "~3.0.0",
+    "d3": "~3.3.13",
+    "nvd3": "~1.1.14-beta",
+    "angularjs-nvd3-directives": "~0.0.5-beta"
+  },
+  "resolutions": {
+    "angular": "1.2.6",
+    "d3": "~3.3.13"
+  }
+}
