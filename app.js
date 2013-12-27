@@ -2,7 +2,7 @@ var config  = require('./oauth');
 var express = require('express');
 var app			= express();
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+var FitbitStrategy = require('passport-fitbit').Strategy;
 
 var allowCrossDomain = function(req, res, next) {
   res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
@@ -26,12 +26,12 @@ passport.deserializeUser(function(obj, done) {
 });
 
 // config
-passport.use(new FacebookStrategy({
-  clientID: config.facebook.clientID,
-  clientSecret: config.facebook.clientSecret,
-  callbackURL: config.facebook.callbackURL
+passport.use(new FitbitStrategy({
+  consumerKey: config.fitbit.consumerKey,
+  consumerSecret: config.fitbit.consumerSecret,
+  callbackURL: config.fitbit.callbackURL
 },
-  function(accessToken, refreshToken, profile, done) {
+  function(token, tokenSecret, profile, done) {
     process.nextTick(function () {
       return done(null, profile);
     });
@@ -59,14 +59,6 @@ app.configure(function(){
   }
 });
 
-var auth = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    res.send(401);
-  } else {
-    next();
-  }
-};
-
 //--------------------------------------------------------//
 
 // app.get('views/*', auth, function(req, res) {
@@ -85,15 +77,15 @@ app.get('/loggedin', function(req, res) {
   res.send(req.isAuthenticated() ? req.user : '0');
 });
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
+app.get('/auth/fitbit',
+  passport.authenticate('fitbit'),
   function(req, res){
     res.send(req.user);
   }
 );
 
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
+app.get('/auth/fitbit/callback',
+  passport.authenticate('fitbit', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   }
@@ -104,5 +96,13 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-app.listen(3000);
+var auth = function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.send(401);
+  } else {
+    next();
+  }
+};
+
+app.listen(app.get('port'));
 console.log('I hears ya on localhost:3000');
