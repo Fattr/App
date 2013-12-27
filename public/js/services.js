@@ -11,6 +11,7 @@ angular.module('Fittr')
           return response;
         },
         function(response) {
+          console.log('response', response);
           if(response.status === 401){
             console.log('here')
             $location.url('/');
@@ -20,4 +21,18 @@ angular.module('Fittr')
       );
     }
 })
-
+.factory('FitbitData', function($http, $location) {
+  return {
+    retrieve: function(callback) {
+      $http({
+        method: 'GET',
+        url: '/getStuff'
+      }).success(function(data){
+        console.log('data', data);
+        callback(data);
+      }).error(function(){
+        console.log('error on getting data');
+      });
+    }
+  }
+});

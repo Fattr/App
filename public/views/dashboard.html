@@ -1,5 +1,7 @@
 <h2>{{name}}</h2>
 <h3>Welcome back {{user.displayName}}</h3>
+<p>{{data}}</p>
+<button ng-click='getData()' class='btn btn-lg btn-primary'>Get Fibit data</button>
 
 <div ng-controller="ChartCtrl">
 	<nvd3-stacked-area-chart
@@ -11,4 +13,5 @@
 	height="350">
 	<svg></svg>
 </nvd3-stacked-area-chart>
+
 </div>
