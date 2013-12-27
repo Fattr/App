@@ -8,29 +8,19 @@ angular.module('Fittr')
 }).
 controller('Signup', function ($scope, $http) {
   $scope.name = 'Signup';
-  $scope.auth = function() {
-    $http({
-      method: 'GET',
-      url: 'auth/facebook'
-    }).success(function(data) {
-      console.log('data', data);
-    }).error(function() {
-      console.log('damn');
-    });
-  };
-
+  
 }).
 controller('Dashboard', function ($scope, FitbitData) {
   $scope.name = 'Dashboard';
-  $scope.stats = function(data) {
-    $scope.data = data;
+  $scope.stats = function(data) { // callback function to retrieve async data from fitbit
+    $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
   };
   $scope.getData = function() {
-    FitbitData.retrieve($scope.stats);
+    FitbitData.retrieve($scope.stats); // FitbitData is a service that asyncs data from fitbit
   };
 }).
 controller('ChartCtrl', function ($scope) {
-  $scope.data = data;
+  $scope.data = data; // FIXME: either nest the controllers on the template or use the FitbitData service here
 });
 
 // data variable to be set to data from the database.
