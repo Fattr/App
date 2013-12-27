@@ -36,3 +36,4 @@ angular.module('Fittr')
     }
   }
 });
+
