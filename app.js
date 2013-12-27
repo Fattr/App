@@ -99,9 +99,9 @@ app.get('/auth/facebook/callback',
   }
 );
 
-app.post('/logout', function(req, res) {
-  req.logOut();
-  res.send(200);
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
 });
 
 app.listen(3000);
