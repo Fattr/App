@@ -8,6 +8,10 @@ angular.module('Fittr', [
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
   var checkAuth = function($q, $location, $http, $rootScope) {
+    $rootScope.user = null;
+    $rootScope.isAuth = function(){
+      return $rootScope.user;
+    };
     var deferred = $q.defer();
 
     $http.get('/loggedin').success(function(user) {
@@ -17,28 +21,13 @@ angular.module('Fittr', [
       } else {
         $rootScope.error_message = 'You must be logged in!';
         deferred.reject();
-        $location.url('/auth/facebook');
+        $location.url('/');
       }
     });
     return deferred.promise;
   };
 
-  $httpProvider.responseInterceptors.push(function($q, $location) {
-    return function(promise) {
-      return promise.then(
-        function(response){
-          return response;
-        },
-        function(response) {
-          if(response.status === 401){
-            $location.url('/auth/facebook');
-          }
-          return $q.reject(response);
-        }
-      );
-    }
-  });
-
+  $httpProvider.responseInterceptors.push('authResponseInterceptor');
   $routeProvider.
     when('/signup', {
       templateUrl: '../views/signup.html',

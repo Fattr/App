@@ -20,8 +20,14 @@ controller('Signup', function ($scope, $http) {
   };
 
 }).
-controller('Dashboard', function ($scope) {
-  $scope.name = 'Dash';
+controller('Dashboard', function ($scope, FitbitData) {
+  $scope.name = 'Dashboard';
+  $scope.stats = function(data) {
+    $scope.data = data;
+  };
+  $scope.getData = function() {
+    FitbitData.retrieve($scope.stats);
+  };
 }).
 controller('ChartCtrl', function ($scope) {
   $scope.data = data;

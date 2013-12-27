@@ -5,6 +5,14 @@ var passport = require('passport');
 var FitbitStrategy = require('passport-fitbit').Strategy;
 var fitbitClient = require('fitbit-js')(config.fitbit.consumerKey, config.fitbit.consumerSecret);
 
+var auth = function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.send(401);
+  } else {
+    next();
+  }
+};
+
 var allowCrossDomain = function(req, res, next) {
   res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
   res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -66,10 +74,7 @@ app.configure(function(){
 
 //--------------------------------------------------------//
 
-// app.get('views/*', auth, function(req, res) {
-//   console.log('dash auth', req.isAuthenticated());
-//   res.sendfile(__dirname + '/public/index.html');
-// });
+
 var token = {};
 app.get('/getStuff', function (req, res) {
   fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
@@ -83,11 +88,6 @@ app.get('/getStuff', function (req, res) {
 app.get('/', function(req, res) {
   console.log('auth',req.isAuthenticated());
   res.sendfile(__dirname + '/public/index.html');
-});
-
-app.get('/', function(req, res) {
-  console.log('auth',req.isAuthenticated());
-	res.sendfile(__dirname + '/public/index.html');
 });
 
 //---------------------------------------------------------//
@@ -115,13 +115,11 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-var auth = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    res.send(401);
-  } else {
-    next();
-  }
-};
+app.get('/test', auth, function(req, res) {
+  res.send('you are auth');
+});
+
+
 
 app.listen(app.get('port'));
 console.log('I hears ya on localhost:3000');
