@@ -7,7 +7,7 @@ angular.module('Fittr', [
   'nvd3ChartDirectives'
 ])
 .config(function ($routeProvider, $locationProvider, $httpProvider) {
-  var checkAuth = function($q, $location, $http, $location, $rootScope) {
+  var checkAuth = function($q, $location, $http, $rootScope) {
     var deferred = $q.defer();
 
     $http.get('/loggedin').success(function(user) {
