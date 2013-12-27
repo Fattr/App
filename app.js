@@ -3,6 +3,7 @@ var express = require('express');
 var app			= express();
 var passport = require('passport');
 var FitbitStrategy = require('passport-fitbit').Strategy;
+var fitbitClient = require('fitbit-js')(config.fitbit.consumerKey, config.fitbit.consumerSecret);
 
 var allowCrossDomain = function(req, res, next) {
   res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
@@ -16,6 +17,8 @@ var allowCrossDomain = function(req, res, next) {
     next();
   }
 };
+
+var token = {};
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -31,7 +34,9 @@ passport.use(new FitbitStrategy({
   consumerSecret: config.fitbit.consumerSecret,
   callbackURL: config.fitbit.callbackURL
 },
-  function(token, tokenSecret, profile, done) {
+  function(otoken, tokenSecret, profile, done) {
+    token.oauth_token_secret = tokenSecret;
+    token.oauth_token = otoken;
     process.nextTick(function () {
       return done(null, profile);
     });
@@ -65,6 +70,21 @@ app.configure(function(){
 //   console.log('dash auth', req.isAuthenticated());
 //   res.sendfile(__dirname + '/public/index.html');
 // });
+var token = {};
+app.get('/getStuff', function (req, res) {
+  fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
+    {token: {oauth_token_secret: token.oauth_token_secret,
+             oauth_token: token.oauth_token}},
+    function(err, resp, json) {
+      if (err) return res.send(err, 500);
+      res.json(json);
+  });
+});
+
+app.get('/', function(req, res) {
+  console.log('auth',req.isAuthenticated());
+  res.sendfile(__dirname + '/public/index.html');
+});
 
 app.get('/', function(req, res) {
   console.log('auth',req.isAuthenticated());
