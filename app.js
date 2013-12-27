@@ -5,6 +5,14 @@ var passport = require('passport');
 var FitbitStrategy = require('passport-fitbit').Strategy;
 var fitbitClient = require('fitbit-js')(config.fitbit.consumerKey, config.fitbit.consumerSecret);
 
+var auth = function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.send(401);
+  } else {
+    next();
+  }
+};
+
 var allowCrossDomain = function(req, res, next) {
   res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
   res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -115,13 +123,11 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-var auth = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    res.send(401);
-  } else {
-    next();
-  }
-};
+app.get('/test', auth, function(req, res) {
+  res.send('you are auth');
+});
+
+
 
 app.listen(app.get('port'));
 console.log('I hears ya on localhost:3000');

@@ -16,7 +16,8 @@
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
           <li><a href="#/dashboard">Dashboard</a></li>
-          <li><a href="#/signup">Sign up</a></li>
+          <li ng-hide='isAuth()'><a href="#/signup">Sign in</a></li>
+          <li ng-show='isAuth()'><a href="/logout">Sign out</a></li>
         </ul>
       </div>
     </nav>
@@ -24,7 +25,7 @@
     <h2>{{error_message}}</h2>
     <div class="container">
       <h1>{{name}}</h1>
-      <div ng-view></div>
+      <div ng-view ng-cloak></div>
     </div>
   </body>
     <script src='js/lib/angular/angular.js'></script>
