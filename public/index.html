@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='Fittr'>
   <head>
-    <title>App</title>
+    <title>{{user.displayName}} | {{title}}</title>
     <link rel="stylesheet" href="js/lib/bootstrap-css-only/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="js/lib/nvd3/nv.d3.min.css">
   </head>
 
-  <body ng-app='Fittr' ng-controller='AppCtrl'>
+  <body ng-controller='AppCtrl'>
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Fittr</a>
