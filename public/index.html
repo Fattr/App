@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app='Fittr'>
   <head>
-    <title>{{user.displayName}} | {{title}}</title>
+    <title>{{user.displayName}} | {{title}}</title> <!-- FIXME: this only works after the user clicks dash, and we have FOUC here as well -->
     <link rel="stylesheet" href="js/lib/bootstrap-css-only/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="js/lib/nvd3/nv.d3.min.css">
@@ -10,11 +10,10 @@
   <body ng-controller='AppCtrl'>
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Fittr</a>
+        <a class="navbar-brand" href="#/">Fittr</a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
           <li><a href="#/dashboard">Dashboard</a></li>
           <li ng-hide='isAuth()'><a href="#/signup">Sign in</a></li>
           <li ng-show='isAuth()'><a href="/logout">Sign out</a></li>

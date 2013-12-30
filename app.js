@@ -1,17 +1,16 @@
-var config  = require('./oauth');
+
 var express = require('express');
 var app			= express();
 var passport = require('passport');
-var FitbitStrategy = require('passport-fitbit').Strategy;
-var fitbitClient = require('fitbit-js')(config.fitbit.consumerKey, config.fitbit.consumerSecret);
+var mongoose = require('mongoose');
 
-var auth = function(req, res, next) {
-  if(!req.isAuthenticated()) {
-    res.send(401);
-  } else {
-    next();
-  }
-};
+var configDB = require('./config/database.js');
+// var FitbitStrategy = require('passport-fitbit').Strategy;
+// var fitbitClient = require('fitbit-js')(config.fitbit.consumerKey, config.fitbit.consumerSecret);
+
+mongoose.connect(configDB.url);
+
+require('./config/passport.js')(passport);
 
 var allowCrossDomain = function(req, res, next) {
   res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:3000');
@@ -26,31 +25,6 @@ var allowCrossDomain = function(req, res, next) {
   }
 };
 
-var token = {};
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-// config
-passport.use(new FitbitStrategy({
-  consumerKey: config.fitbit.consumerKey,
-  consumerSecret: config.fitbit.consumerSecret,
-  callbackURL: config.fitbit.callbackURL
-},
-  function(otoken, tokenSecret, profile, done) {
-    token.oauth_token_secret = tokenSecret;
-    token.oauth_token = otoken;
-    process.nextTick(function () {
-      return done(null, profile);
-    });
-  }
-));
-//-------------------------------------------------//
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -72,52 +46,90 @@ app.configure(function(){
   }
 });
 
+require('./app/routes.js')(app, passport);
+
+// var auth = function(req, res, next) {
+//   if(!req.isAuthenticated()) {
+//     res.send(401);
+//   } else {
+//     next();
+//   }
+// };
+
+
+// var token = {};
+
+// passport.serializeUser(function(user, done) {
+//   done(null, user);
+// });
+
+// passport.deserializeUser(function(obj, done) {
+//   done(null, obj);
+// });
+
+// // config
+// passport.use(new FitbitStrategy({
+//   consumerKey: config.fitbit.consumerKey,
+//   consumerSecret: config.fitbit.consumerSecret,
+//   callbackURL: config.fitbit.callbackURL
+// },
+//   function(otoken, tokenSecret, profile, done) {
+//     token.oauth_token_secret = tokenSecret;
+//     token.oauth_token = otoken;
+//     process.nextTick(function () {
+//       return done(null, profile);
+//     });
+//   }
+// ));
+//-------------------------------------------------//
+
+
 //--------------------------------------------------------//
 
 
-var token = {};
-app.get('/getStuff', function (req, res) {
-  fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
-    {token: token},
-    function(err, resp, json) {
-      if (err) return res.send(err, 500);
-      res.json(json);
-  });
-});
+// var token = {};
+// app.get('/getStuff', function (req, res) {
+//   fitbitClient.apiCall('GET', '/user/-/activities/date/2011-05-25.json',
+//     {token: token},
+//     function(err, resp, json) {
+//       if (err) return res.send(err, 500);
+//       res.json(json);
+//   });
+// });
 
-app.get('/', function(req, res) {
-  console.log('auth',req.isAuthenticated());
-  res.sendfile(__dirname + '/public/index.html');
-});
+// app.get('/', function(req, res) {
+//   console.log('auth',req.isAuthenticated());
+//   res.sendfile(__dirname + '/public/index.html');
+// });
 
-//---------------------------------------------------------//
+// //---------------------------------------------------------//
 
-app.get('/loggedin', function(req, res) {
-  res.send(req.isAuthenticated() ? req.user : '0');
-});
+// app.get('/loggedin', function(req, res) {
+//   res.send(req.isAuthenticated() ? req.user : '0');
+// });
 
-app.get('/auth/fitbit',
-  passport.authenticate('fitbit'),
-  function(req, res){
-    res.send(req.user);
-  }
-);
+// app.get('/auth/fitbit',
+//   passport.authenticate('fitbit'),
+//   function(req, res){
+//     res.send(req.user);
+//   }
+// );
 
-app.get('/auth/fitbit/callback',
-  passport.authenticate('fitbit', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
+// app.get('/auth/fitbit/callback',
+//   passport.authenticate('fitbit', { failureRedirect: '/' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   }
+// );
 
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
+// app.get('/logout', function(req, res) {
+//   req.logout();
+//   res.redirect('/');
+// });
 
-app.get('/test', auth, function(req, res) {
-  res.send('you are auth');
-});
+// app.get('/test', auth, function(req, res) {
+//   res.send('you are auth');
+// });
 
 
 
