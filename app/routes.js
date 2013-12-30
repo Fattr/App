@@ -1,3 +1,9 @@
+
+var User = require('./models/users.js');
+var config = require('../config/auth.js').fitbit;
+var fitbitClient = require('fitbit-js')(config.consumerKey, config.consumerSecret);
+
+
 module.exports = function(app, passport) {
 	// =========================
 	// Home page 
@@ -17,9 +23,9 @@ module.exports = function(app, passport) {
 		res.send(req.isAuthenticated() ? req.user : '0');
 	});
 
-	// =========================
+	// ===========================
 	// Fitbit authentication route 
-	// =========================
+	// ===========================
 
 	app.get('/auth/fitbit', passport.authenticate('fitbit'),
 			function(req, res) {
@@ -30,9 +36,24 @@ module.exports = function(app, passport) {
 	app.get('/auth/fitbit/callback', passport.authenticate('fitbit',
 			{failureRedirect: '/'}),
 		function(req, res) {
+			console.log('req user here', req.user);
 			res.redirect('/');
 		}
 	);
+
+	app.get('/fitbit/activity', authCheck, function(req, res) {
+		var currentUser = req.user;
+		User.findById(currentUser._id, function(err, user) {
+			var token = {oauth_token: user.fitbit.token, oauth_token_secret: user.fitbit.tokenSecret};
+		  fitbitClient.apiCall('GET', '/user/-/activities/date/2013-12-29.json',
+		    {token: token},
+		    function(err, resp, json) {
+		      if (err) return res.send(err, 500);
+		      console.log('data', json);
+		      res.json(json);
+		  });
+		});
+	});
 
 	// =========================
 	// logout route 

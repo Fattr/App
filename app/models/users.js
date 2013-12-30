@@ -6,12 +6,23 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
 	fitbit: {
-		id: {type: String},
+		id: String,
 		token: String,
 		tokenSecret: String,
 		displayName: String
-	}
+	},
 	// other passport strategies if we need them
+	decvices: [
+		mongoose.Schema({
+			name: String,
+			type: String,
+			company: String,
+			active: Boolean,
+			visible: Boolean
+		})
+	],
+	active: Boolean,
+	showPublicly: Boolean
 });
 
 // =============================================

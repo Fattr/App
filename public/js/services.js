@@ -26,7 +26,7 @@ angular.module('Fittr')
     retrieve: function(callback) {
       $http({
         method: 'GET',
-        url: '/getStuff'
+        url: '/fitbit/activity'
       }).success(function(data){
         console.log('data', data);
         callback(data);

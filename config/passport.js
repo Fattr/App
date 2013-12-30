@@ -5,6 +5,7 @@ var config				 = require('./auth.js');
 var User					 = require('../app/models/users.js');
 
 module.exports = function(passport) {
+
 	// ===============================
 	// passport session config
 	// passport has to be able to 
@@ -20,7 +21,6 @@ module.exports = function(passport) {
 	// use to deserialize user out the session
 	passport.deserializeUser(function(id, done) {
 		User.findById(id._id, function(err, user) {
-			console.log('id', id);
 			done(err, user);
 		});
 	});
@@ -46,6 +46,7 @@ module.exports = function(passport) {
 					if(user) {
 						return done(null, user); // this is the user
 					} else {
+						console.log('new user');
 						// if there is not a user with that fitbit id, make one
 						var newUser = new User();
 
