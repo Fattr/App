@@ -31,6 +31,7 @@ angular.module('Fittr', [
   // intercept all '401's from server, meaning user is not auth to access that route
   // will use to protect the server from un auth users trying to access saved data in the db
   // authResponseInterceptor is defined in service.js
+  
   $httpProvider.responseInterceptors.push('authResponseInterceptor');
   $routeProvider.
     when('/signup', {
