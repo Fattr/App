@@ -1,12 +1,13 @@
 
 var User = require('./models/users.js');
+var Steps = require('./models/fbSteps.js');
 var config = require('../config/auth.js').fitbit;
 var fitbitClient = require('fitbit-js')(config.consumerKey, config.consumerSecret);
 
 
 module.exports = function(app, passport) {
 	// =========================
-	// Home page 
+	// Home page
 	// =========================
 	app.get('/', function(req, res) {
 		console.log('auth: ', req.isAuthenticated());
@@ -24,7 +25,7 @@ module.exports = function(app, passport) {
 	});
 
 	// ===========================
-	// Fitbit authentication route 
+	// Fitbit authentication route
 	// ===========================
 
 	app.get('/auth/fitbit', passport.authenticate('fitbit'),
@@ -42,21 +43,41 @@ module.exports = function(app, passport) {
 	);
 
 	app.get('/fitbit/activity', authCheck, function(req, res) {
+		// capture incoming user in order to query out DB
 		var currentUser = req.user;
+
+		// find user by associated "._id" property in out DB
 		User.findById(currentUser._id, function(err, user) {
+
+			// create a new token with credititanls from from user in our DB
 			var token = {oauth_token: user.fitbit.token, oauth_token_secret: user.fitbit.tokenSecret};
-		  fitbitClient.apiCall('GET', '/user/-/activities/date/2013-12-29.json',
+		  fitbitClient.apiCall('GET', '/user/-/activities/date/2013-11-29.json',
 		    {token: token},
 		    function(err, resp, json) {
+		    	// json is the data back from fitbit
 		      if (err) return res.send(err, 500);
-		      console.log('data', json);
-		      res.json(json);
+
+		      // create a new steps instance and set all its
+		      // data to the fitbit data we just got
+		      // not all data is being saved yet, just for
+		      // testing right now
+		      var steps = new Steps();
+		      steps.user = currentUser._id;
+
+		      // 'summary' is an object Fitbit returns with the data we need
+		      steps.steps = json.summary.steps;
+		      steps.distance = json.summary.distances;
+
+		      // save the updated steps schema into our DB
+		      steps.save(function(err) {
+		      	if(err) return err;
+		      });
 		  });
 		});
 	});
 
 	// =========================
-	// logout route 
+	// logout route
 	// =========================
 
 	app.get('/logout', function(req, res) {
