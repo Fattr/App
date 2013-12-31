@@ -5,6 +5,12 @@ var mongoose = require('mongoose');
 // =====================
 
 var userSchema = mongoose.Schema({
+	name: String,
+  email: String,
+  username: {
+    type: String,
+    unique: true
+  },
 	fitbit: {
 		id: String,
 		token: String,
@@ -12,7 +18,7 @@ var userSchema = mongoose.Schema({
 		displayName: String
 	},
 	// other passport strategies if we need them
-	decvices: [
+	devices: [
 		mongoose.Schema({
 			name: String,
 			type: String,

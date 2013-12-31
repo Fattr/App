@@ -1,4 +1,3 @@
-
 var User = require('./models/users.js');
 var Steps = require('./models/fbSteps.js');
 var config = require('../config/auth.js').fitbit;
@@ -92,6 +91,57 @@ module.exports = function(app, passport) {
 	app.get('/db', authCheck, function(req, res) {// use created middleware to check auth before granting access to DB
 		res.send('db data'); // FIXME: add db queries here
 	});
+
+	// List user data. 
+	// FIXME: Don't display tokens.
+	app.get('/users/me', function(req, res) {
+    res.jsonp(req.user || null);
+	});
+
+
+	app.get('/users/activity/:from?/:to?', function(req, res, next){
+	// app.get('/users/devices/data/:id/:from?/:to?', function(req, res, next){
+    // var deviceId = req.params.id;
+    var dateFrom = req.params.from;
+    var dateTo   = req.params.to;
+    // users.deviceData(req, res, deviceId, dateFrom, dateTo);
+
+    // No user logged in.
+    if(!req.user) {
+      res.jsonp(null);
+      return;
+    }
+
+	 	var query = { userId: req.user._id };
+
+	 	// Set the proper date range if needed.
+    dateFrom = (dateFrom === '-') ? undefined : dateFrom;
+    dateTo = (dateTo === '-') ? undefined : dateTo;
+
+    if(dateFrom !== undefined && dateTo !== undefined) {
+        query.date = { $gte: dateFrom, $lte: dateTo };
+    } else {
+        if(dateFrom !== undefined) {
+            query.date = { $gte: dateFrom };
+        }
+
+        if(dateTo !== undefined) {
+            query.date = { $lte: dateTo };
+        }
+    }
+
+    Steps.find(query, function(err, stats){
+        if(err) {
+          console.log('Error retrieving stats', err);
+          res.jsonp(null);
+        }
+        res.jsonp(stats || null);
+    });
+
+  });
+
+
+
 };
 
 // ====================================

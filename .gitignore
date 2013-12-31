@@ -3,3 +3,4 @@ dist
 .tmp
 public/js/lib
 config/auth.js
+.DS_Store
