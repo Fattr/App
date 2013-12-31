@@ -100,11 +100,8 @@ module.exports = function(app, passport) {
 
 
 	app.get('/users/activity/:from?/:to?', function(req, res, next){
-	// app.get('/users/devices/data/:id/:from?/:to?', function(req, res, next){
-    // var deviceId = req.params.id;
     var dateFrom = req.params.from;
     var dateTo   = req.params.to;
-    // users.deviceData(req, res, deviceId, dateFrom, dateTo);
 
     // No user logged in.
     if(!req.user) {
