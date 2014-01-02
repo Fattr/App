@@ -13,11 +13,11 @@ module.exports = function(app, passport) {
 		res.sendfile('index.html', {root:__dirname + '/../public/'})
 	});
 
-	// =========================
+	// ======================================
 	// Check to see if user is auth, used to
 	// protect our angular routes from unauth
 	// users
-	// =========================
+	// ======================================
 
 	app.get('/loggedin', function(req, res) {
 		res.send(req.isAuthenticated() ? req.user : '0');
@@ -60,6 +60,7 @@ module.exports = function(app, passport) {
 		      // data to the fitbit data we just got
 		      // not all data is being saved yet, just for
 		      // testing right now
+
 		      var steps = new Steps();
 		      steps.user = currentUser._id;
 

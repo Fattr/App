@@ -8,7 +8,7 @@ module.exports = function(passport) {
 
 	// ===============================
 	// passport session config
-	// passport has to be able to 
+	// passport has to be able to
 	// serialize and eserialize users
 	// in / out the session
 	// ===============================
@@ -37,6 +37,7 @@ module.exports = function(passport) {
 	},
 		function(token, tokenSecret, profile, done) {
 			process.nextTick(function() {
+				console.log('profile', profile);
 				// find user in DB based on there fitbit id
 				User.findOne({'fitbit.id': profile.id}, function(err, user) {
 					// if there is an error, halt everything and return that
@@ -54,7 +55,8 @@ module.exports = function(passport) {
 						newUser.fitbit.id = profile.id;
 						newUser.fitbit.token = token;
 						newUser.fitbit.tokenSecret = tokenSecret;
-						newUser.fitbit.displayName = profile.displayName
+						newUser.fitbit.displayName = profile.displayName;
+						newUser.fitbit.profilePic = profile._json.user.avatar;
 
 						// save that new user
 						newUser.save(function(err) {
