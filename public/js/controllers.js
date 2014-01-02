@@ -23,26 +23,7 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
     // AJAX call to query our database for data
     $http({method: 'GET', url: '/users/activity/2013-01-01'}).
     success(function(data) {
-      // success function loops through the data and finds the average number of steps
-      var data = data;
-      var stepSum = 0;
-      for (var i = 0; i < data.length; i++){
-        stepSum += data[i].steps;
-      }
-      var stepAvg = stepSum/data.length;
-      console.log(stepAvg);
-      $scope.chart = [
-        {
-          "key": "You",
-          "values": [ [ 'Steps Taken' , 13468], [ 'Steps Goal' , 10000] ]
-        },
-
-        {
-          "key": "Comparison Data",
-          "values": [ [ 'Steps Taken' , stepAvg], [ 'Steps Goal' , 10000] ]
-        }
-      ];
-      return stepAvg;
+      $scope.averageCallback(data);
     })
   };
   $scope.submit = function() {
@@ -53,3 +34,25 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
   $scope.checkEmail = function() {
     return $rootScope.user.email;
   };
+
+  $scope.averageCallback = function(data) {
+    var data = data;
+    var stepSum = 0;
+    for (var i = 0; i < data.length; i++){
+      stepSum += data[i].steps;
+    }
+    var stepAvg = stepSum/data.length;
+    console.log(stepAvg);
+    $scope.chart = [
+    {
+      "key": "You",
+      "values": [ [ 'Steps Taken' , 13468], [ 'Steps Goal' , 10000] ]
+    },
+
+    {
+      "key": "Comparison Data",
+      "values": [ [ 'Steps Taken' , stepAvg], [ 'Steps Goal' , 10000] ]
+    }
+    ];
+  };
+});
