@@ -5,14 +5,21 @@ var mongoose = require('mongoose');
 // =====================
 
 var userSchema = mongoose.Schema({
+	name: String,
+  email: String,
+  username: {
+    type: String,
+    unique: true
+  },
 	fitbit: {
 		id: String,
 		token: String,
 		tokenSecret: String,
-		displayName: String
+		displayName: String,
+		profilePic: String
 	},
 	// other passport strategies if we need them
-	decvices: [
+	devices: [
 		mongoose.Schema({
 			name: String,
 			type: String,
@@ -30,4 +37,4 @@ var userSchema = mongoose.Schema({
 // access to it
 // =============================================
 
-module.exports = mongoose.model('User', userSchema);	
+module.exports = mongoose.model('User', userSchema);
