@@ -34,10 +34,10 @@ module.exports = function(app, passport) {
 	);
 
 	app.get('/auth/fitbit/callback', passport.authenticate('fitbit',
-			{failureRedirect: '/'}),
+			{failureRedirect: 'http://127.0.0.1:3000/#/signup'}),
 		function(req, res) {
 			console.log('req user here', req.user);
-			res.redirect('/');
+			res.redirect('http://127.0.0.1:3000/#/dashboard');
 		}
 	);
 

@@ -7,6 +7,16 @@
     </ul>
   </div>
   <div id='page-content-wrapper'>
+    <div ng-hide='{{user.email}}'>
+      <h3>Yo, we don't have an email for you, give us one please!</h3>
+      <form ng-submit='submit()' role="form">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" ng-model='email' placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-default">Done</button>
+      </form>
+    </div>
     <h1>{{name}}</h1>
     <img ng-Src='{{user.fitbit.profilePic}}' class='img-rounded' alt='Fittr profile pic'/>
     <h3>Welcome back {{user.name}}</h3>
