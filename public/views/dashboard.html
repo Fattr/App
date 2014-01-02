@@ -23,17 +23,19 @@
     <p>data: {{data}}</p>
 
     <button ng-click='getData()' class='btn btn-lg btn-primary'>Get Fibit data</button>
-
+    <button ng-click='getAverage()' class='btn btn-lg btn-primary'>Get Steps Average</button>
   </div>
-  <div ng-controller="ChartCtrl">
+  <div ng-controller="Dashboard">
     <nvd3-multi-bar-chart
-    data="data"
+    data="chart"
     id="exampleId"
     width="550"
     height="350"
     showxaxis="true"
     showyaxis="true"
     showLegend="true"
+    interactive="true"
+    tooltips="true"
     <svg></svg>
   </nvd3-multi-bar-chart>
 </div>

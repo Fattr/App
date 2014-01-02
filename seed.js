@@ -6,7 +6,7 @@ require('./app/models/users.js');
 require('./app/models/fbSteps.js');
 
 // FIXME: Look-up the only user in the database and apply data.
-var userId = '52c526e2a74a13c647000004';
+var userId = '52c5cb9ab1c1882a1b000002';
 
 var User = mongoose.model('User');
 var FitbitSteps = mongoose.model('fitbitSteps');
