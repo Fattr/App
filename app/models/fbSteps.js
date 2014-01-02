@@ -13,7 +13,7 @@ var fbStepsSchema = mongoose.Schema({
 	 },
 	 //date: String,
 	 steps: Number,
-	 distance: Number,
+	 distance: Array,
 	 seditaryMin: Number,
    fairlyActMin: Number,
    veryActMin: Number

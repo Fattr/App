@@ -12,16 +12,18 @@
     <p>data: {{data}}</p>
 
 <button ng-click='getData()' class='btn btn-lg btn-primary'>Get Fibit data</button>
+<button ng-click='showData()' class='btn btn-lg btn-primary'>Display Data</button>
 
   </div>
   <div ng-controller="ChartCtrl">
-    <nvd3-stacked-area-chart
+    <nvd3-multi-bar-chart
     data="data"
     id="exampleId"
-    showXAxis="true"
-    showYAxis="true"
     width="550"
-    height="350">
+    height="350"
+    showxaxis="true"
+    showyaxis="true"
+    showLegend="true"
     <svg></svg>
-  </nvd3-stacked-area-chart>
+  </nvd3-multi-bar-chart>
 </div>

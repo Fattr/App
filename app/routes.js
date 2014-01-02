@@ -51,7 +51,7 @@ module.exports = function(app, passport) {
 
 			// create a new token with credititanls from from user in our DB
 			var token = {oauth_token: user.fitbit.token, oauth_token_secret: user.fitbit.tokenSecret};
-		  fitbitClient.apiCall('GET', '/user/-/activities/date/2013-11-29.json',
+		  fitbitClient.apiCall('GET', '/user/-/activities/date/2013-12-29.json',
 		    {token: token},
 		    function(err, resp, json) {
 		    	// json is the data back from fitbit
@@ -70,7 +70,10 @@ module.exports = function(app, passport) {
 
 		      // save the updated steps schema into our DB
 		      steps.save(function(err) {
-		      	if(err) return err;
+		      	if(err) {
+		      		console.log('error and shit', err);
+		      		return err;
+		      	}
 		      });
 		  });
 		});
