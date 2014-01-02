@@ -76,23 +76,6 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	// =========================================
-  // FIXME----------
-  // Get fitbit profile pic here for dash
-  // returns url to Profile pic
-  // must use angular service to retrieve pic
-  // =========================================
-	// app.get('/fitbit/pic', authCheck, function(req, res) {
-	// 	var query = {id: req.user._id};
-
-	// 	User.findById(query.id, function(err, user) {
-	// 		if(err) {
-	// 			console.log('error getting profile pic', err);
-	// 		}
-	// 		console.log('pic', user.fitbit.profilePic);
-	// 		res.json(user.fitbit.profilePic);
-	// 	});
-	// });
 
 	// =========================
 	// logout route

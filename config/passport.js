@@ -51,6 +51,8 @@ module.exports = function(passport) {
 						// if there is not a user with that fitbit id, make one
 						var newUser = new User();
 
+						// set all our user data to db
+						newUser.name = profile._json.user.fullName;
 						//set all our fitbit data to our user model
 						newUser.fitbit.id = profile.id;
 						newUser.fitbit.token = token;
