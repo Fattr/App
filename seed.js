@@ -6,13 +6,13 @@ require('./app/models/users.js');
 require('./app/models/fbSteps.js');
 
 // FIXME: Look-up the only user in the database and apply data.
-var userId = '52c30444376eeba718000002';
+var userId = '52c50a9a1fc846f229000002';
 
 var User = mongoose.model('User');
 var FitbitSteps = mongoose.model('fitbitSteps');
 
 // var userData = [
-//   // { name: 'Nick Loveridge', email: 'nick@fusemedia.ca', username: 'nick', password: 'test', provider: 'local', 
+//   // { name: 'Nick Loveridge', email: 'nick@fusemedia.ca', username: 'nick', password: 'test', provider: 'local',
 //   //   devices: [{ name: 'flex', company: 'fitbit', active: true, visible: true }]
 //   // },
 //   { name: 'Fred', email: 'fred@hackreactor.com', username: 'fred', password: 'test', provider: 'local',
@@ -27,16 +27,16 @@ var userData = [];
 // var opts = ;
 var deviceData = [];
 // var deviceData = [{
-//   deviceId: deviceId, 
+//   deviceId: deviceId,
 //   date: '2013-04-01',
 //   caloriesBurned: 0,
-//   steps: 0, 
-//   distance: 0, 
-//   seditaryMin: 1,440, 
-//   lightActMin: 0, 
-//   fairlyActMin: 0, 
-//   fairlyActMin: 0, 
-//   veryActMin: 0 
+//   steps: 0,
+//   distance: 0,
+//   seditaryMin: 1,440,
+//   lightActMin: 0,
+//   fairlyActMin: 0,
+//   fairlyActMin: 0,
+//   veryActMin: 0
 // }];
 
 var total = userData.length, result = [];
@@ -106,11 +106,11 @@ csv()
       date: row[1],
       caloriesBurned: row[2],
       steps: row[3],
-      distance: row[4], 
-      seditaryMin: row[6], 
-      lightActMin: row[7], 
-      fairlyActMin: row[8], 
-      veryActMin: row[9] 
+      distance: row[4],
+      seditaryMin: row[6],
+      lightActMin: row[7],
+      fairlyActMin: row[8],
+      veryActMin: row[9]
     };
     deviceData.push(obj);
   }
@@ -134,7 +134,7 @@ csv()
     mongoose.connection.collections['fitbitsteps'].drop( function(err) {
       console.log('fitbitsteps collection dropped');
       // saveUsers(function() {
-        
+
         console.log('All users saved.');
         // saveDeviceData(function(){
         //   console.log('Saved device data to collection.');

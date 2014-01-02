@@ -33,6 +33,18 @@ angular.module('Fittr')
       }).error(function(){
         console.log('error on getting data');
       });
+    },
+
+    update: function(data) {
+      $http({
+        method: 'POST',
+        url: '/fitbit/update/email',
+        data: {email: data}
+      }).success(function(stuff) {
+        console.log('sent email');
+      }).error(function(err) {
+        console.log('could not update email');
+      });
     }
   }
 });

@@ -8,9 +8,9 @@ angular.module('Fittr')
 }).
 controller('Signup', function ($scope, $http) {
   $scope.name = 'Signup';
-  
+
 }).
-controller('Dashboard', function ($scope, FitbitData) {
+controller('Dashboard', function ($scope, $rootScope, FitbitData) {
   $scope.name = 'Dashboard';
   $scope.stats = function(data) { // callback function to retrieve async data from fitbit
     $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
@@ -18,6 +18,14 @@ controller('Dashboard', function ($scope, FitbitData) {
   $scope.getData = function() {
     FitbitData.retrieve($scope.stats); // FitbitData is a service that asyncs data from fitbit
   };
+  $scope.submit = function() {
+    FitbitData.update($scope.email);
+    $scope.checkEmail();
+  };
+  $scope.email = 'email';
+  $scope.checkEmail = function() {
+    return $rootScope.user.email;
+  }
 }).
 controller('ChartCtrl', function ($scope) {
   $scope.data = data; // FIXME: either nest the controllers on the template or use the FitbitData service here

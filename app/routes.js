@@ -13,11 +13,11 @@ module.exports = function(app, passport) {
 		res.sendfile('index.html', {root:__dirname + '/../public/'})
 	});
 
-	// =========================
+	// ======================================
 	// Check to see if user is auth, used to
 	// protect our angular routes from unauth
 	// users
-	// =========================
+	// ======================================
 
 	app.get('/loggedin', function(req, res) {
 		res.send(req.isAuthenticated() ? req.user : '0');
@@ -34,10 +34,10 @@ module.exports = function(app, passport) {
 	);
 
 	app.get('/auth/fitbit/callback', passport.authenticate('fitbit',
-			{failureRedirect: '/'}),
+			{failureRedirect: 'http://127.0.0.1:3000/#/signup'}),
 		function(req, res) {
 			console.log('req user here', req.user);
-			res.redirect('/');
+			res.redirect('http://127.0.0.1:3000/#/dashboard');
 		}
 	);
 
@@ -60,6 +60,7 @@ module.exports = function(app, passport) {
 		      // data to the fitbit data we just got
 		      // not all data is being saved yet, just for
 		      // testing right now
+
 		      var steps = new Steps();
 		      steps.user = currentUser._id;
 
@@ -75,6 +76,30 @@ module.exports = function(app, passport) {
 		});
 	});
 
+
+  // ========================
+  // Get user email here
+  // ========================
+  app.post('/fitbit/update/email', function(req, res) {
+    var query = {id: req.user._id};
+    var email = req.body.email;
+
+    User.findById(query.id, function(err, user) {
+      if(err) {
+        console.log('could not find user to update email', err);
+        return err;
+      }
+      console.log('user', user);
+      user.email = email;
+      user.save(function(err) {
+        if(err) {
+          console.log('could not save ' + user.name + ' email', err);
+        }
+      });
+    });
+    res.send(201);
+  });
+
 	// =========================
 	// logout route
 	// =========================
@@ -88,26 +113,25 @@ module.exports = function(app, passport) {
 	// DB routes
 	// =========================
 
-	app.get('/db', authCheck, function(req, res) {// use created middleware to check auth before granting access to DB
-		res.send('db data'); // FIXME: add db queries here
-	});
 
-	// List user data. 
+	// List user data.
 	// FIXME: Don't display tokens.
 	app.get('/users/me', function(req, res) {
     res.jsonp(req.user || null);
 	});
 
 
-	app.get('/users/activity/:from?/:to?', function(req, res, next){
+	app.get('/users/activity/:from?/:to?', authCheck, function(req, res, next){
     var dateFrom = req.params.from;
     var dateTo   = req.params.to;
 
+    // Use authCheck custom middleware to check for auth
+    // to send back a 401 for angular interceptors
     // No user logged in.
-    if(!req.user) {
-      res.jsonp(null);
-      return;
-    }
+    // if(!req.user) {
+    //   res.jsonp(null);
+    //   return;
+    // }
 
 	 	var query = { userId: req.user._id };
 
