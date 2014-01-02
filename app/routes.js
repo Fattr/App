@@ -77,6 +77,29 @@ module.exports = function(app, passport) {
 	});
 
 
+  // ========================
+  // Get user email here
+  // ========================
+  app.post('/fitbit/update/email', function(req, res) {
+    var query = {id: req.user._id};
+    var email = req.body.email;
+
+    User.findById(query.id, function(err, user) {
+      if(err) {
+        console.log('could not find user to update email', err);
+        return err;
+      }
+      console.log('user', user);
+      user.email = email;
+      user.save(function(err) {
+        if(err) {
+          console.log('could not save ' + user.name + ' email', err);
+        }
+      });
+    });
+    res.send(201);
+  });
+
 	// =========================
 	// logout route
 	// =========================
