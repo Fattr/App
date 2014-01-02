@@ -76,6 +76,24 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	// =========================================
+  // FIXME----------
+  // Get fitbit profile pic here for dash
+  // returns url to Profile pic
+  // must use angular service to retrieve pic
+  // =========================================
+	// app.get('/fitbit/pic', authCheck, function(req, res) {
+	// 	var query = {id: req.user._id};
+
+	// 	User.findById(query.id, function(err, user) {
+	// 		if(err) {
+	// 			console.log('error getting profile pic', err);
+	// 		}
+	// 		console.log('pic', user.fitbit.profilePic);
+	// 		res.json(user.fitbit.profilePic);
+	// 	});
+	// });
+
 	// =========================
 	// logout route
 	// =========================
@@ -89,26 +107,25 @@ module.exports = function(app, passport) {
 	// DB routes
 	// =========================
 
-	app.get('/db', authCheck, function(req, res) {// use created middleware to check auth before granting access to DB
-		res.send('db data'); // FIXME: add db queries here
-	});
 
-	// List user data. 
+	// List user data.
 	// FIXME: Don't display tokens.
 	app.get('/users/me', function(req, res) {
     res.jsonp(req.user || null);
 	});
 
 
-	app.get('/users/activity/:from?/:to?', function(req, res, next){
+	app.get('/users/activity/:from?/:to?', authCheck, function(req, res, next){
     var dateFrom = req.params.from;
     var dateTo   = req.params.to;
 
+    // Use authCheck custom middleware to check for auth
+    // to send back a 401 for angular interceptors
     // No user logged in.
-    if(!req.user) {
-      res.jsonp(null);
-      return;
-    }
+    // if(!req.user) {
+    //   res.jsonp(null);
+    //   return;
+    // }
 
 	 	var query = { userId: req.user._id };
 
