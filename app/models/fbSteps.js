@@ -6,19 +6,19 @@ var mongoose = require('mongoose');
 
 
 var fbStepsSchema = mongoose.Schema({
-	// associate a user id with steps
-	 userId: {
-	 	type: mongoose.Schema.ObjectId,
-	 	ref: 'User'
-	 },
-	 date: String,
-	 steps: Number,
-	 distance: Array,
-	 caloriesBurned: Number,
-	 seditaryMin: Number,
-	 lightActMin: Number,
-	 fairlyActMin: Number,
-	 veryActMin: Number
+  // associate a user id with steps
+   userId: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+   },
+   date: String,
+   steps: Number,
+   distances: Array,
+   caloriesBurned: Number,
+   sedentaryMins: Number,
+   lightActMins: Number,
+   fairlyActMins: Number,
+   veryActMins: Number
 });
 
 module.exports = mongoose.model('fitbitSteps', fbStepsSchema);
