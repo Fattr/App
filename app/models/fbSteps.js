@@ -13,12 +13,12 @@ var fbStepsSchema = mongoose.Schema({
    },
    date: String,
    steps: Number,
-   distance: Array,
+   distances: Array,
    caloriesBurned: Number,
-   seditaryMin: Number,
-   lightActMin: Number,
-   fairlyActMin: Number,
-   veryActMin: Number
+   sedentaryMins: Number,
+   lightActMins: Number,
+   fairlyActMins: Number,
+   veryActMins: Number
 });
 
 module.exports = mongoose.model('fitbitSteps', fbStepsSchema);
