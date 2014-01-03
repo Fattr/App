@@ -55,15 +55,16 @@ var getActivities = function(users) {
     };
     // console.log('token', token);
     fitbitClient.apiCall(
-      'GET', '/user/-/activities/date/' + yesterday +'.json',
+      'GET', '/user/-/activities/date/' + yesterday + '.json',
       {token: token},
       function(err, resp, userActivities) {
         if (err) throw err;
         else {
           userActivities.id = user._id;
           userActivities.date = yesterday;
+          console.log('----- User ----');
           console.log(userActivities);
-          // updateDb(userActivities);
+          updateDb(userActivities);
         }
       }
     );
