@@ -47,5 +47,19 @@ angular.module('Fittr')
       });
     }
   }
+})
+.factory('getAverage', function($http) {
+  return {
+    getData: function(callback) {
+      $http({
+        method: 'GET',
+        url: '/users/acitivity/2013-01-01',
+      }).success(function(data) {
+        callback(data);
+      }).error(function(err) {
+        console.log('error getting average steps ', err);
+      });
+    }
+  }
 });
 
