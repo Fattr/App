@@ -7,20 +7,20 @@ var fitbitClient = require('fitbit-js')(config.consumerKey, config.consumerSecre
 // ================================
 
 module.exports = {
-	activity: function(req, res) {
-		var currentUser = req.user;
-		console.log('currentUser', currentUser);
-		var token = {oauth_token: currentUser.fitbit.token, oauth_token_secret: currentUser.fitbit.tokenSeret};
-		User.findById(currentUser._id, function(err, user) {
-			fitbitClient.apiCall('GET', 'user/activities/data/2013-12-29.json',
-				{token: token},
-				function(err, resp, json) {
-					if(err){
-						console.log('err', err);
-						res.send(err, 500);
-					}  
-					res.json(json);
-				});
-		});
-	}		
+  activity: function(req, res) {
+    var currentUser = req.user;
+    console.log('currentUser', currentUser);
+    var token = {oauth_token: currentUser.fitbit.token, oauth_token_secret: currentUser.fitbit.tokenSeret};
+    User.findById(currentUser._id, function(err, user) {
+      fitbitClient.apiCall('GET', 'user/activities/data/2013-12-29.json',
+        {token: token},
+        function(err, resp, json) {
+          if(err){
+            console.log('err', err);
+            res.send(err, 500);
+          }
+          res.json(json);
+        });
+    });
+  }
 };

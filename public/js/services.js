@@ -28,7 +28,7 @@ angular.module('Fittr')
         method: 'GET',
         url: '/fitbit/activity'
       }).success(function(data){
-        console.log('data', data);
+        console.log('steps data', data);
         callback(data);
       }).error(function(){
         console.log('error on getting data');
