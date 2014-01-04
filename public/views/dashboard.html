@@ -22,10 +22,12 @@
 
     <h3>Welcome back {{user.name}}</h3>
     <p>data: {{data}}</p>
+    <h3>Query Dates</h3>
+    <p>From date: <input ui-date="dateOptions" ng-model="myDates.from" ui-date-format="yy-mm-dd"></p>
 
-    <p>pick a date: <input ui-date="dateOptions" ng-model="myDate" name="date"></p>
+    <p>To date: <input ui-date="dateOptions" ng-model="myDates.to" ui-date-format="yy-mm-dd"></p>
 
-    <p>{{myDate}}</p>
+    <p>{{myDates}}</p>
 
     <button ng-click='getData()' class='btn btn-lg btn-primary'>Get Fibit data</button>
     <button ng-click='getAverage()' class='btn btn-lg btn-primary'>Get Steps Average</button>
