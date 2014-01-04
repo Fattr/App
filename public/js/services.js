@@ -47,5 +47,25 @@ angular.module('Fittr')
       });
     }
   }
+})
+//==========================================
+//  factory function to find the average
+//  number of steps per day for all fitbit
+//  users.
+//==========================================
+.factory('AverageSteps', function($http) {
+  return {
+    getData: function(callback) {
+      // AJAX call to query our database
+      $http({
+        method: 'GET',
+        url: '/users/activity/2013-01-01',
+      }).success(function(data) {
+        callback(data);
+      }).error(function(err) {
+        console.log('error getting average steps ', err);
+      });
+    }
+  }
 });
 
