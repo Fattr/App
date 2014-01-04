@@ -120,7 +120,8 @@ User.find({}, function(err, users) {
   }
 
   if (users) {
-    getActivities(users);
+    // getActivities(users);
+    getProfile(users);
   }
 });
 
