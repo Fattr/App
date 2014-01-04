@@ -41,41 +41,55 @@ module.exports = function(app, passport) {
     }
   );
 
+  // ===========================
+  // query DB to get single user
+  // steps
+  // ===========================
   app.get('/fitbit/activity', authCheck, function(req, res) {
     // capture incoming user in order to query out DB
     var currentUser = req.user;
 
     // find user by associated "._id" property in out DB
-    User.findById(currentUser._id, function(err, user) {
+    // User.findById(currentUser._id, function(err, user) {
 
-      // create a new token with credititanls from from user in our DB
-      var token = {oauth_token: user.fitbit.token, oauth_token_secret: user.fitbit.tokenSecret};
-      fitbitClient.apiCall('GET', '/user/-/activities/date/2013-11-29.json',
-        {token: token},
-        function(err, resp, json) {
-          // json is the data back from fitbit
-          if (err) return res.send(err, 500);
+    //   // create a new token with credititanls from from user in our DB
+    //   var token = {oauth_token: user.fitbit.token, oauth_token_secret: user.fitbit.tokenSecret};
+    //   fitbitClient.apiCall('GET', '/user/-/activities/date/2013-11-29.json',
+    //     {token: token},
+    //     function(err, resp, json) {
+    //       // json is the data back from fitbit
+    //       if (err) return res.send(err, 500);
 
-          // create a new steps instance and set all its
-          // data to the fitbit data we just got
-          // not all data is being saved yet, just for
-          // testing right now
-          console.log(json);
-          var steps = new Steps();
-          steps.userId = currentUser._id;
+    //       // create a new steps instance and set all its
+    //       // data to the fitbit data we just got
+    //       // not all data is being saved yet, just for
+    //       // testing right now
+    //       console.log(json);
+    //       var steps = new Steps();
+    //       steps.userId = currentUser._id;
 
-          // 'summary' is an object Fitbit returns with the data we need
-          steps.steps = json.summary.steps;
-          steps.distances = json.summary.distances;
+    //       // 'summary' is an object Fitbit returns with the data we need
+    //       steps.steps = json.summary.steps;
+    //       steps.distances = json.summary.distances;
 
-          // save the updated steps schema into our DB
-          steps.save(function(err) {
-            if(err) console.log('error', err);
-            console.log('saved steps');
-          });
-      });
-    });
-    res.send(200);
+    //       // save the updated steps schema into our DB
+    //       steps.save(function(err) {
+    //         if(err) console.log('error', err);
+    //         console.log('saved steps');
+    //       });
+    //   });
+    // });
+
+    // use the current user's id to find associated steps data and return it
+    Steps.findOne({userId: currentUser._id}, function(err, steps) {
+      if(err) {
+        console.log('error getting ' + currentUser.displayName + "'s steps data", err);
+        res.send(500, err);
+      } else if(steps) {
+        console.log('got ' + currentUser.name +' step data.', steps.steps);
+        res.json(steps.steps);
+      }
+    })
   });
 
 

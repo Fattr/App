@@ -5,31 +5,31 @@ var mongoose = require('mongoose');
 // =====================
 
 var userSchema = mongoose.Schema({
-	name: String,
+  name: String,
   email: String,
   // username: {
   //   type: String,
   //   unique: true
   // },
-	fitbit: {
-		id: String,
-		token: String,
-		tokenSecret: String,
-		displayName: String,
-		profilePic: String
-	},
-	// other passport strategies if we need them
-	devices: [
-		mongoose.Schema({
-			name: String,
-			type: String,
-			company: String,
-			active: Boolean,
-			visible: Boolean
-		})
-	],
-	active: Boolean,
-	showPublicly: Boolean
+  fitbit: {
+    id: String,
+    token: String,
+    tokenSecret: String,
+    displayName: String,
+    profilePic: String
+  },
+  // other passport strategies if we need them
+  devices: [
+    mongoose.Schema({
+      name: String,
+      type: String,
+      company: String,
+      active: Boolean,
+      visible: Boolean
+    })
+  ],
+  active: Boolean,
+  showPublicly: Boolean
 });
 
 // =============================================
