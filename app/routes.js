@@ -41,61 +41,8 @@ module.exports = function(app, passport) {
     }
   );
 
-  // ===========================
-  // query DB to get single user
-  // steps
-  // ===========================
-  app.get('/fitbit/activity', authCheck, function(req, res) {
-    // capture incoming user in order to query out DB
-    var currentUser = req.user;
-
-    // find user by associated "._id" property in out DB
-    // User.findById(currentUser._id, function(err, user) {
-
-    //   // create a new token with credititanls from from user in our DB
-    //   var token = {oauth_token: user.fitbit.token, oauth_token_secret: user.fitbit.tokenSecret};
-    //   fitbitClient.apiCall('GET', '/user/-/activities/date/2013-11-29.json',
-    //     {token: token},
-    //     function(err, resp, json) {
-    //       // json is the data back from fitbit
-    //       if (err) return res.send(err, 500);
-
-    //       // create a new steps instance and set all its
-    //       // data to the fitbit data we just got
-    //       // not all data is being saved yet, just for
-    //       // testing right now
-    //       console.log(json);
-    //       var steps = new Steps();
-    //       steps.userId = currentUser._id;
-
-    //       // 'summary' is an object Fitbit returns with the data we need
-    //       steps.steps = json.summary.steps;
-    //       steps.distances = json.summary.distances;
-
-    //       // save the updated steps schema into our DB
-    //       steps.save(function(err) {
-    //         if(err) console.log('error', err);
-    //         console.log('saved steps');
-    //       });
-    //   });
-    // });
-
-    // use the current user's id to find associated steps data and return it
-    Steps.findOne({userId: currentUser._id}, function(err, steps) {
-      if(err) {
-        console.log('error getting ' + currentUser.displayName + "'s steps data", err);
-        res.send(500, err);
-      } else if(steps) {
-        console.log('got ' + currentUser.name +' step data.', steps.steps);
-        res.json(steps.steps);
-      }
-    })
-  });
-
-
-
   // ========================
-  // Get user email here
+  // Post user email here
   // ========================
   app.post('/fitbit/update/email', function(req, res) {
     var query = {id: req.user._id};
@@ -130,25 +77,9 @@ module.exports = function(app, passport) {
   // DB routes
   // =========================
 
-
-  // List user data.
-  // FIXME: Don't display tokens.
-  app.get('/users/me', function(req, res) {
-    res.jsonp(req.user || null);
-  });
-
-
   app.get('/users/activity/:from?/:to?', authCheck, function(req, res, next){
     var dateFrom = req.params.from;
     var dateTo   = req.params.to;
-
-    // Use authCheck custom middleware to check for auth
-    // to send back a 401 for angular interceptors
-    // No user logged in.
-    // if(!req.user) {
-    //   res.jsonp(null);
-    //   return;
-    // }
 
     var query = { userId: req.user._id };
 
@@ -175,11 +106,44 @@ module.exports = function(app, passport) {
       }
       res.jsonp(stats || null);
     });
-
   });
 
+  // ===========================
+  // query DB to get single user
+  // steps
+  // ===========================
+  app.get('/user/activity/:from?/:to?', authCheck, function(req, res) {
+    // capture incoming user in order to query out DB
+    var dateFrom = req.params.from,
+        dateTo   = req.params.to,
+        query    = {userId: req.user._id};
 
+    dateFrom = (dateFrom === '-') ? undefined : dateFrom;
+    dateTo   = (  dateTo === '-') ? undefined : dateTo;
 
+    if( dateFrom !== undefined && dateTo !== undefined) {
+      query.date = { $gte: dateFrom, $lte: dateTo };
+    } else {
+      if( dateFrom !== undefined) {
+        query.date = { $gte: dateFrom};
+      }
+
+      if( dateTo !== undefined) {
+        query.date = { $lte: dateTo};
+      }
+    }
+
+    // use the current user's id to find associated steps data and return it
+    Steps.findOne(query, function(err, steps) {
+      if(err) {
+        console.log('error getting ' + currentUser.displayName + "'s steps data", err);
+        res.send(500, err);
+      } else if(steps) {
+        console.log('got ' + currentUser.name +' step data.', steps.steps);
+        res.json(steps.steps);
+      }
+    })
+  });
 };
 
 // ====================================
