@@ -22,6 +22,9 @@
     <h3>Welcome back {{user.name}}</h3>
     <p>data: {{data}}</p>
 
+    <p>pick a date: <input ui-date="dateOptions" name="date"></p>
+    <br>
+
     <button ng-click='getData()' class='btn btn-lg btn-primary'>Get Fibit data</button>
     <button ng-click='getAverage()' class='btn btn-lg btn-primary'>Get Steps Average</button>
   </div>

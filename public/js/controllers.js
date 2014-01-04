@@ -51,4 +51,9 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData, Average
   $scope.getAverage = function() {
     AverageSteps.getData($scope.averageCallback); // AverageSteps is a factory fn found in services.js
   };
+  $scope.dateOptions = {
+    changeYear: true,
+    changeMonth: true,
+    yearRange: '1900:-0'
+  };
 });
