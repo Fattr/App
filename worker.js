@@ -25,7 +25,7 @@ var yesterday = function() {
   return '' + year + '-' + month + '-' + day;
 }();
 
-var updateDb = function(userActivities) {
+var updateActivitiesDb = function(userActivities) {
   var dailyActivities = new Steps({
     user:             userActivities.id,
     date:             userActivities.date,
@@ -58,13 +58,54 @@ var getActivities = function(users) {
       'GET', '/user/-/activities/date/' + yesterday + '.json',
       {token: token},
       function(err, resp, userActivities) {
-        if (err) throw err;
+        if (err) console.log(err);
         else {
           userActivities.id = user._id;
           userActivities.date = yesterday;
           console.log('----- User ----');
           console.log(userActivities);
-          updateDb(userActivities);
+          updateActivitiesDb(userActivities);
+        }
+      }
+    );
+  }
+};
+
+var updateProfileDb = function(userProfile, user) {
+  console.log('updateProfileDb\'s userProfile obj', userProfile);
+  User.update(
+    {_id: user._id},
+    {
+      fitbit: {
+        displayName: userProfile.user.displayName,
+        profilePic:  userProfile.user.avatar
+      }
+    },
+    {},
+    function(err, numAffected, raw) {
+      if (err) console.log(err);
+      console.log('rows affected:', numAffected);
+      console.log('mongo response:', raw);
+    }
+  );
+};
+
+var getProfile = function(users) {
+  for (var i = 0; i < users.length; i++) {
+    var user = users[i];
+    var token = {
+      oauth_token: user.fitbit.token,
+      oauth_token_secret: user.fitbit.tokenSecret
+    };
+
+    fitbitClient.apiCall(
+      'GET',
+      '/user/-/profile.json',
+      {token: token},
+      function(err, resp, userProfile) {
+        if (err) console.log(err);
+        else {
+          updateProfileDb(userProfile, user);
         }
       }
     );
@@ -79,7 +120,8 @@ User.find({}, function(err, users) {
   }
 
   if (users) {
-    getActivities(users);
+    // getActivities(users);
+    getProfile(users);
   }
 });
 
