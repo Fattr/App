@@ -112,12 +112,29 @@ module.exports = function(app, passport) {
   // query DB to get single user
   // steps
   // ===========================
-  app.get('/fitbit/activity', authCheck, function(req, res) {
+  app.get('/user/activity/:from?/:to?', authCheck, function(req, res) {
     // capture incoming user in order to query out DB
-    var currentUser = req.user;
+    var dateFrom = req.params.from,
+        dateTo   = req.params.to,
+        query    = {userId: req.user._id};
+
+    dateFrom = (dateFrom === '-') ? undefined : dateFrom;
+    dateTo   = (  dateTo === '-') ? undefined : dateTo;
+
+    if( dateFrom !== undefined && dateTo !== undefined) {
+      query.date = { $gte: dateFrom, $lte: dateTo };
+    } else {
+      if( dateFrom !== undefined) {
+        query.date = { $gte: dateFrom};
+      }
+
+      if( dateTo !== undefined) {
+        query.date = { $lte: dateTo};
+      }
+    }
 
     // use the current user's id to find associated steps data and return it
-    Steps.findOne({userId: currentUser._id}, function(err, steps) {
+    Steps.findOne(query, function(err, steps) {
       if(err) {
         console.log('error getting ' + currentUser.displayName + "'s steps data", err);
         res.send(500, err);
