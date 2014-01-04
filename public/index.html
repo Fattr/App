@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="js/lib/bootstrap-css-only/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="js/lib/nvd3/nv.d3.min.css">
+    <link rel="stylesheet" href="js/lib/jquery-ui/themes/smoothness/jquery-ui.css"/>
   </head>
 
   <body ng-controller='AppCtrl'>
@@ -23,13 +24,16 @@
 
     <!-- <h2>{{error_message}}</h2> -->
     <div class="container">
-<!--       <h1>{{name}}</h1> -->
+    <!-- <h1>{{name}}</h1> -->
       <div ng-view ng-cloak></div>
     </div>
   </body>
+    <script src='js/lib/jquery/jquery.min.js'></script>
+    <script src='js/lib/jquery-ui/ui/minified/jquery-ui.min.js'></script>
     <script src='js/lib/angular/angular.js'></script>
     <script src='js/lib/angular-route/angular-route.min.js'></script>
     <script src='js/lib/angular-cookie/angular-cookie.min.js'></script>
+    <script src='js/lib/angular-ui-date/src/date.js'></script>
     <script src='js/app.js'></script>
     <script src='js/services.js'></script>
     <script src='js/controllers.js'></script>

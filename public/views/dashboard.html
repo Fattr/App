@@ -19,11 +19,17 @@
     </div>
     <h1>{{name}}</h1>
     <img ng-Src='{{user.fitbit.profilePic}}' class='img-rounded' alt='Fittr profile pic'/>
+
     <h3>Welcome back {{user.name}}</h3>
     <p>data: {{data}}</p>
 
+    <p>pick a date: <input ui-date="dateOptions" ng-model="myDate" name="date"></p>
+
+    <p>{{myDate}}</p>
+
     <button ng-click='getData()' class='btn btn-lg btn-primary'>Get Fibit data</button>
     <button ng-click='getAverage()' class='btn btn-lg btn-primary'>Get Steps Average</button>
+
   </div>
   <div ng-controller="Dashboard">
     <nvd3-multi-bar-chart

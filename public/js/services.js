@@ -66,6 +66,10 @@ angular.module('Fittr')
         console.log('error getting average steps ', err);
       });
     }
+    // TODO: once the worker is up and running, make
+    // getData also take in 2 date params to modify the
+    // AJAX call's url. Might need to make it a separate
+    // function for it, if we still want to use global data.
   }
 });
 
