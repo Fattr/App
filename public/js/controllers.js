@@ -56,5 +56,8 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData, Average
     changeMonth: true,
     yearRange: '2010:-0'
   };
-  $scope.myDate;
+  $scope.myDates = {
+    from: '',
+    to: '',
+  }
 });
