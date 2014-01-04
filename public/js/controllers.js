@@ -56,5 +56,5 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData, Average
     changeMonth: true,
     yearRange: '2010:-0'
   };
-  $scope.myDates;
+  $scope.myDates; //the datepicker stores the dates as {'from':'someDate', 'to':'someDate'}
 });
