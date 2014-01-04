@@ -23,10 +23,10 @@ angular.module('Fittr')
 })
 .factory('FitbitData', function($http, $location) {
   return {
-    retrieve: function(callback) {
+    retrieve: function(dates, callback) {
       $http({
         method: 'GET',
-        url: '/fitbit/activity'
+        url: '/user/activity'
       }).success(function(data){
         console.log('steps data', data);
         callback(data);
