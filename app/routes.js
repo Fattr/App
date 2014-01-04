@@ -137,7 +137,7 @@ module.exports = function(app, passport) {
     Steps.findOne(query, function(err, steps) {
       if(err) {
         console.log('error getting ' + currentUser.displayName + "'s steps data", err);
-        res.send(500, err);
+        res.send(err);
       } else if(steps) {
         console.log('got ' + currentUser.name +' step data.', steps.steps);
         res.json(steps.steps);

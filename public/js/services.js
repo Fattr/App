@@ -13,7 +13,7 @@ angular.module('Fittr')
         function(response) {
           console.log('response', response);
           if(response.status === 401){
-            console.log('here')
+            console.log('interception!!!');
             $location.url('/');
           }
           return $q.reject(response);
@@ -38,7 +38,7 @@ angular.module('Fittr')
     update: function(data) {
       $http({
         method: 'POST',
-        url: '/fitbit/update/email',
+        url: '/update/email',
         data: {email: data}
       }).success(function(stuff) {
         console.log('sent email');
@@ -55,11 +55,11 @@ angular.module('Fittr')
 //==========================================
 .factory('AverageSteps', function($http) {
   return {
-    getData: function(callback) {
+    getData: function(dates, callback) {
       // AJAX call to query our database
       $http({
         method: 'GET',
-        url: '/users/activity/2013-01-01',
+        url: '/users/activity/2013-01-01', // dates object will have from and to dates to tie on to the url here
       }).success(function(data) {
         callback(data);
       }).error(function(err) {
