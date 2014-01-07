@@ -26,7 +26,7 @@ angular.module('Fittr')
     retrieve: function(dates, callback) {
       $http({
         method: 'GET',
-        url: '/user/activity'
+        url: '/user/activity/'+dates.from +'/'+dates.to
       }).success(function(data){
         console.log('steps data', data);
         callback(data);
