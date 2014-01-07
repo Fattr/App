@@ -27,12 +27,13 @@ var yesterday = function() {
 
 var updateActivitiesDb = function(userActivities) {
   var dailyActivities = new Steps({
-    user:             userActivities.id,
+    userId:           userActivities.id,
     date:             userActivities.date,
     steps:            userActivities.summary.steps,
     distances:        userActivities.distances,
     caloriesBurned:   userActivities.caloriesOut,
     sedentaryMins:    userActivities.summary.sedentaryMinutes,
+    lightActMins:     userActivities.summary.lightlyActiveMinutes,
     fairlyActMins:    userActivities.summary.fairlyActiveMinutes,
     veryActMins:      userActivities.summary.veryActiveMinutes
   });
@@ -53,7 +54,7 @@ var getActivities = function(users) {
       oauth_token: user.fitbit.token,
       oauth_token_secret: user.fitbit.tokenSecret
     };
-    
+
     fitbitClient.apiCall(
       'GET', '/user/-/activities/date/' + yesterday + '.json',
       {token: token},
