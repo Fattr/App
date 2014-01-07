@@ -56,7 +56,7 @@ module.exports = {
   // =========================
 
   allUsersActivity: function(req, res) {
-    var query = { userId: req.user._id };
+    var query = {};
     dateRange(req.params.from, req.params.to, query);
 
     Steps.find(query, function(err, stats) {
@@ -65,7 +65,7 @@ module.exports = {
         res.send(err);
       }
       if(stats) {
-        res.json(stats || null);
+        res.json(stats);
       }
     });
   },

@@ -30,7 +30,7 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
   //  async data from the db.
   //==========================================
   $scope.averageCallback = function(data) {
-    var data = data;
+    console.log('data', data);
     var stepSum = 0;
     for (var i = 0; i < data.length; i++){
       stepSum += data[i].steps;
