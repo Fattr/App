@@ -8,7 +8,8 @@ var mongoose      = require('mongoose'),
     User          = require('./app/models/users.js'),
     Steps         = require('./app/models/fbSteps.js'),
     config        = require('./config/auth.js').fitbit,
-    fitbitClient  = require('fitbit-js')(config.consumerKey, config.consumerSecret, config.callbackURL);
+    fitbitClient  = require('fitbit-js')(config.consumerKey, config.consumerSecret, config.callbackURL),
+    moment        = require('moment');
 
 // Find all users
 User.find({}, function(err, users){
@@ -50,3 +51,4 @@ var dates = function(user, memberSince) {
   // count the number of days < 150 (rate limit)
 
 // Make the actual calls and add to the db
+
