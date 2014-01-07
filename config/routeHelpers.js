@@ -82,9 +82,9 @@ module.exports = {
     Steps.findOne(query, function(err, steps) {
       if(err) {
         res.send(err);
-      } else {
-        console.log('db data', steps);
-        res.json(steps);
+      } else if(steps) {
+        console.log('db data', steps.steps);
+        res.json(steps.steps);
       }
     });
   }

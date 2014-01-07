@@ -50,7 +50,7 @@ angular.module('Fittr')
       // AJAX call to query our database
       $http({
         method: 'GET',
-        url: '/users/activity/2013-01-01', // dates object will have from and to dates to tie on to the url here
+        url: '/users/activity/'+dates.from+'/'+dates.to // dates object will have from and to dates to tie on to the url here
       }).success(function(data) {
         callback(data);
       }).error(function(err) {
