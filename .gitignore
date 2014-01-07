@@ -4,3 +4,5 @@ dist
 public/js/lib
 config/auth.js
 .DS_Store
+public/lib/
+worker-x.js
