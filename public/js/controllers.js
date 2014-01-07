@@ -15,7 +15,7 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
     $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
   };
   $scope.getData = function() {
-    FitbitData.retrieve($scope.stats); // FitbitData is a service that asyncs data from fitbit
+    FitbitData.retrieve($scope.myDates, $scope.stats); // FitbitData is a service that asyncs data from fitbit
   };
   $scope.submit = function() {
     FitbitData.update($scope.email);
@@ -49,7 +49,7 @@ controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
     ];
   };
   $scope.getAverage = function() {
-    AverageSteps.getData($scope.averageCallback); // AverageSteps is a factory fn found in services.js
+    FitbitData.getData($scope.myDates, $scope.averageCallback); // AverageSteps is a factory fn found in services.js
   };
   $scope.dateOptions = {
     changeYear: true,

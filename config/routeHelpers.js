@@ -81,10 +81,9 @@ module.exports = {
 
     Steps.findOne(query, function(err, steps) {
       if(err) {
-        console.log('error getting ' + currentUser.displayName + "'s steps data", err);
         res.send(err);
       } else if(steps) {
-        console.log('got ' + currentUser.name +' step data.', steps.steps);
+        console.log('db data', steps.steps);
         res.json(steps.steps);
       }
     });
@@ -92,6 +91,7 @@ module.exports = {
 }
 
 var dateRange = function(dateFrom, dateTo, query) {
+  console.log('date range');
   dateFrom = (dateFrom === '-') ? undefined : dateFrom;
   dateTo   = (  dateTo === '-') ? undefined : dateTo;
 
@@ -106,4 +106,5 @@ var dateRange = function(dateFrom, dateTo, query) {
       query.date = { $lte: dateTo };
     }
   }
+  console.log('date', query.date);
 };
