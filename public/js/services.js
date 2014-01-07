@@ -45,16 +45,7 @@ angular.module('Fittr')
       }).error(function(err) {
         console.log('could not update email');
       });
-    }
-  }
-})
-//==========================================
-//  factory function to find the average
-//  number of steps per day for all fitbit
-//  users.
-//==========================================
-.factory('AverageSteps', function($http) {
-  return {
+    },
     getData: function(dates, callback) {
       // AJAX call to query our database
       $http({
@@ -66,10 +57,7 @@ angular.module('Fittr')
         console.log('error getting average steps ', err);
       });
     }
-    // TODO: once the worker is up and running, make
-    // getData also take in 2 date params to modify the
-    // AJAX call's url. Might need to make it a separate
-    // function for it, if we still want to use global data.
   }
 });
+
 

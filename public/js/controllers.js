@@ -9,7 +9,7 @@ angular.module('Fittr')
 controller('Signup', function ($scope, $http) {
   $scope.name = 'Signup';
 }).
-controller('Dashboard', function ($scope, $rootScope, $http, FitbitData, AverageSteps) {
+controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
   $scope.name = 'Dashboard';
   $scope.stats = function(data) { // callback function to retrieve async data from fitbit
     $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
