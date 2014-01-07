@@ -49,26 +49,29 @@ var updateActivitiesDb = function(userActivities) {
 
 var getActivities = function(users) {
   for (var i = 0; i < users.length; i++) {
-    var user = users[i];
-    var token = {
-      oauth_token: user.fitbit.token,
-      oauth_token_secret: user.fitbit.tokenSecret
-    };
+    (function(index){
+      var user = users[index];
+      var token = {
+        oauth_token: user.fitbit.token,
+        oauth_token_secret: user.fitbit.tokenSecret
+      };
 
-    fitbitClient.apiCall(
-      'GET', '/user/-/activities/date/' + yesterday + '.json',
-      {token: token},
-      function(err, resp, userActivities) {
-        if (err) console.log(err);
-        else {
-          userActivities.id = user._id;
-          userActivities.date = yesterday;
-          console.log('----- User ----');
-          console.log(userActivities);
-          updateActivitiesDb(userActivities);
+      fitbitClient.apiCall(
+        'GET', '/user/-/activities/date/' + yesterday + '.json',
+        {token: token},
+        function(err, resp, userActivities) {
+
+          if (err) console.log(err);
+          else {
+            userActivities.id = user._id;
+            userActivities.date = yesterday;
+            console.log('----- User ----');
+            console.log(userActivities);
+            updateActivitiesDb(userActivities);
+          }
         }
-      }
-    );
+      );
+    })(i);
   }
 };
 
