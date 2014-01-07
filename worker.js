@@ -74,15 +74,18 @@ var getActivities = function(users) {
 
 var updateProfileDb = function(userProfile, user) {
   console.log('updateProfileDb\'s userProfile obj', userProfile);
+  var query = { _id: user._id };
   User.update(
-    {_id: user._id},
-    {
-      fitbit: {
-        displayName: userProfile.user.displayName,
-        profilePic:  userProfile.user.avatar
+    query,
+    {fitbit:
+      {
+        $set: {
+          displayName: userProfile.user.displayName,
+          profilePic: userProfile.user.avatar
+        }
       }
     },
-    {},
+    // {upsert: true},
     function(err, numAffected, raw) {
       if (err) console.log(err);
       console.log('rows affected:', numAffected);
