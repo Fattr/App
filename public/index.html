@@ -20,11 +20,14 @@
           <li ng-hide='isAuth()'><a href="#/signup">Sign in</a></li>
           <li ng-show='isAuth()'><a href="/logout">Sign out</a></li>
         </ul>
+        <ul class='nav navbar-nav navbar-right'ng-show='isAuth()'>
+          <li><a href=""><img style='width: 30%'ng-src="{{user.fitbit.profilePic}}"> {{user.name}}</a></li>
+        </ul>
       </div>
     </nav>
 
     <!-- <h2>{{error_message}}</h2> -->
-      <a href="https://github.com/Hendrixer/Fittr"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+      <a href="https://github.com/Hendrixer/Fittr"><img style="position: absolute; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <!-- <h1>{{name}}</h1> -->
     <div ng-view ng-cloak></div>
   </body>
