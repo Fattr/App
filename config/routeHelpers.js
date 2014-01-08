@@ -58,7 +58,7 @@ module.exports = {
   allUsersActivity: function(req, res) {
     var query = {};
     dateRange(req.params.from, req.params.to, query);
-
+    console.log('db query', query)
     Steps.find(query, function(err, stats) {
       if(err) {
         console.log('Error getting all users stats', err);
@@ -91,7 +91,6 @@ module.exports = {
 }
 
 var dateRange = function(dateFrom, dateTo, query) {
-  console.log('date range');
   dateFrom = (dateFrom === '-') ? undefined : dateFrom;
   dateTo   = (  dateTo === '-') ? undefined : dateTo;
 
@@ -106,5 +105,4 @@ var dateRange = function(dateFrom, dateTo, query) {
       query.date = { $lte: dateTo };
     }
   }
-  console.log('date', query.date);
 };
