@@ -43,11 +43,11 @@ angular.module('Fittr')
     console.log('average calories burned - ', calAvg);
     $scope.stepsChart = [
       {
-        "key": "You",
-        "values": [ [ 'Steps Taken' , 13468], [ 'Steps Goal' , 10000] ]
+        "key": "Yesterday",
+        "values": [ [ 'Steps Taken' , data[data.length-1].steps], [ 'Steps Goal' , 10000] ]
       },
       {
-        "key": "Comparison Data",
+        "key": "Average",
         "values": [ [ 'Steps Taken' , stepAvg], [ 'Steps Goal' , 10000] ]
       }
     ];
