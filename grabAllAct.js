@@ -1,6 +1,6 @@
 /*
- * Look at memberSince property on user
- * Build an array from that date up until the day before yesterday
+ * worker script for pulling all user fitbit
+ * data-points since join date (memberSince)
  */
 
 var mongoose      = require('mongoose'),
@@ -11,44 +11,85 @@ var mongoose      = require('mongoose'),
     fitbitClient  = require('fitbit-js')(config.consumerKey, config.consumerSecret, config.callbackURL),
     moment        = require('moment');
 
-// Find all users
-User.find({}, function(err, users){
-  if (err) {
-    console.log('error:', err);
-  }
-
-  if (users) {
-
-  }
-});
-
-// Each do a fitbitClient call to grab the memberSince date
-var dates = function(user, memberSince) {
-  var results = [];
-
-  for (var i = 1; i < 151; i++) { // fitbit api rate limit
-    var date = new Date();
-    date.setDate(date.get() - i);
-
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    // add 0 in front of single digit nums
-    if (month < 10) {
-      month = 0 + String(month);
-    }
-    if (day < 10) {
-      day = 0 + String(day);
-    }
-
-    results.push(year + '-' + month + '-' + day);
-  }
-
-  return results;
+/*
+ * IDEAL call signature
+*/
+var allActivities = function() {
+  var users = getUsers();
+  users.forEach(function(user) {
+    var date = getDate(user);
+    getDailyAct(date, writeDb);
+  });
 };
 
-// Build the array of dates to use for the fitbitClient call for grabbing daily activity
-  // count the number of days < 150 (rate limit)
+// Write activites to DB
+var writeDb = function(activities) {
+  var dailyActivities = new Steps({
+    userId:           userActivities.id,
+    date:             userActivities.date,
+    steps:            userActivities.summary.steps,
+    distances:        userActivities.distances,
+    caloriesBurned:   userActivities.caloriesOut,
+    sedentaryMins:    userActivities.summary.sedentaryMinutes,
+    lightActMins:     userActivities.summary.lightlyActiveMinutes,
+    fairlyActMins:    userActivities.summary.fairlyActiveMinutes,
+    veryActMins:      userActivities.summary.veryActiveMinutes
+  });
 
-// Make the actual calls and add to the db
+  dailyActivities.save(function(err, activities, numAffected) {
+    if (err) throw err;
+    else {
+      console.log('activities', activities);
+      console.log('number affected', numAffected);
+    }
+  });
+};
 
+// Find all users that have been 
+var getUsers = function() {
+  User.find({}, function(err, users){
+    if (err) {
+      console.log('error:', err);
+    } else {
+      grabAllAct(users);
+    }
+  });
+};
+
+var getDailyAct = function(date, next) {
+  fitbitClient.apiCall(
+    'GET', '/user/-/activities/date/' + date + '.json',
+    {token: token},
+    function(err, resp, userActivities) {
+      if (err) console.log(err);
+      else {
+        userActivities.id = user._id;
+        userActivities.date = date;
+        console.log('user: ' + user.name + '; userActivities.date: ' + userActivities.date);
+        allUserActs.push(userActivities);
+      }
+    }
+  );
+};
+
+var getDates = function(users) {
+  for (var i = 0; i < users.length; i++) {
+    (function(index) {
+      var user = users[index];
+      var token = {
+        oauth_token: user.fitbit.token,
+        oauth_token_secret: user.fitbit.tokenSecret
+      };
+
+      var dateLimit = moment().subtract('days', 150).format('YYYY-MM-DD');
+      var memberSince = moment(user.memberSince);
+
+      for (var j = 0; j < dates.length; j++) {
+        (function(idx) {
+          var date = dates[idx];
+          getDailyAct(date);
+        })(j);
+      }
+    })(i);
+  }
+};
