@@ -32,11 +32,15 @@ angular.module('Fittr')
   $scope.averageCallback = function(data) {
     console.log('data', data);
     var stepSum = 0;
+    var calSum = 0;
     for (var i = 0; i < data.length; i++){
       stepSum += data[i].steps;
+      calSum += data[i].caloriesOut;
     }
     var stepAvg = stepSum/data.length;
-    console.log(stepAvg);
+    var calAvg = calSum/data.length;
+    console.log('average steps - ', stepAvg);
+    console.log('average calories burned - ', calAvg);
     $scope.stepsChart = [
       {
         "key": "You",
@@ -54,7 +58,7 @@ angular.module('Fittr')
       },
       {
         "key": "Comparison Data",
-        "values": [ [ 'Avg Calories Burned' , 12345], [ 'Some Other Shit' , 10000] ]
+        "values": [ [ 'Avg Calories Burned' , calAvg], [ 'Some Other Shit' , 10000] ]
       }
     ];
     // TODO: Sleep chart shit in worker.js (Time permitting).
