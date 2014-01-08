@@ -17,10 +17,15 @@ var mongoose      = require('mongoose'),
 var allActivities = function() {
   var users = getUsers();
   users.forEach(function(user) {
-    var date = getDate(user);
-    getDailyAct(date, writeDb);
+    var dates = getDates();
+    dates.forEach(function(date) {
+      var activities = getDailyAct(date);
+      writeDb(activities);
+    });
   });
 };
+// SCRIPT INVOCATION
+allActivities();
 
 // Write activites to DB
 var writeDb = function(activities) {
@@ -46,17 +51,17 @@ var writeDb = function(activities) {
 };
 
 // Find all users that have been 
-var getUsers = function() {
+var getUsers = function(callback) {
   User.find({}, function(err, users){
     if (err) {
       console.log('error:', err);
     } else {
-      grabAllAct(users);
+      callback(users);
     }
   });
 };
 
-var getDailyAct = function(date, next) {
+var getDailyAct = function(date, callback) {
   fitbitClient.apiCall(
     'GET', '/user/-/activities/date/' + date + '.json',
     {token: token},
@@ -66,13 +71,13 @@ var getDailyAct = function(date, next) {
         userActivities.id = user._id;
         userActivities.date = date;
         console.log('user: ' + user.name + '; userActivities.date: ' + userActivities.date);
-        allUserActs.push(userActivities);
+        writeDb(userActivities);
       }
     }
   );
 };
 
-var getDates = function(users) {
+var getDates = function(users, callback) {
   for (var i = 0; i < users.length; i++) {
     (function(index) {
       var user = users[index];
