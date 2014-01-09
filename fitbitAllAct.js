@@ -12,17 +12,17 @@ var mongoose      = require('mongoose'),
 
 
 // Write activites to DB
-var updateDb = function(activities) {
+var updateDb = function(dailyActivity) {
   var dailyActivities = new Steps({
-    userId:           userActivities.id,
-    date:             userActivities.date,
-    steps:            userActivities.summary.steps,
-    distances:        userActivities.distances,
-    caloriesBurned:   userActivities.caloriesOut,
-    sedentaryMins:    userActivities.summary.sedentaryMinutes,
-    lightActMins:     userActivities.summary.lightlyActiveMinutes,
-    fairlyActMins:    userActivities.summary.fairlyActiveMinutes,
-    veryActMins:      userActivities.summary.veryActiveMinutes
+    userId:           dailyActivity.id,
+    date:             dailyActivity.date,
+    steps:            dailyActivity.summary.steps,
+    distances:        dailyActivity.distances,
+    caloriesBurned:   dailyActivity.caloriesOut,
+    sedentaryMins:    dailyActivity.summary.sedentaryMinutes,
+    lightActMins:     dailyActivity.summary.lightlyActiveMinutes,
+    fairlyActMins:    dailyActivity.summary.fairlyActiveMinutes,
+    veryActMins:      dailyActivity.summary.veryActiveMinutes
   });
 
   dailyActivities.save(function(err, activities, numAffected) {
@@ -59,9 +59,7 @@ var getDailyAct = function(user, date, callback) {
       else {
         dailyActivity.id = user._id;
         dailyActivity.date = date;
-        console.log('user', user.name);
-        console.log('userAct', dailyActivity);
-        // callback(dailyActivity);
+        callback(dailyActivity);
       }
     }
   );
@@ -98,7 +96,7 @@ var allActivities = function() {
     users.forEach(function(user) {
       getDates(user, function(user, date) {
         getDailyAct(user, date, function(activities) {
-        //   updateDb(activities);
+          updateDb(activities);
         });
       });
     });
