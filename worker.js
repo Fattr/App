@@ -4,6 +4,7 @@ var mongoose      = require('mongoose'),
     Steps         = require('./app/models/fbSteps.js'),
     config        = require('./config/auth.js').fitbit,
     fitbitClient  = require('fitbit-js')(config.consumerKey, config.consumerSecret, config.callbackURL);
+    moment        = require('moment');
 
 // =================================
 // get all users fibit access tokens
@@ -11,18 +12,9 @@ var mongoose      = require('mongoose'),
 // to database
 // =================================
 var yesterday = function() {
-  var date = new Date();
-  date.setDate(date.getDate() - 1);
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  if (month < 10) {
-    month = 0 + String(month);
-  }
-  var day = date.getDate();
-  if (day < 10) {
-    day = 0 + String(day);
-  }
-  return '' + year + '-' + month + '-' + day;
+  var date = moment();
+  date = date.subtract('days', 1).format('YYYY-MM-DD');
+  return date;
 }();
 
 var updateActivitiesDb = function(userActivities) {
@@ -127,8 +119,8 @@ User.find({}, function(err, users) {
   }
 
   if (users) {
-    getActivities(users);
-    getProfile(users);
+    // getActivities(users);
+    // getProfile(users);
   }
 });
 
