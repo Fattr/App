@@ -3,20 +3,44 @@
 /* Controllers */
 
 angular.module('Fittr')
-.controller('AppCtrl', function ($scope, $http) {
+.controller('AppCtrl', function ($scope, $http, $timeout) {
   $scope.name = 'Fittr';
+  $scope.someone = 'The World';
+  // Array of random names for Jumbotron
+  var names = ['LeBron', 'Manning', 'San Francisco', '94102', 'your friends', 'Westbrook', 'The World', 'Rose', 'Jeter','Fred','your Mom', 'your brother'];
+
+  // return a random name
+  var randomName = function() {
+    var name = Math.floor(Math.random() * (names.length));
+    $scope.someone = names[name];
+  };
+
+  // set name to a random name on an interval
+  setInterval(function() {
+    $scope.$apply(function(){
+      randomName();
+    })
+  }, 2000);
 })
+
+// sign up controller
 .controller('Signup', function ($scope, $http) {
   $scope.name = 'Signup';
 })
+
+// Dashbord controller
 .controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
   $scope.name = 'Dashboard';
+
   $scope.stats = function(data) { // callback function to retrieve async data from fitbit
     $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
   };
   $scope.getData = function() {
     FitbitData.retrieve($scope.myDates, $scope.stats); // FitbitData is a service that asyncs data from fitbit
   };
+
+  // userd to update user email
+  // FIXME: currentlly not using user email
   $scope.submit = function() {
     FitbitData.update($scope.email);
     $scope.checkEmail();
@@ -25,6 +49,7 @@ angular.module('Fittr')
   $scope.checkEmail = function() {
     return $rootScope.user.email;
   };
+
   //==========================================
   //  callback function to print chart from
   //  async data from the db.
@@ -37,41 +62,18 @@ angular.module('Fittr')
       stepSum += data[i].steps;
       calSum += data[i].caloriesOut;
     }
-    var stepAvg = stepSum/data.length;
-    var calAvg = calSum/data.length;
-    console.log('average steps - ', stepAvg);
-    console.log('average calories burned - ', calAvg);
+    $scope.stepAvg = stepSum/data.length;
+    $scope.yesterday = data[data.length-1].steps;
     $scope.stepsChart = [
       {
         "key": "Yesterday",
-        "values": [ [ 'Steps Taken' , data[data.length-1].steps], [ 'Steps Goal' , 10000] ]
+        "values": [ [ 'Steps Taken' , $scope.yesterday], [ 'Steps Goal' , 10000] ]
       },
       {
         "key": "Average",
-        "values": [ [ 'Steps Taken' , stepAvg], [ 'Steps Goal' , 10000] ]
+        "values": [ [ 'Steps Taken' , $scope.stepAvg], [ 'Steps Goal' , 10000] ]
       }
     ];
-    $scope.caloriesChart = [
-      {
-        "key": "You",
-        "values": [ [ 'Calories Burned Today' , 12345], [ 'Calories Goal' , 10000] ]
-      },
-      {
-        "key": "Comparison Data",
-        "values": [ [ 'Avg Calories Burned' , calAvg], [ 'Some Other Shit' , 10000] ]
-      }
-    ];
-    // TODO: Sleep chart shit in worker.js (Time permitting).
-    // $scope.sleepChart = [
-    //   {
-    //     "key": "You",
-    //     "values": [ [ 'Minutes Sleeping' , 12345], [ 'Minutes Awake' , 10000] ]
-    //   },
-    //   {
-    //     "key": "Comparison Data",
-    //     "values": [ [ 'Avg Minutes Sleeping' , 12345], [ 'Average Minutes Awake' , 10000] ]
-    //   }
-    // ];
   };
   $scope.getAverage = function() {
     FitbitData.getData($scope.myDates, $scope.averageCallback); // AverageSteps is a factory fn found in services.js
