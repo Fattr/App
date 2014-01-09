@@ -2,6 +2,8 @@
  * worker script for pulling all user fitbit
  * data-points since join date (memberSince)
  */
+
+// Defaults / Configs
 var mongoose      = require('mongoose'),
     db            = mongoose.connect('mongodb://localhost/fittr'),
     User          = require('./app/models/users.js'),
