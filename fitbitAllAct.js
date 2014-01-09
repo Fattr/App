@@ -45,6 +45,7 @@ var getUsers = function(callback) {
   });
 };
 
+// The actual Fitbit API call for user's daily activities
 var getDailyAct = function(user, date, callback) {
   var token = {
     oauth_token: user.fitbit.token,
@@ -88,9 +89,9 @@ var getDates = function(user, callback) {
   }
 };
 
-/*
- * IDEAL call signature
-*/
+/* 
+ * THE KICK-OFF!!!
+ */
 var allActivities = function() {
   getUsers(function(users) {
     users.forEach(function(user) {
