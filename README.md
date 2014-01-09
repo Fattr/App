@@ -1,6 +1,7 @@
 # Fittr
 
-Fittr allows users to track and compare data from all of their different quantified self devices.
+Fittr allows you to compare your fitness metrics to the world.
+Using the data from many popular trackers like Fitbit.
 We built Fittr using the MEAN stack ([MongoDB](http://mongodb.org), [ExpressJS](http://expressjs.com), [AngularJS](http://angularjs.org/), [NodeJS](http://nodejs.org)).
 
 
