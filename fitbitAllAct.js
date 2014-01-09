@@ -1,6 +1,11 @@
 /*
  * worker script for pulling all user fitbit
  * data-points since join date (memberSince)
+ *
+ * FUTURE ADDITIONS: 
+ *
+ * Query Mongo for Users that have joined 
+ * after the last time this script was run
  */
 
 // Defaults / Configs
