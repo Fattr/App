@@ -16,7 +16,8 @@ var userSchema = mongoose.Schema({
     token: String,
     tokenSecret: String,
     displayName: String,
-    profilePic: String
+    profilePic: String,
+    memberSince: String
   },
   // other passport strategies if we need them
   devices: [
