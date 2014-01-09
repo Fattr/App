@@ -2,7 +2,6 @@
  * worker script for pulling all user fitbit
  * data-points since join date (memberSince)
  */
-
 var mongoose      = require('mongoose'),
     db            = mongoose.connect('mongodb://localhost/fittr'),
     User          = require('./app/models/users.js'),
@@ -11,24 +10,9 @@ var mongoose      = require('mongoose'),
     fitbitClient  = require('fitbit-js')(config.consumerKey, config.consumerSecret, config.callbackURL),
     moment        = require('moment');
 
-/*
- * IDEAL call signature
-*/
-var allActivities = function() {
-  var users = getUsers();
-  users.forEach(function(user) {
-    var dates = getDates();
-    dates.forEach(function(date) {
-      var activities = getDailyAct(date);
-      writeDb(activities);
-    });
-  });
-};
-// SCRIPT INVOCATION
-allActivities();
 
 // Write activites to DB
-var writeDb = function(activities) {
+var updateDb = function(activities) {
   var dailyActivities = new Steps({
     userId:           userActivities.id,
     date:             userActivities.date,
@@ -61,40 +45,64 @@ var getUsers = function(callback) {
   });
 };
 
-var getDailyAct = function(date, callback) {
+var getDailyAct = function(user, date, callback) {
+  var token = {
+    oauth_token: user.fitbit.token,
+    oauth_token_secret: user.fitbit.tokenSecret
+  };
+
   fitbitClient.apiCall(
     'GET', '/user/-/activities/date/' + date + '.json',
     {token: token},
-    function(err, resp, userActivities) {
+    function(err, resp, dailyActivity) {
       if (err) console.log(err);
       else {
-        userActivities.id = user._id;
-        userActivities.date = date;
-        console.log('user: ' + user.name + '; userActivities.date: ' + userActivities.date);
-        writeDb(userActivities);
+        dailyActivity.id = user._id;
+        dailyActivity.date = date;
+        console.log('user', user.name);
+        console.log('userAct', dailyActivity);
+        // callback(dailyActivity);
       }
     }
   );
 };
 
-var getDates = function(users, callback) {
-  for (var i = 0; i < users.length; i++) {
-    (function(index) {
-      var user = users[index];
-      var token = {
-        oauth_token: user.fitbit.token,
-        oauth_token_secret: user.fitbit.tokenSecret
-      };
+// getDates sends every date, 
+// user's join date (user.memberSince),
+// and sends it to a callback (fitbit api).
+// The date format is "YYYY-MM-DD"
+var getDates = function(user, callback) {
+  var dateLimit = moment().subtract('days', 150).format('YYYY-MM-DD');
+  var memberSince = moment("2014-01-01");
 
-      var dateLimit = moment().subtract('days', 150).format('YYYY-MM-DD');
-      var memberSince = moment(user.memberSince);
+  var loopDays = function(daysNeeded) {
+    for (var numDays = 2; numDays < daysNeeded; numDays++) {
+      var date = moment().subtract('days', numDays).format('YYYY-MM-DD');
+      callback(user, date);
+    }
+  };
 
-      for (var j = 0; j < dates.length; j++) {
-        (function(idx) {
-          var date = dates[idx];
-          getDailyAct(date);
-        })(j);
-      }
-    })(i);
+  if ( memberSince.isBefore(dateLimit) ) { // a member > 150 days
+    loopDays(152);
+  } else { // a member < 150 days
+    var daysNeeded = moment().subtract('days', 2).diff(memberSince, 'days');
+    loopDays(daysNeeded);
   }
 };
+
+/*
+ * IDEAL call signature
+*/
+var allActivities = function() {
+  getUsers(function(users) {
+    users.forEach(function(user) {
+      getDates(user, function(user, date) {
+        getDailyAct(user, date, function(activities) {
+        //   updateDb(activities);
+        });
+      });
+    });
+  });
+};
+// SCRIPT INVOCATION
+allActivities();
