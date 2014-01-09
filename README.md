@@ -12,7 +12,7 @@ Create an account
 
 Select a date range
 
-Click button to view your data vs everyone else
+Click button to view your data vs everyone else's
 ## About
 
 Fittr was built by [Mehul Patel](https://github.com/Mayho), [Scott Moss](https://github.com/Hendrixer), [David Wu](https://github.com/wuwoot), [Nick Loveridge](https://github.com/lovenick) as a student project at [Hack Reactor](http://hackreactor.com)
