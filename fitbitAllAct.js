@@ -79,7 +79,7 @@ var getDailyAct = function(user, date, callback) {
 // The date format is "YYYY-MM-DD"
 var getDates = function(user, callback) {
   var dateLimit = moment().subtract('days', 150).format('YYYY-MM-DD');
-  var memberSince = moment(user.memberSince);
+  var memberSince = moment(user.fitbit.memberSince);
 
   var loopDays = function(daysNeeded) {
     for (var numDays = 2; numDays < daysNeeded; numDays++) {
