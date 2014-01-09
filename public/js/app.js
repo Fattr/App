@@ -36,7 +36,8 @@ angular.module('Fittr', [
   $httpProvider.responseInterceptors.push('authResponseInterceptor');
   $routeProvider.
     when('/', {
-      templateUrl: '../views/home.html'
+      templateUrl: '../views/home.html',
+      controller: 'AppCtrl'
     })
     .when('/signup', {
       templateUrl: '../views/signup.html',

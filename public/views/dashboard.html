@@ -1,4 +1,3 @@
-<div class='container'>
   <div id='wrapper'>
     <div id='sidebar-wrapper'>
       <ul class='sidebar-nav'>
@@ -7,35 +6,38 @@
         <li class='sidebar-brand'><a href=''>Goals</a></li>
       </ul>
     </div>
-    <div id='page-content-wrapper'>
-
-      <!-- ** We don't need this anymore, but keeping it as a comment in case of future use **
-      <div ng-hide='checkEmail()'>
-        <h3>Yo, we don't have an email for you, give us one please!</h3>
-        <form ng-submit='submit()' role="form">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" ng-model='email' placeholder="Enter email">
-          </div>
-          <button type="submit" class="btn btn-default">Done</button>
-        </form>
-      </div> -->
-      <br><br>
-      <h1>Welcome back {{user.name}}!</h1>
-      <br>
-      <img ng-Src='{{user.fitbit.profilePic}}' class='img-rounded' alt='Fittr profile pic'/>
-      <strong>Please pick the date range you wish to query.</strong><br><br>
-      <p>From date: <input ui-date="dateOptions" ng-model="myDates.from" ui-date-format="yy-mm-dd"> &nbsp; &nbsp;
-        To date: <input ui-date="dateOptions" ng-model="myDates.to" ui-date-format="yy-mm-dd">
+  </div>
+  <div class='dash' id='page-content-wrapper'>
+    <div class='container'>
+      <p>
+        <h3>Hey, {{user.name}}</h3>
+        <h4>
+          pick a date below to start comparing some activity
+        </h4>
       </p>
-      <br><br>
-      <button ng-click='getAverage()' class='btn btn-lg btn-primary'>Display Step Data</button>
+      <img ng-Src='{{user.fitbit.profilePic}}' class='img-circle img-responsive' alt='Fittr profile pic'/>
+      <div class='dates row'>
+        <div class='col-xs-6 col-md-4'>
+          <div class='input-group'>
+            <span class='input-group-addon'>@</span>
+            <input class='form-control' placeholder='From Date'ui-date="dateOptions" ng-model="myDates.from" ui-date-format="yy-mm-dd">
+          </div>
+        </div>
+        <div class='col-xs-6 col-md-4'>
+          <div class='input-group'>
+            <span class='input-group-addon'>@</span>
+            <input type='text' placeholder='To Date'class='form-control' ui-date="dateOptions" ng-model="myDates.to" ui-date-format="yy-mm-dd">
+          </div>
+        </div>
+      </div>
+      <button ng-click='getAverage()' class='dash-btn btn btn-lg btn-primary'>Display Step Data</button>
     </div>
-    <div ng-controller="Dashboard">
-      <nvd3-multi-bar-chart
+  </div>
+  <div class='container graph'ng-controller="Dashboard">
+    <nvd3-multi-bar-chart
       data="stepsChart"
       id="exampleId"
-      width="640"
+      width="900"
       height="540"
       showxaxis="true"
       showyaxis="true"
@@ -45,4 +47,3 @@
       <svg></svg>
     </nvd3-multi-bar-chart>
   </div>
-</div>
