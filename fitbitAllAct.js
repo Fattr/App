@@ -1,6 +1,11 @@
 /*
  * worker script for pulling all user fitbit
  * data-points since join date (memberSince)
+ *
+ * FUTURE ADDITIONS: 
+ *
+ * Query Mongo for Users that have joined 
+ * after the last time this script was run
  */
 
 // Defaults / Configs
@@ -74,7 +79,7 @@ var getDailyAct = function(user, date, callback) {
 // The date format is "YYYY-MM-DD"
 var getDates = function(user, callback) {
   var dateLimit = moment().subtract('days', 150).format('YYYY-MM-DD');
-  var memberSince = moment("2014-01-01"); // !!! HARD-CODED !!!
+  var memberSince = moment(user.fitbit.memberSince);
 
   var loopDays = function(daysNeeded) {
     for (var numDays = 2; numDays < daysNeeded; numDays++) {
