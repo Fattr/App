@@ -10,7 +10,7 @@ built with the [MEAN Stack](http://mean.io) ([MongoDB](http://mongodb.org) |
 * MongoDB - Download and install [MongoDB](http://mongodb.org) and make sure you're running on the default port (27017)
 
 ### Tools
-1. NPM - this comes with Node.js
+1. NPM - Package manager that comes with Node.js
 2. Bower - Package manager, easy to install with npm
   *  `npm install -g bower`
 
