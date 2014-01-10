@@ -21,6 +21,7 @@ built with the [MEAN Stack](http://mean.io) ([MongoDB](http://mongodb.org) |
 * [Angular](http://angularjs.org/) - defined as bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
 * [d3](http://d3js.org/) - defined as bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
 * [nvd3](http://nvd3.org/) - defined as a bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
+* [Angular-Animate](https://github.com/angular/bower-angular-animate) - defined as a bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file  
 
 ## Usage
 Clone the repo `git clone https://github.com/Hendrixer/Fittr.git`
