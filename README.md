@@ -43,7 +43,16 @@ var ids = {
 module.exports = ids;
 ```  
 
-start server `node app.js`
+Start the Server `node app.js`
+
+## Bootstrap Fittr
+After signing up and populating your DB with users, you must run `node fitbitAllAct.js`  
+to query the DB, select all users tokens and retrieve the user's info and data from  
+Fitbit.  
+`worker.js` will update all users' data from yesterday from fitbit. Use a cron job  
+to place the worker on a schedule, run `node worker.js`   
+
+## Team
 
 Fittr was built by [Mehul Patel](https://github.com/Mayho), [Scott Moss](https://github.com/Hendrixer), [David Wu](https://github.com/wuwoot), [Nick Loveridge](https://github.com/lovenick) as a student project at [Hack Reactor](http://hackreactor.com)
 

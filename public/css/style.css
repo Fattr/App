@@ -4,7 +4,8 @@ body {
 
 .jumbotron {
   background-color: #1abc9c;
-  box-shadow: 0px -8px 5px #16a085 inset;
+  background-image: url(../assets/banner.png);
+  height: 380px;
 }
 
 .dates {
@@ -13,7 +14,7 @@ body {
 }
 
 .dash {
-  background-color: #e74c3c;
+  background-color: #999;
   color: white;
   box-shadow: 0px 4px 3px grey;
   margin-left: 250px;
@@ -29,7 +30,7 @@ body {
 
 .challenge {
   font-size: 3em;
-  margin-top: 2%;
+  margin-top: 8%;
 }
 
 .someone {
