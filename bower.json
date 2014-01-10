@@ -22,10 +22,11 @@
     "d3": "~3.3.13",
     "nvd3": "~1.1.14-beta",
     "angularjs-nvd3-directives": "~0.0.5-beta",
-    "angular-ui-date": "latest"
+    "angular-ui-date": "latest",
+    "angular-animate": "~1.2.7"
   },
   "resolutions": {
-    "angular": "1.2.6",
+    "angular": "1.2.7",
     "d3": "~3.3.13"
   }
 }

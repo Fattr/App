@@ -31,7 +31,8 @@ angular.module('Fittr')
 // Dashbord controller
 .controller('Dashboard', function ($scope, $rootScope, $http, FitbitData) {
   $scope.name = 'Dashboard';
-
+  $scope.show = false;
+  $scope.side = false;
   $scope.stats = function(data) { // callback function to retrieve async data from fitbit
     $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
   };
@@ -77,6 +78,7 @@ angular.module('Fittr')
   };
   $scope.getAverage = function() {
     FitbitData.getData($scope.myDates, $scope.averageCallback); // AverageSteps is a factory fn found in services.js
+    $scope.show = true;
   };
   $scope.dateOptions = {
     changeYear: true,

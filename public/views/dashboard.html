@@ -33,13 +33,13 @@
       <button ng-click='getAverage()' class='dash-btn btn btn-lg btn-primary'>Display Step Data</button>
     </div>
   </div>
-  <div class='container'>
-    <div calss='row'>
-      <div class='col-xs-12 graph'ng-controller="Dashboard">
+  <div ng-if='show' class='slide-top container'>
+    <div class='row'>
+      <div class='col-xs-12 graph' ng-controller="Dashboard">
         <nvd3-multi-bar-chart
           data="stepsChart"
           id="exampleId"
-          width="900"
+          width="1200"
           height="540"
           showxaxis="true"
           showyaxis="true"

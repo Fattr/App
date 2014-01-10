@@ -4,6 +4,7 @@
 
 angular.module('Fittr', [
   'ngRoute',
+  'ngAnimate',
   'nvd3ChartDirectives',
   'ui.date'
 ])
