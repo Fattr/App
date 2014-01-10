@@ -6,3 +6,4 @@ config/auth.js
 .DS_Store
 public/lib/
 worker-x.js
+static
