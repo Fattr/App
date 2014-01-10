@@ -37,7 +37,8 @@ angular.module('Fittr')
     $scope.data = data; // save that data in the $scope for manipulatiion on tempaltes
   };
   $scope.getData = function() {
-    FitbitData.retrieve($scope.myDates, $scope.stats); // FitbitData is a service that asyncs data from fitbit
+    FitbitData.retrieve($scope.myDates, $scope.stats);
+     // FitbitData is a service that asyncs data from fitbit
   };
 
   // userd to update user email
@@ -64,11 +65,11 @@ angular.module('Fittr')
       calSum += data[i].caloriesOut;
     }
     $scope.stepAvg = stepSum/data.length;
-    $scope.yesterday = data[data.length-1].steps;
+    // $scope.yesterday = data[data.length-1].steps;
     $scope.stepsChart = [
       {
         "key": "Yesterday",
-        "values": [ [ 'Steps Taken' , $scope.yesterday], [ 'Steps Goal' , 10000] ]
+        "values": [ [ 'Steps Taken' , $scope.data], [ 'Steps Goal' , 10000] ]
       },
       {
         "key": "Average",
@@ -78,6 +79,7 @@ angular.module('Fittr')
   };
   $scope.getAverage = function() {
     FitbitData.getData($scope.myDates, $scope.averageCallback); // AverageSteps is a factory fn found in services.js
+    FitbitData.retrieve($scope.myDates, $scope.stats);
     $scope.show = true;
   };
   $scope.dateOptions = {

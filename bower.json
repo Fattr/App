@@ -26,7 +26,7 @@
     "angular-animate": "~1.2.7"
   },
   "resolutions": {
-    "angular": "1.2.7",
+    "angular": "1.2.8-build.2109+sha.8ace807",
     "d3": "~3.3.13"
   }
 }
