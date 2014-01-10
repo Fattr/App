@@ -28,14 +28,15 @@ Clone the repo `git clone https://github.com/Hendrixer/Fittr.git`
 The best way to get started with Fittr is to use npm and bower  
 install node modules `npm install`  
 install bower modules `bower intsall`  
-start mongoDB in a seperate terminal window or tab `mongod`
-### Fittr does not include the required file that holds your Fitbit app data, to include just make a new file named `auth.js` in the [config folder](https://github.com/Hendrixer/Fittr/tree/master/config) You must now paste the following code in and then fill in your Fitbit app secrets  
+start mongoDB in a seperate terminal window or tab `mongod`  
+**Fittr does not include the required file that holds your Fitbit app data, to include, just make a  
+new file named `auth.js` in the [config folder](https://github.com/Hendrixer/Fittr/tree/master/config) You must now paste the following code in and then fill in your Fitbit app secrets**  
 ```javscript
 var ids = {
   fitbit: {
-    consumerKey: 'Your fitbit consumer key here',
-    consumerSecret: 'Your fitbit consumer secret here',
-    callbackURL: 'Your fitbit callback url'
+    consumerKey: '/*Your fitbit consumer key here*/',
+    consumerSecret: '/*Your fitbit consumer secret here*/',
+    callbackURL: '/*Your fitbit callback url*/'
   }
 };
 
