@@ -59,7 +59,6 @@ module.exports = function(passport) {
             newUser.fitbit.tokenSecret = tokenSecret;
             newUser.fitbit.displayName = profile.displayName;
             newUser.fitbit.profilePic = profile._json.user.avatar;
-            console.log('profile obj', profile);
             newUser.fitbit.memberSince = profile._json.user.memberSince;
 
             // save that new user
