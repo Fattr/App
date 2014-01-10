@@ -68,17 +68,15 @@ var getActivities = function(users) {
 };
 
 var updateProfileDb = function(userProfile, user) {
+  // updates displayName and profPic
   console.log('updateProfileDb\'s userProfile obj', userProfile);
   var query = { _id: user._id };
   User.update(
     query,
-    {fitbit:
-      {
-        $set: {
-          displayName: userProfile.user.displayName,
-          profilePic: userProfile.user.avatar
+    { $set: {
+          'fitbit.displayName': userProfile.user.displayName,
+          'fitbit.profilePic': userProfile.user.avatar
         }
-      }
     },
     // {upsert: true},
     function(err, numAffected, raw) {
