@@ -76,7 +76,7 @@ var updateProfileDb = function(userProfile, user) {
       {
         $set: {
           displayName: userProfile.user.displayName,
-          profilePic: userProfile.user.avatar
+          profilePic: userProfile._json.user.avatar
         }
       }
     },
