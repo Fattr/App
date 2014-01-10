@@ -11,6 +11,9 @@ var userSchema = mongoose.Schema({
   //   type: String,
   //   unique: true
   // },
+  joinDate: {
+    type: Date, default: Date.now
+  },
   fitbit: {
     id: String,
     token: String,

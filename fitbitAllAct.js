@@ -21,7 +21,7 @@ var mongoose      = require('mongoose'),
 // Write activites to DB
 var updateDb = function(dailyActivity) {
   var dailyActivities = new Steps({
-    userId:           dailyActivity.id,
+    userId:           dailyActivity.uid,
     date:             dailyActivity.date,
     steps:            dailyActivity.summary.steps,
     distances:        dailyActivity.distances,
@@ -43,7 +43,10 @@ var updateDb = function(dailyActivity) {
 
 // Find all users that have been 
 var getUsers = function(callback) {
-  User.find({}, function(err, users){
+  var d = new Date();
+  var yesterday = d.setDate(d.getDate() - 1);
+
+  User.find({ joinDate: { $gte: yesterday } }, function(err, users) {
     if (err) {
       console.log('error:', err);
     } else {
@@ -65,7 +68,7 @@ var getDailyAct = function(user, date, callback) {
     function(err, resp, dailyActivity) {
       if (err) console.log(err);
       else {
-        dailyActivity.id = user._id;
+        dailyActivity.uid = user._id;
         dailyActivity.date = date;
         callback(dailyActivity);
       }

@@ -1,8 +1,7 @@
-var fitbitStrategy = require('passport-fitbit').Strategy;
-var config         = require('./auth.js');
-
+var fitbitStrategy = require('passport-fitbit').Strategy,
+    config         = require('./auth.js'),
 // load up the user model
-var User           = require('../app/models/users.js');
+    User           = require('../app/models/users.js');
 
 module.exports = function(passport) {
 

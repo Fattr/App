@@ -119,8 +119,8 @@ User.find({}, function(err, users) {
   }
 
   if (users) {
-    // getActivities(users);
-    // getProfile(users);
+    getActivities(users);
+    getProfile(users);
   }
 });
 
