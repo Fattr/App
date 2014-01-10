@@ -4,6 +4,7 @@ body {
 
 .jumbotron {
   background-color: #1abc9c;
+  box-shadow: 0px -8px 5px #16a085 inset;
 }
 
 .dates {
