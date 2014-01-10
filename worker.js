@@ -68,6 +68,7 @@ var getActivities = function(users) {
 };
 
 var updateProfileDb = function(userProfile, user) {
+  // updates displayName and profPic
   console.log('updateProfileDb\'s userProfile obj', userProfile);
   var query = { _id: user._id };
   User.update(
@@ -76,7 +77,7 @@ var updateProfileDb = function(userProfile, user) {
       {
         $set: {
           displayName: userProfile.user.displayName,
-          profilePic: userProfile.user.avatar
+          profilePic: userProfile._json.user.avatar
         }
       }
     },
