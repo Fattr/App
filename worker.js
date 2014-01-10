@@ -73,13 +73,10 @@ var updateProfileDb = function(userProfile, user) {
   var query = { _id: user._id };
   User.update(
     query,
-    {fitbit:
-      {
-        $set: {
-          displayName: userProfile.user.displayName,
-          profilePic: userProfile._json.user.avatar
+    { $set: {
+          'fitbit.displayName': userProfile.user.displayName,
+          'fitbit.profilePic': userProfile.user.avatar
         }
-      }
     },
     // {upsert: true},
     function(err, numAffected, raw) {
@@ -120,7 +117,7 @@ User.find({}, function(err, users) {
   }
 
   if (users) {
-    getActivities(users);
+    // getActivities(users);
     getProfile(users);
   }
 });
