@@ -15,10 +15,10 @@ built with the [MEAN Stack](http://mean.io) ([MongoDB](http://mongodb.org) |
   *  `npm install -g bower`
 
 ## Additional Packages
-* Express - defined as a node module in the [package.json](https://github.com/Hendrixer/Fittr/blob/master/package.json) file
+* [Express](http://expressjs.com/) - defined as a node module in the [package.json](https://github.com/Hendrixer/Fittr/blob/master/package.json) file
 * [Passport](http://passportjs.org/) - defined as a node module in the [package.json](https://github.com/Hendrixer/Fittr/blob/master/package.json) file
 * [Mongoose](http://mongoosejs.com/) - defined as a node module in the [package.json](https://github.com/Hendrixer/Fittr/blob/master/package.json) file
-* Angular - defined as bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
+* [Angular](http://angularjs.org/) - defined as bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
 * [d3](http://d3js.org/) - defined as bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
 * [nvd3](http://nvd3.org/) - defined as a bower module in the [bower.json](https://github.com/Hendrixer/Fittr/blob/master/bower.json) file
 
