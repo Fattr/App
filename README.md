@@ -29,6 +29,7 @@ The best way to get started with Fittr is to use npm and bower
 install node modules `npm install`  
 install bower modules `bower intsall`  
 start mongoDB in a seperate terminal window or tab `mongod`  
+in mongo use the command `use fittr` to change to the correct db  
 **Fittr does not include the required file that holds your Fitbit app data, to include, just make a  
 new file named `auth.js` in the [config folder](https://github.com/Hendrixer/Fittr/tree/master/config) You must now paste the following code in and then fill in your Fitbit app secrets**  
 ```javscript
