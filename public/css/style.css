@@ -4,6 +4,8 @@ body {
 
 .jumbotron {
   background-color: #1abc9c;
+  background-image: url(../assets/banner.png);
+  height: 380px;
 }
 
 .dates {
@@ -28,7 +30,7 @@ body {
 
 .challenge {
   font-size: 3em;
-  margin-top: 2%;
+  margin-top: 8%;
 }
 
 .someone {
