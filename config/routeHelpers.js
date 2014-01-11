@@ -79,12 +79,20 @@ module.exports = {
     var query = { userId: req.user._id };
     dateRange(req.params.from, req.params.to, query);
 
-    Steps.findOne(query, function(err, steps) {
+    Steps.find(query, function(err, steps) {
       if(err) {
         res.send(err);
       } else if(steps) {
-        console.log('db data', steps.steps);
-        res.json(steps.steps);
+        console.log('db data', steps);
+        var output = 0;
+        for (var i = 0; i < steps.length; i++){
+          console.log('individual step ', steps[i].steps);
+          output += steps[i].steps;
+          console.log('running total for output ', output);
+        }
+        var result = output/steps.length;
+        console.log('step average result ', result);
+        res.json(result);
       }
     });
   }
