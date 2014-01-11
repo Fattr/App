@@ -28,7 +28,7 @@ angular.module('Fittr')
         method: 'GET',
         url: '/user/activity/'+dates.from +'/'+dates.to
       }).success(function(data){
-        console.log('steps data', data);
+        console.log('single user steps data', data);
         callback(data);
       }).error(function(){
         console.log('error on getting data');
