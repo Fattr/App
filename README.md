@@ -56,7 +56,7 @@ to place the worker on a schedule, run `node worker.js`
 
 ## Team
 
-Fittr was built by [Mehul Patel](https://github.com/Mayho), [Scott Moss](https://github.com/Hendrixer), [David Wu](https://github.com/wuwoot), [Nick Loveridge](https://github.com/lovenick) as a student project at [Hack Reactor](http://hackreactor.com)
+Fittr was built by [Mehul Patel](https://github.com/Mayho), [Scott Moss](https://github.com/Hendrixer), [David Wu](https://github.com/wuwoot), [Nick Loveridge](https://github.com/lovenick), [Santiago Archila](https://github.com/sarchila), and [Wayne Montague](https://github.com/stateoflux) as a student project at [Hack Reactor](http://hackreactor.com)
 
 ## License
 MIT
