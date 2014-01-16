@@ -82,3 +82,5 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
 
 });
 
+angular.module('fittr.services', []);
+

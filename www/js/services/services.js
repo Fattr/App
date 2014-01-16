@@ -1,4 +1,4 @@
-angular.module('fittr.services', [])
+angular.module('fittr.services')
 
 /**
  * A simple example service that returns some data.
@@ -22,5 +22,5 @@ angular.module('fittr.services', [])
       // Simple index lookup
       return pets[petId];
     }
-  }
+  };
 });
