@@ -37,7 +37,7 @@ module.exports = function(grunt) {
           args: [],
           ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
           watchedExtensions: ['js', 'html', 'css'],
-          watchedFolders: ['js', 'css', 'templates'],
+          watchedFolders: ['js', 'css', 'templates', './'],
           debug: true,
           delayTime: 1,
           env: {
