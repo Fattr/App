@@ -1,5 +1,4 @@
-angular.module('starter.controllers', [])
-
+angular.module('fittr.controllers', [])
 
 // A simple controller that fetches a list of data from a service
 .controller('PetIndexCtrl', function($scope, PetService) {
