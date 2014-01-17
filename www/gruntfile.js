@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         }
       },
       jshint: {
-        all: ['gruntfile.js', '/js/**/*.js']
+        all: ['gruntfile.js', '/js/**/*.js', 'test/karma/**/*.js']
             // all: ['gruntfile.js', '/js/**/*.js', 'test/mocha/**/*.js', 'test/karma/**/*.js', 'app/**/*.js']
           },
           nodemon: {
@@ -32,42 +32,41 @@ module.exports = function(grunt) {
               options: {
                 file: 'server.js',
                 args: [],
-                ignoredFiles: ['README.md', '.DS_Store'],
-                    // ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
-                    watchedExtensions: ['js', 'html', 'css'],
-                    watchedFolders: ['js', 'css', 'templates'],
-                    debug: true,
-                    delayTime: 1,
-                    env: {
-                      PORT: 3000
-                    },
-                    cwd: __dirname
-                  }
-                }
-              },
-              concurrent: {
-                tasks: ['nodemon', 'watch'],
-                options: {
-                  logConcurrentOutput: true
-                }
-              },
-              jasmine: {
-                src: 'js/*.js',
-                options: {
-                  specs: 'test/jasmine/*.js'
+                ignoredFiles: ['README.md', 'node_modules/**', '.DS_Store'],
+                watchedExtensions: ['js', 'html', 'css'],
+                watchedFolders: ['js', 'css', 'templates'],
+                debug: true,
+                delayTime: 1,
+                env: {
+                  PORT: 3000
                 },
-              },
-              env: {
-                test: {
-                  NODE_ENV: 'test'
-                }
+                cwd: __dirname
               }
-              /* karma: {
-                unit: {
-                  configFile: 'test/karma/karma.conf.js'
-                }
-              } */
-            });
+            }
+          },
+          concurrent: {
+            tasks: ['nodemon', 'watch'],
+            options: {
+              logConcurrentOutput: true
+            }
+          },
+          jasmine: {
+            src: 'js/*.js',
+            options: {
+              specs: 'test/jasmine/*.js'
+            },
+          },
+          env: {
+            test: {
+              NODE_ENV: 'test'
+            }
+          },
+          karma: {
+            unit: {
+              configFile: 'test/karma/karma.conf.js'
+            }
+          }
+        });
 
     //Load NPM tasks 
     grunt.loadNpmTasks('grunt-contrib-watch');
