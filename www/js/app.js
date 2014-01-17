@@ -1,14 +1,21 @@
-// Ionic Starter App, v0.9.20
+// Ionic fittr App, v0.9.20
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'fittr' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
+// 'fittr.services' is found in services.js
+// 'fittr.controllers' is found in controllers.js
+angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRoute'])
 
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $routeProvider) {
+
+  // $routeProvider
+
+  // .when('/', {
+  //   templateUrl: 'templates/entry.html',
+  //   controller: 'EntryController'
+  // });
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -21,6 +28,13 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
       url: "/tab",
       abstract: true,
       templateUrl: "templates/tabs.html"
+    })
+
+    // entry
+    .state('entry', {
+      url: '/entry',
+      templateUrl: 'templates/entry.html',
+      controller: 'EntryController'
     })
 
     // the pet tab has its own child nav-view and history
@@ -63,7 +77,10 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/pets');
+  $urlRouterProvider.otherwise('entry');
+
 
 });
+
+angular.module('fittr.services', []);
 
