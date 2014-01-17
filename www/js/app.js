@@ -30,11 +30,22 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
       templateUrl: "templates/tabs.html"
     })
 
+
+    /*
+     * Fittr STATES
+     */
+
     // entry
     .state('entry', {
       url: '/entry',
       templateUrl: 'templates/entry.html',
       controller: 'EntryController'
+    })
+
+    .state('signup', {
+      url: '/registration',
+      templateUrl: 'templates/signup.html',
+      controller: 'SignupController'
     })
 
     // the pet tab has its own child nav-view and history
