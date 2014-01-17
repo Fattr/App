@@ -53,7 +53,7 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
       views: {
         'pets-tab': {
           templateUrl: 'templates/pet-detail.html',
-          controler: 'PetDetailCtrl'
+          controller: 'PetDetailCtrl'
         }
       }
     })
