@@ -23,7 +23,6 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
     .state('entry', {
       url: '/entry',
       templateUrl: 'templates/entry.html',
-      controller: 'EntryController'
     })
 
     .state('signup', {
