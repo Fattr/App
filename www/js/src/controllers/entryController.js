@@ -21,6 +21,8 @@ angular.module('fittr.controllers')
       Facebook.getLoginStatus(function(response) {
         if (response.status == 'connected') {
           $scope.logged = true;
+          // TODO: determine where to store the user's acessToken somewhere
+          console.log(response.authResponse.accessToken);
           $scope.me();
         } else {
           $scope.login();
