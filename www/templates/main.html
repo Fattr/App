@@ -1,0 +1,21 @@
+<view title="'Main'">
+  <content 
+    has-header="true"
+    has-tabs="false"
+    padding="true"
+    scroll="true"
+    on-refresh="onRefresh()"
+    >
+
+    <!-- CARDS BEGIN HERE -->
+    <div
+      class="card flip-in"
+      ng-repeat="user in users"
+      ng-click="cardToggle()"
+      >
+      <div class="item item-avatar">
+        <h2>{{ user }}</h2>
+      </div>
+    </div> 
+  </content>
+</view>

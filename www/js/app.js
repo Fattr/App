@@ -9,30 +9,14 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
 
 
 .config(function($stateProvider, $urlRouterProvider, $routeProvider) {
-
-  // $routeProvider
-
-  // .when('/', {
-  //   templateUrl: 'templates/entry.html',
-  //   controller: 'EntryController'
-  // });
-
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+
   $stateProvider
-
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/tabs.html"
-    })
-
-
     /*
-     * Fittr STATES
+     * Fittr
      */
 
     // entry
@@ -44,13 +28,32 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
 
     .state('signup', {
       url: '/signup',
-      templateUrl: 'templates/signup.html'
+      templateUrl: 'templates/signlogin.html'
       // controller: 'SignupController'
     })
 
     .state('login', {
       url: '/login',
-      templateUrl: 'templates/login.html'
+      templateUrl: 'templates/signlogin.html'
+      // controller: 'LoginController'
+    })
+
+    // main
+    .state('main', {
+      url: '/main',
+      templateUrl: 'templates/main.html',
+      controller: 'MainController'
+    })
+
+    /*
+     * Pets
+     */
+
+    // setup an abstract state for the tabs directive
+    .state('tab', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "templates/tabs.html"
     })
 
     // the pet tab has its own child nav-view and history
