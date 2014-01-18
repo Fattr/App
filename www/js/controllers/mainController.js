@@ -16,11 +16,20 @@ angular.module('fittr.controllers')
     'Anne'
   ];
 
-  $scope.users = users;
+  var userObjs = [];
 
-  $scope.cardVis = true;
+  users.forEach(function(user) {
+    var obj = {
+      name: user,
+      display: true
+    };
+
+    userObjs.push(obj);
+  });
+
+  $scope.users = userObjs;
 
   $scope.cardToggle = function() {
-    $scope.cardVis = !$scope.cardVis;
+    $scope.this.diplay = !this.display;
   };
 });
