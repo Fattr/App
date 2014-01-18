@@ -7,7 +7,7 @@ angular.module('fittr.services')
 
       $http({
         method: 'GET',
-        url: 'https://graph.facebook.com/santiago.archila'
+        url: 'http://localhost:3000/facebook'
       }).success(function(data, status) {
         d.resolve(data);
       }).error(function(data, status) {
