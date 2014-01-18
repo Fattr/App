@@ -5,89 +5,101 @@
 // the 2nd parameter is an array of 'requires'
 // 'fittr.services' is found in services.js
 // 'fittr.controllers' is found in controllers.js
-angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRoute', 'facebook'])
-  
-  // Facebook Configuration
-  // ==========================================================================
-  // Here you could set your appId throug the setAppId method and then initialize
-  // or use the shortcut in the initialize method directly.
-  .config(['FacebookProvider', function(FacebookProvider) {
-     FacebookProvider.init('559410647482302');
-  }])
+angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRoute'])
 
-  .config(function($stateProvider, $urlRouterProvider, $routeProvider) {
 
-    // $routeProvider
+.config(function($stateProvider, $urlRouterProvider, $routeProvider) {
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
 
-    // .when('/', {
-    //   templateUrl: 'templates/entry.html',
-    //   controller: 'EntryController'
-    // });
+  $stateProvider
+    /*
+     * Fittr
+     */
 
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
-    $stateProvider
+    // entry
+    .state('entry', {
+      url: '/entry',
+      templateUrl: 'templates/entry.html',
+      controller: 'EntryController'
+    })
 
-      // setup an abstract state for the tabs directive
-      .state('tab', {
-        url: "/tab",
-        abstract: true,
-        templateUrl: "templates/tabs.html"
-      })
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'templates/signlogin.html'
+      // controller: 'SignupController'
+    })
 
-      // entry
-      .state('entry', {
-        url: '/entry',
-        templateUrl: 'templates/entry.html',
-        controller: 'EntryController'
-      })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/signlogin.html'
+      // controller: 'LoginController'
+    })
 
-      // the pet tab has its own child nav-view and history
-      .state('tab.pet-index', {
-        url: '/pets',
-        views: {
-          'pets-tab': {
-            templateUrl: 'templates/pet-index.html',
-            controller: 'PetIndexCtrl'
-          }
+    // main
+    .state('main', {
+      url: '/main',
+      templateUrl: 'templates/main.html',
+      controller: 'MainController'
+    })
+
+    /*
+     * Pets
+     */
+
+    // setup an abstract state for the tabs directive
+    .state('tab', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "templates/tabs.html"
+    })
+
+    // the pet tab has its own child nav-view and history
+    .state('tab.pet-index', {
+      url: '/pets',
+      views: {
+        'pets-tab': {
+          templateUrl: 'templates/pet-index.html',
+          controller: 'PetIndexCtrl'
         }
-      })
+      }
+    })
 
-      .state('tab.pet-detail', {
-        url: '/pet/:petId',
-        views: {
-          'pets-tab': {
-            templateUrl: 'templates/pet-detail.html',
-            controller: 'PetDetailCtrl'
-          }
+    .state('tab.pet-detail', {
+      url: '/pet/:petId',
+      views: {
+        'pets-tab': {
+          templateUrl: 'templates/pet-detail.html',
+          controler: 'PetDetailCtrl'
         }
-      })
+      }
+    })
 
-      .state('tab.adopt', {
-        url: '/adopt',
-        views: {
-          'adopt-tab': {
-            templateUrl: 'templates/adopt.html'
-          }
+    .state('tab.adopt', {
+      url: '/adopt',
+      views: {
+        'adopt-tab': {
+          templateUrl: 'templates/adopt.html'
         }
-      })
+      }
+    })
 
-      .state('tab.about', {
-        url: '/about',
-        views: {
-          'about-tab': {
-            templateUrl: 'templates/about.html'
-          }
+    .state('tab.about', {
+      url: '/about',
+      views: {
+        'about-tab': {
+          templateUrl: 'templates/about.html'
         }
-      });
+      }
+    });
 
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('entry');
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('entry');
 
 
-  });
+});
 
 angular.module('fittr.services', []);
 
