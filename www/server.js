@@ -1,7 +1,8 @@
 
 var express = require("express"),
     app     = express(),
-    port    = parseInt(process.env.PORT, 10) || 4567;
+    port    = 3001;
+    // port    = parseInt(process.env.PORT, 10) || 4567;
     
 app.get("/", function(req, res) {
   console.log("request heard");
