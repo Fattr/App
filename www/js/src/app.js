@@ -27,13 +27,13 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
 
     .state('signup', {
       url: '/signup',
-      templateUrl: 'templates/signlogin.html',
+      templateUrl: 'templates/signup-login.html',
       controller: 'SignupController'
     })
 
     .state('login', {
       url: '/login',
-      templateUrl: 'templates/signlogin.html',
+      templateUrl: 'templates/signup-login.html',
       controller: 'LoginController'
     })
 

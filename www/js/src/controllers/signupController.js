@@ -1,7 +1,9 @@
 angular.module('fittr.controllers')
 
   .controller('SignupController', function($scope, $http) {
+    $scope.title = "Sign Up";
     $scope.user = {};
+
 
     $scope.getCssClasses = function(ngModelContoller) {
       return {
