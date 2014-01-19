@@ -10,10 +10,10 @@
 input[type="email"], input[type="password"] {
   padding: 6px;
 }
-input[type="email"].success, input[type="password"] {
+input[type="email"].success, input[type="password"].success {
   border: 2px solid green;
 }
-input[type="email"].error, input[type="password"] {
+input[type="email"].error, input[type="password"].error {
   border: 2px solid red;
 }
 

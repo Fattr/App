@@ -7,7 +7,8 @@ angular.module('fittr.controllers')
 
     $scope.getCssClasses = function(ngModelContoller) {
       return {
-        error: ngModelContoller.$invalid && ngModelContoller.$dirty,
+        error: ngModelContoller.$dirty && ngModelContoller.$invalid,
+        // error: ngModelContoller.$invalid && ngModelContoller.$dirty,
         success: ngModelContoller.$valid && ngModelContoller.$dirty
       };
     };
