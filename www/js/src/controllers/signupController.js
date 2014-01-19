@@ -1,14 +1,13 @@
 angular.module('fittr.controllers')
 
-  .controller('SignupController', function($scope, $http) {
+  .controller('SignupController', function($scope, $http, UserService) {
     $scope.title = "Sign Up";
     $scope.user = {};
 
 
     $scope.getCssClasses = function(ngModelContoller) {
       return {
-        error: ngModelContoller.$dirty && ngModelContoller.$invalid,
-        // error: ngModelContoller.$invalid && ngModelContoller.$dirty,
+        error: ngModelContoller.$invalid && ngModelContoller.$dirty,
         success: ngModelContoller.$valid && ngModelContoller.$dirty
       };
     };
@@ -19,28 +18,28 @@ angular.module('fittr.controllers')
 
     $scope.canSubmit = function() {
       return $scope.signupLoginForm.$dirty &&
-        $scope.signupLoginForm.$valid
+        $scope.signupLoginForm.$valid;
     };
 
     $scope.submit = function() {
-      console.log($scope.user);
-      // send user's credentials to server
-
-      // TODO: move to service
-      var url = "http://localhost:3000/signup"   //ala Parse's api
-      var futureResponse = $http.post(url, $scope.user); 
-
-      futureResponse.success(function (data, status, headers, config) { 
-        console.log(data);
-        // TODO: investigate how to indicate to user that signup was successfull
-        // TODO: investigate how to properly move from this state to connect devices state
-        // - how about combining the two. indication of success is transition to 'connect devices'
-        // state
-      }); 
-      futureResponse.error(function (data, status, headers, config) { 
-        throw new Error(' Something went wrong...');
-        // TODO: investigate how to indicate to user that signup was successfull
-        // TODO: investigate how to properly move from this state to connect devices state
-      });
+      $scope.user.username = $scope.user.email;
+      UserService.signup($scope.user)
+        .then(function(data) {
+          // store user details in local storage?
+          console.log(data);
+        });
     };
   });
+
+
+// When the creation is successful, the HTTP response is a 201 Created and the Location header contains the URL for the new user:
+
+// Status: 201 Created
+// Location: https://api.parse.com/1/users/g7y9tkhB7O
+// The response body is a JSON object containing the objectId, the createdAt timestamp of the newly-created object, and the sessionToken which can be used to authenticate subsequent requests as this user:
+
+// {
+//   "createdAt": "2011-11-07T20:58:34.448Z",
+//   "objectId": "g7y9tkhB7O",
+//   "sessionToken": "pnktnjyb996sj4p156gjtp4im"
+// }

@@ -1,0 +1,42 @@
+angular.module('fittr.services')
+
+.provider('UserService', function() {
+  var baseUrl = "http://localhost:3000/signup";
+  var apiKey = '';
+
+  // Set our API key from the .config section
+  // of our app
+  this.setApiKey = function(key) {
+    apiKey = key || apiKey;
+  };
+
+
+  this.$get = function($http, $q) {
+    return {
+      signup: function(user) {
+        console.log(user, apiKey);
+        var creatingUser = $q.defer();
+        
+        // configure http to send app access token along with POST
+        $http.defaults.headers.post.apikey = apiKey;
+        $http.post(baseUrl, user)
+          .success(function(data, status, headers, config) {
+            console.log("data: ", data, "status: ", status);
+            creatingUser.resolve(data);
+            // TODO: investigate how to indicate to user that signup was successfull
+            // TODO: investigate how to properly move from this state to connect devices state
+            // - how about combining the two. indication of success is transition to 'connect devices'
+            // state    
+            // this.setUser(data);   
+          })
+          .error(function(data, status, headers, config) {
+            creatingUser.reject(data, status);
+          // TODO: investigate how to indicate to user that signup was successfull
+          // TODO: investigate how to properly move from this state to connect devices state
+          });
+
+        return creatingUser.promise;
+      }
+    };
+  };
+});
