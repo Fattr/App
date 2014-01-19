@@ -5,8 +5,15 @@
 // the 2nd parameter is an array of 'requires'
 // 'fittr.services' is found in services.js
 // 'fittr.controllers' is found in controllers.js
-angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRoute'])
+angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.services', 'fittr.controllers'])
+.config(function(UserServiceProvider) {
+  UserServiceProvider.setApiKey('myKey');
+})
 
+// Allows us to segregate app data by using a 'Fittr' prefix
+.config(function(localStorageServiceProvider){
+  localStorageServiceProvider.setPrefix('Fittr');
+})
 
 .config(function($stateProvider, $urlRouterProvider, $routeProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
