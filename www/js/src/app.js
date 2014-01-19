@@ -21,20 +21,20 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
 
     // entry
     .state('entry', {
-      url: '/entry',
+      url: '/',
       templateUrl: 'templates/entry.html',
     })
 
     .state('signup', {
       url: '/signup',
-      templateUrl: 'templates/signlogin.html'
-      // controller: 'SignupController'
+      templateUrl: 'templates/signlogin.html',
+      controller: 'SignupController'
     })
 
     .state('login', {
       url: '/login',
-      templateUrl: 'templates/signlogin.html'
-      // controller: 'LoginController'
+      templateUrl: 'templates/signlogin.html',
+      controller: 'LoginController'
     })
 
     // main
@@ -42,6 +42,13 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
       url: '/main',
       templateUrl: 'templates/main.html',
       controller: 'MainController'
+    })
+
+    // User will connect their devices/services here
+    .state('connect-devices', {
+      url: '/connect-devices',
+      templateUrl: 'templates/connect-devices.html',
+      controller: 'ConnectDevicesController'
     })
 
     /*
@@ -95,7 +102,7 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('entry');
+  $urlRouterProvider.otherwise('/');
 
 
 });

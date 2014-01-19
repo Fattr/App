@@ -6,3 +6,18 @@
   width: 96px;
   height: 96px;
 }
+
+input[type="email"], input[type="password"] {
+  padding: 6px;
+}
+input[type="email"].success, input[type="password"] {
+  border: 2px solid green;
+}
+input[type="email"].error, input[type="password"] {
+  border: 2px solid red;
+}
+
+.tile {
+  border: 1px solid #ccc;
+  height: 75px;
+}
