@@ -1,6 +1,6 @@
 angular.module('fittr.controllers')
 
-  .controller('SignupController', function($scope, $http, UserService) {
+  .controller('SignupController', function($scope, $http, UserService, $state) {
     $scope.title = "Sign Up";
     $scope.user = {};
 
@@ -28,7 +28,8 @@ angular.module('fittr.controllers')
           console.log(data);
           // store user details in local storage?
           UserService.save(data);
-          // move to connect devices state?
+          // move to connect devices state
+          $state.go('connect-devices');
         });
     };
   });
