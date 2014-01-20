@@ -47,14 +47,14 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
     .state('main.stream', {
       url: '/stream',
       views: {
-      //   'catBar': {
-      //     templateUrl: 'templates/catBar.html',
-      //     controller: 'CatBarController'
-      //   },
-      //   'topBar': {
-      //     templateUrl: 'templates/topBar.html',
-      //     // controller: 'TopBarController'
-      //   }  ,
+        'catBar@': {
+          templateUrl: 'templates/catBar.html',
+          controller: 'CatBarController'
+        },
+        'topBar@': {
+          templateUrl: 'templates/topBar.html',
+          controller: 'TopBarController'
+        }  ,
         'cards@': {
           templateUrl: 'templates/cards.html',
           controller: 'CardController'
