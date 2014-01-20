@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.js">
+</script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+</head>
+<body ng-app="app">
+  <div ui-view="filters"></div>
+  <div ui-view="tabledata"></div>
+  <div ui-view="graph"></div>
+
+  <script>
+  var app = angular.module('app', ['ui.router'])
+
+  .config(function($stateProvider) {
+    $stateProvider
+      .state('report',
+         {
+    views: {
+      'filters': {
+        template: '<div>FILTERS</div>',
+        controller: function($scope){ }
+      },
+      'tabledata': {
+        templateUrl: 'report-table.html',
+        controller: function($scope){  }
+      },
+      'graph': {
+        templateUrl: 'report-graph.html',
+        controller: function($scope){ }
+      }
+    }
+  });
+  });
+  </script>
+</body>
+</html>
