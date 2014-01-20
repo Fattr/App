@@ -5,8 +5,15 @@
 // the 2nd parameter is an array of 'requires'
 // 'fittr.services' is found in services.js
 // 'fittr.controllers' is found in controllers.js
-angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRoute'])
+angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.services', 'fittr.controllers'])
+.config(function(UserServiceProvider) {
+  UserServiceProvider.setApiKey('myKey');
+})
 
+// Allows us to segregate app data by using a 'Fittr' prefix
+.config(function(localStorageServiceProvider){
+  localStorageServiceProvider.setPrefix('Fittr');
+})
 
 .config(function($stateProvider, $urlRouterProvider, $routeProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
@@ -21,21 +28,20 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
 
     // entry
     .state('entry', {
-      url: '/entry',
+      url: '/',
       templateUrl: 'templates/entry.html',
-      controller: 'EntryController'
     })
 
     .state('signup', {
       url: '/signup',
-      templateUrl: 'templates/signlogin.html'
-      // controller: 'SignupController'
+      templateUrl: 'templates/signup-login.html',
+      controller: 'SignupController'
     })
 
     .state('login', {
       url: '/login',
-      templateUrl: 'templates/signlogin.html'
-      // controller: 'LoginController'
+      templateUrl: 'templates/signup-login.html',
+      controller: 'LoginController'
     })
 
     // main
@@ -43,6 +49,13 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
       url: '/main',
       templateUrl: 'templates/main.html',
       controller: 'MainController'
+    })
+
+    // User will connect their devices/services here
+    .state('connect-devices', {
+      url: '/connect-devices',
+      templateUrl: 'templates/connect-devices.html',
+      controller: 'ConnectDevicesController'
     })
 
     /*
@@ -96,7 +109,7 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('entry');
+  $urlRouterProvider.otherwise('/');
 
 
 });

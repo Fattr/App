@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-facebook": "~0.2.2"
+    "angular-facebook": "~0.2.2",
+    "angular-local-storage": "*"
   }
 }

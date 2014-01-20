@@ -1,0 +1,29 @@
+<view title="title">
+  <content has-header="true" has-tabs="true" padding="true">
+    <form name="signupLoginForm" novalidate>
+      <div class="list list-inset">
+
+        <!-- user email -->
+        <label class="item item-input">
+          <input type="email" placeholder="Enter your email" name="email" required
+            ng-model="user.email"
+            ng-class="getCssClasses(signupLoginForm.email)">
+        </label>
+
+        <!-- user password -->
+        <label class="item item-input">
+          <input type="password" placeholder="Enter your password" name="password" required
+            ng-model="user.password"
+            ng-minlength="3"
+            ng-class="getCssClasses(signupLoginForm.password)">
+        </label>
+      </div>
+
+      <button class="button button-block button-stable"
+        ng-click="signup()"
+        ng-disabled="!(signupLoginForm.$dirty && signupLoginForm.$valid)">
+        Sign Up / Log in
+      </button>
+    </form>
+  </content>
+</view>
