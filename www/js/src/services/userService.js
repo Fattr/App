@@ -38,9 +38,9 @@ angular.module('fittr.services')
 
         return creatingUser.promise;
       },
-      save: function(userId, data) {
+      save: function(data) {
         console.log("saving user into localStorage");
-        // localStorageService.add('users', data);
+        localStorageService.add('currentUser', data);
       }
     };
   };

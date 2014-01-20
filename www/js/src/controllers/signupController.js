@@ -21,13 +21,14 @@ angular.module('fittr.controllers')
         $scope.signupLoginForm.$valid;
     };
 
-    $scope.submit = function() {
+    $scope.signup = function() {
       $scope.user.username = $scope.user.email;
       UserService.signup($scope.user)
         .then(function(data) {
-          // store user details in local storage?
           console.log(data);
-          UserService.save();
+          // store user details in local storage?
+          UserService.save(data);
+          // move to connect devices state?
         });
     };
   });
