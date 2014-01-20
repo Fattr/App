@@ -54,21 +54,10 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
       //   'topBar': {
       //     templateUrl: 'templates/topBar.html',
       //     // controller: 'TopBarController'
-      //   },
+      //   }  ,
         'cards@': {
           templateUrl: 'templates/cards.html',
           controller: 'CardController'
-        }
-      }
-    })
-
-    // TEST
-    .state('test', {
-      // url: '/test',
-      // templateUrl: 'templates/test.html',
-      views: {
-        'test-nested': {
-          templateUrl: 'templates/test-nested.html'
         }
       }
     })
