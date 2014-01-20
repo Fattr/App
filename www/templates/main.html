@@ -2,24 +2,14 @@
   <content 
     has-header="true"
     has-tabs="false"
-    padding="true"
+    padding="false"
     scroll="true"
     on-refresh="onRefresh()"
     >
-
-    <!-- CARDS BEGIN HERE -->
-    <div ng-controller="MainController">
-      <div
-        class="card flip-in"
-        ng-click="cardToggle()"
-        ng-controller="CardController"
-        ng-repeat="user in users"
-        ng-show="visib"
-        >
-        <div class="item item-avatar">
-          <h2>{{ user.name }}</h2>
-        </div>
-    </div> 
-  </dvi>
+    <!-- <nav-view="catBar"></nav-view> -->
+      <!-- <div ui-view></div> -->
+      <!-- <div ui-view="catBar"></div> -->
+      <!-- <div ui-view="topBar"></div> -->
+      <div ui-view="cards"></div>
   </content>
 </view>
