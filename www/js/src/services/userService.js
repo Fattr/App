@@ -13,6 +13,9 @@ angular.module('fittr.services')
 
   this.$get = function($http, $q, localStorageService) {
     return {
+      // persist user details in memory
+      currentUser: {},
+
       signup: function(user) {
         console.log(user, apiKey);
         var creatingUser = $q.defer();
@@ -73,9 +76,14 @@ angular.module('fittr.services')
           });
         return retrievingUser.promise;
       },
-      saveToLocal: function(data) {
+
+      save: function(userData) {
+        this.currentUser = userData;
+      },
+
+      saveToLocal: function(userData) {
         console.log("saving user into localStorage");
-        localStorageService.add('currentUser', data);
+        localStorageService.add('currentUser', userData);
       }
     };
   };
