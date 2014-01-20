@@ -60,21 +60,10 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
       //   'topBar': {
       //     templateUrl: 'templates/topBar.html',
       //     // controller: 'TopBarController'
-      //   },
+      //   }  ,
         'cards@': {
           templateUrl: 'templates/cards.html',
           controller: 'CardController'
-        }
-      }
-    })
-
-    // TEST
-    .state('test', {
-      // url: '/test',
-      // templateUrl: 'templates/test.html',
-      views: {
-        'test-nested': {
-          templateUrl: 'templates/test-nested.html'
         }
       }
     })
