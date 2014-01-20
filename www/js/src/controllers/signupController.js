@@ -32,11 +32,17 @@ angular.module('fittr.controllers')
       $scope.user.username = $scope.user.email;
       UserService.signup($scope.user)
         .then(function(data) {
-          console.log(data);
+          console.log("signup: ", data);
           // clear form
           resetForm(ngFormController);
-          // store user details in local storage?
-          UserService.save(data);
+          // ask UserService to grab user details from api
+          UserService.retrieve(data._id)
+            .then(function(data) {
+              console.log("retrieve fulfilled: ", data);
+              // store user details in local storage?
+              UserService.saveToLocal(data);
+            });
+          
           // move to connect devices state
           $state.go('connect-devices');
         }, function(reason) {
