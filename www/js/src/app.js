@@ -62,8 +62,8 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
           // controller: 'TopBarController'
         },
         'cards@': {
-          templateUrl: 'templates/cards.html'
-          // controller: 'CardsController'
+          templateUrl: 'templates/cards.html',
+          controller: 'CardsController'
         }
       }
     })
