@@ -51,22 +51,41 @@
   -->
   <body ng-app="fittr" animation="slide-left-right-ios7">
 
-    <!--
-      The nav bar that will be updated as we navigate between views
-      Additional attributes set its look, nav-bar animation and icons
-      Icons provided by Ionicons: http://ionicons.com/
-    -->
-    <nav-bar type="bar-positive"
-             animation="nav-title-slide-ios7"
-             back-button-type="button-icon"
-             back-button-icon="icon ion-arrow-left-c"></nav-bar>
+    <side-menus>
 
-    <!--
-      The views will be rendered in the <nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
-    <nav-view></nav-view>
+      <!-- CENTER CONTENT -->
+      <pane side-menu-content ng-controller="MainController">
+        <!--
+          The nav bar that will be updated as we navigate between views
+          Additional attributes set its look, nav-bar animation and icons
+          Icons provided by Ionicons: http://ionicons.com/
+        -->
+        <div class="bar bar-header bar-stable">
+          <button class="button button-icon icon ion-navicon" ng-click="toggleMenu()"></button>
+          <div class="h1 title">Main | Stream</div>
+        </div>
+
+        <!--<nav-bar type="bar-positive"
+                 animation="nav-title-slide-ios7"
+                 back-button-type="button-icon"
+                 back-button-icon="icon ion-arrow-left-c"></nav-bar>-->
+
+        <!--
+          The views will be rendered in the <nav-view> directive below
+          Templates are in the /templates folder (but you could also
+          have templates inline in this html file if you'd like).
+        -->
+        <nav-view></nav-view>
+      </pane>
+
+      <!-- LEFT MENU -->
+      <side-menu side="left">
+        <header class="bar bar-header bar-dark">
+          <h1 class="title">Menu</h1>
+        </header>
+      </side-menu>
+
+    </side-menus>
 
   </body>
 </html>
