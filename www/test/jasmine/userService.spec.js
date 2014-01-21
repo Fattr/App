@@ -5,6 +5,7 @@
 describe('User Service Specs', function() {
   var UserService;
   var localStorageService;
+  var baseUrl = "http://localhost:3000/users";
 
   beforeEach(module('fittr.services', 'LocalStorageModule'));
   beforeEach(inject(function(_UserService_, _localStorageService_) {
@@ -16,10 +17,9 @@ describe('User Service Specs', function() {
     expect(UserService).not.toBe(null);
   });
 
-  xdescribe('signup method', function() {
+  describe('signup method', function() {
 
     // do i test the http request?
-
     it('should return a promise object when invoked', function() {
       var promise = UserService.signup();
 
@@ -28,10 +28,9 @@ describe('User Service Specs', function() {
     });
   });
 
-  xdescribe('retrieve method', function() {
+  describe('retrieve method', function() {
 
     // do i test the http request?
-
     it('should return a promise object when invoked', function() {
       var promise = UserService.retrieve();
 
@@ -64,7 +63,7 @@ describe('User Service Specs', function() {
       });
     });
 
-    describe('saveToLocal', function() {
+    xdescribe('saveToLocal', function() {
       it('should save user details to localStorage', function() {
         var userFromLocal;
 
