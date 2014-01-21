@@ -41,7 +41,7 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
     // MAIN
     .state('main', {
       url: '/main',
-      abstract: true,
+      // abstract: true,
       templateUrl: 'templates/main.html'
     })
     .state('main.stream', {
@@ -52,9 +52,9 @@ angular.module('fittr', ['ionic', 'fittr.services', 'fittr.controllers', 'ngRout
           controller: 'CatBarController'
         },
         'topBar@': {
-          templateUrl: 'templates/topBar.html',
-          controller: 'TopBarController'
-        }  ,
+          templateUrl: 'templates/topBar.html'
+          // controller: 'TopBarController'
+        },
         'cards@': {
           templateUrl: 'templates/cards.html',
           controller: 'CardController'
