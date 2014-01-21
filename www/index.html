@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Fittr</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Fittr</title>
 
-    <!-- ionic css -->
-    <link href="css/ionic.css" rel="stylesheet">
+  <!-- ionic css -->
+  <link href="css/ionic.css" rel="stylesheet">
 
-    <!-- your app's css -->
-    <link href="css/app.css" rel="stylesheet">
-    <link href="css/ng-animation.css" rel="stylesheet">
+  <!-- your app's css -->
+  <link href="css/app.css" rel="stylesheet">
+  <link href="css/ng-animation.css" rel="stylesheet">
 
-    <!-- angularjs scripts -->
-    <script src="js/ionic.js"></script>
-    <script src="js/bower_components/angular/angular.js"></script>
-    <script src="js/angular/angular-animate.js"></script>
-    <script src="js/angular/angular-route.js"></script>
-    <script src="js/angular/angular-touch.js"></script>
-    <script src="js/angular/angular-sanitize.js"></script>
-    <script src="js/angular-ui/angular-ui-router.js"></script>
-    <script src="js/ionic-angular.js"></script>
-    <script src="js/bower_components/angular-facebook/lib/angular-facebook.js"></script>
-    <script src="js/bower_components/angular-local-storage/angular-local-storage.js"></script>
-    <script src="http://localhost:35729/livereload.js"></script>
+  <!-- angularjs scripts -->
+  <script src="js/ionic.js"></script>
+  <script src="js/bower_components/angular/angular.js"></script>
+  <script src="js/angular/angular-animate.js"></script>
+  <script src="js/angular/angular-route.js"></script>
+  <script src="js/angular/angular-touch.js"></script>
+  <script src="js/angular/angular-sanitize.js"></script>
+  <script src="js/angular-ui/angular-ui-router.js"></script>
+  <script src="js/ionic-angular.js"></script>
+  <script src="js/bower_components/angular-facebook/lib/angular-facebook.js"></script>
+  <script src="js/bower_components/angular-local-storage/angular-local-storage.js"></script>
+  <script src="http://localhost:35729/livereload.js"></script>
 
-    <!-- cordova script -->
-    <!-- <script src="cordova.js"></script> -->   
-    <!-- your app's script -->
-    <script src="js/src/app.js"></script> 
-  
-    <!-- SERVICES -->
-    <script src="js/src/services/services.js"></script>
-    <script src="js/src/services/userService.js"></script>
-    <script src="js/src/services/deviceService.js"></script>
+  <!-- cordova script -->
+  <!-- <script src="cordova.js"></script> -->
+  <!-- your app's script -->
+  <script src="js/src/app.js"></script>
 
-    <!-- CONTROLLERS -->
-    <script src="js/src/controllers/controllers.js"></script>
-    <script src="js/src/controllers/cardsController.js"></script>
-    <script src="js/src/controllers/catBarController.js"></script>
-    <script src="js/src/controllers/loginController.js"></script>
-    <script src="js/src/controllers/mainController.js"></script>
-    <script src="js/src/controllers/signupController.js"></script>
-    <script src="js/src/controllers/topBarController.js"></script>
-    <script src="js/src/controllers/connectDevicesController.js"></script>
-  </head>
+  <!-- SERVICES -->
+  <script src="js/src/services/services.js"></script>
+  <script src="js/src/services/userService.js"></script>
+  <script src="js/src/services/deviceService.js"></script>
+
+  <!-- CONTROLLERS -->
+  <script src="js/src/controllers/controllers.js"></script>
+  <script src="js/src/controllers/cardsController.js"></script>
+  <script src="js/src/controllers/catBarController.js"></script>
+  <script src="js/src/controllers/loginController.js"></script>
+  <script src="js/src/controllers/mainController.js"></script>
+  <script src="js/src/controllers/signupController.js"></script>
+  <script src="js/src/controllers/topBarController.js"></script>
+  <script src="js/src/controllers/connectDevicesController.js"></script>
+</head>
 
   <!--
     'starter' is the name of this angular module (js/app.js)
@@ -53,8 +53,8 @@
 
     <side-menus>
 
-      <!-- CENTER CONTENT -->
-      <pane side-menu-content ng-controller="MainController">
+    <!-- CENTER CONTENT -->
+    <pane side-menu-content ng-controller="MainController">
         <!--
           The nav bar that will be updated as we navigate between views
           Additional attributes set its look, nav-bar animation and icons
@@ -79,13 +79,26 @@
       </pane>
 
       <!-- LEFT MENU -->
-      <side-menu side="left">
-        <header class="bar bar-header bar-dark">
-          <h1 class="title">Menu</h1>
-        </header>
-      </side-menu>
+      <side-menu side="left" ng-controller="MainController">
+        <div class="list">
 
-    </side-menus>
+          <div class="item item-divider">
+            Menu
+          </div>
 
-  </body>
+          <a class="item" href="" ng-click="toggleMenu()">
+            Profile
+          </a>
+          <a class="item" href="" ng-click="toggleMenu()">
+            Settings
+          </a>
+          <a class="item" href="" ng-click="toggleMenu()">
+            Other stuff
+          </a>
+        </div>
+    </side-menu>
+
+  </side-menus>
+
+</body>
 </html>
