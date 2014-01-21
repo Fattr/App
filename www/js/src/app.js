@@ -26,7 +26,7 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
      * Fittr
      */
 
-    // entry
+    // ENTRY 
     .state('entry', {
       url: '/',
       templateUrl: 'templates/entry.html',
@@ -44,11 +44,28 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
       controller: 'LoginController'
     })
 
-    // main
+    // MAIN
     .state('main', {
       url: '/main',
-      templateUrl: 'templates/main.html',
-      controller: 'MainController'
+      // abstract: true,
+      templateUrl: 'templates/main.html'
+    })
+    .state('main.stream', {
+      url: '/stream',
+      views: {
+        'catBar@': {
+          templateUrl: 'templates/catBar.html'
+          // controller: 'CatBarController'
+        },
+        'topBar@': {
+          templateUrl: 'templates/topBar.html'
+          // controller: 'TopBarController'
+        },
+        'cards@': {
+          templateUrl: 'templates/cards.html'
+          // controller: 'CardsController'
+        }
+      }
     })
 
     // User will connect their devices/services here
@@ -110,7 +127,6 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
-
 
 });
 
