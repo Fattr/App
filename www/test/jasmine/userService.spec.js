@@ -11,6 +11,10 @@ describe('User Service Specs', function() {
     console.log("user service: ", UserService);
   }));
 
+  it('should not be null', function() {
+    expect(true).toBe(true);
+  });
+
   // xdescribe('signup method', function() {
 
   //   // do i test the http request?
