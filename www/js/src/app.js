@@ -126,7 +126,7 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('main/stream');
+  $urlRouterProvider.otherwise('/');
 
 });
 
