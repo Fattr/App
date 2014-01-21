@@ -1,20 +1,24 @@
-<!--
-  This template loads for the 'tab.entry' state (app.js)
--->
 <view title="'Fittr'">
-  <content has-header="true" has-tabs="false" padding="true">
-    <h1>FITTR!</h1>
-    <a class="button button-block button-stable" href="#/signup">
-      Signup
-    </a>
-    <a class="button button-block button-stable" href="#/login">
-      Login
-    </a>  
-    <a class="button button-block button-stable" href="#/connect-devices">
-      Jump to Connect Devices
-    </a>    
-    <a class="button button-block button-stable" href="#/main/stream">
-      Jump to User stream
-    </a>  
+  <content has-header="true" has-tabs="false" padding="false">
+    <div class="mast-head"><p>FITTR<p></div>
+    <div class="button-container">
+      <a class="button button-block button-stable" href="#/signup">
+        Signup
+      </a>
+      <a class="button button-block button-stable" href="#/login">
+        Login
+      </a>  
+    </div>
+    <div class="debug">
+      <h3>Debug Only</h3>
+      <div class="button-container">
+        <a class="button button-block button-stable" href="#/connect-devices">
+          Jump to Connect Devices
+        </a>    
+        <a class="button button-block button-stable" href="#/main/stream">
+          Jump to User stream
+        </a>  
+      </div>
+    </div>
   </content>
 </view>

@@ -21,7 +21,7 @@ angular.module('fittr.services')
         var creatingUser = $q.defer();
         
         // configure http to send app access token along with POST
-        $http.defaults.headers.post.apikey = apiKey;
+        $http.defaults.headers.post.fittr-api-key = apiKey;
         $http.post(baseUrl, user)
           .success(function(data, status, headers, config) {
             console.log("data: ", data, "status: ", status);

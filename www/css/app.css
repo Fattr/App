@@ -6,6 +6,9 @@
   width: 96px;
   height: 96px;
 }
+.scroll-content {
+  background-color: #ccc;
+}
 
 input[type="email"], input[type="password"] {
   padding: 6px;
@@ -20,4 +23,22 @@ input[type="email"].error, input[type="password"].error {
 .tile {
   border: 1px solid #ccc;
   height: 75px;
+}
+
+.mast-head {
+  background-color: #ccc;
+  color: #fff;
+  padding: 40px;
+}
+.mast-head p {
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+.debug h3 {
+  margin-top: 30px;
+  text-align: center;
+}
+.button-container {
+  padding: 30px 40px;
 }
