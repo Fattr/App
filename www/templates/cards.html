@@ -1,18 +1,9 @@
 <content padding="true" style="margin-top: 190px; background: #999">
   CARDS
-<div class="card">
+<div class="card" ng-repeat="user in users">
   <div class="item item-text-wrap">
-    This is a basic Card with some text.
+    {{ user.name }}<br />
+    Steps: {{ user.steps | number }}
   </div>
 </div>
-<div class="card">
-  <div class="item item-text-wrap">
-    This is a basic Card with some text.
-  </div>
-</div>
-<div class="card">
-  <div class="item item-text-wrap">
-    This is a basic Card with some text.
-  </div>
-</div>  
 </content>
