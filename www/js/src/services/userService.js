@@ -84,6 +84,9 @@ angular.module('fittr.services')
       saveToLocal: function(userData) {
         console.log("saving user into localStorage");
         localStorageService.add('currentUser', userData);
+      },
+      retrieveFromLocal: function() {
+        localStorageService.get('currentUser');
       }
     };
   };
