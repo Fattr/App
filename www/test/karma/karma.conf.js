@@ -13,11 +13,22 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'js/angular/angular.js',
-      'js/angular/angular-mocks.js',
+      'js/bower_components/angular-mocks/angular-mocks.js',
       'js/angular-*/*.js',
       'js/ionic.js',
       'js/ionic-angular.js',
-      'js/src/**/*.js',
+      'js/bower_components/angular-facebook/lib/angular-facebook.js',
+      'js/bower_components/angular-local-storage/angular-local-storage.js',
+      'js/src/app.js',
+      'js/src/services/services.js',
+      'js/src/services/userService.js',
+      'js/src/services/deviceService.js',
+      'js/src/controllers/controllers.js',
+      'js/src/controllers/cardsController.js',
+      'js/src/controllers/loginController.js',
+      'js/src/controllers/mainController.js',
+      'js/src/controllers/signupController.js',
+      'js/src/controllers/connectDevicesController.js',
       'test/jasmine/**/*.js'
     ],
 

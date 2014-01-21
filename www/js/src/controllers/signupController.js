@@ -39,8 +39,11 @@ angular.module('fittr.controllers')
           UserService.retrieve(data._id)
             .then(function(data) {
               console.log("retrieve fulfilled: ", data);
+              // store user details in memory
+              UserService.save(data);
               // store user details in local storage?
               UserService.saveToLocal(data);
+              console.log(UserService.currentUser);
             });
           
           // move to connect devices state
