@@ -47,7 +47,7 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
     // MAIN
     .state('main', {
       url: '/main',
-      abstract: true,
+      // abstract: true,
       templateUrl: 'templates/main.html'
     })
     .state('main.stream', {
@@ -58,9 +58,9 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
           controller: 'CatBarController'
         },
         'topBar@': {
-          templateUrl: 'templates/topBar.html',
-          controller: 'TopBarController'
-        }  ,
+          templateUrl: 'templates/topBar.html'
+          // controller: 'TopBarController'
+        },
         'cards@': {
           templateUrl: 'templates/cards.html',
           controller: 'CardController'
