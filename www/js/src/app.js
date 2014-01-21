@@ -54,16 +54,16 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
       url: '/stream',
       views: {
         'catBar@': {
-          templateUrl: 'templates/catBar.html',
-          controller: 'CatBarController'
+          templateUrl: 'templates/catBar.html'
+          // controller: 'CatBarController'
         },
         'topBar@': {
           templateUrl: 'templates/topBar.html'
           // controller: 'TopBarController'
         },
         'cards@': {
-          templateUrl: 'templates/cards.html',
-          controller: 'CardController'
+          templateUrl: 'templates/cards.html'
+          // controller: 'CardsController'
         }
       }
     })

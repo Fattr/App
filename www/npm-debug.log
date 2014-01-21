@@ -28,22 +28,22 @@
 7 verbose install     'grunt-env' ] ]
 8 info preinstall fittr-client@0.0.0
 9 verbose readDependencies using package.json deps
-10 verbose already installed skipping karma-script-launcher@~0.1.0 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+10 verbose already installed skipping karma-chrome-launcher@~0.1.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 11 verbose already installed skipping grunt@~0.4.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 12 verbose already installed skipping express@~3.4.8 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-13 verbose already installed skipping karma-chrome-launcher@~0.1.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-14 verbose already installed skipping karma-firefox-launcher@~0.1.3 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+13 verbose already installed skipping karma-firefox-launcher@~0.1.3 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+14 verbose already installed skipping karma-script-launcher@~0.1.0 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 15 verbose already installed skipping karma-html2js-preprocessor@~0.1.0 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-16 verbose already installed skipping karma-coffee-preprocessor@~0.1.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-17 verbose already installed skipping karma-jasmine@~0.1.5 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+16 verbose already installed skipping karma-jasmine@~0.1.5 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+17 verbose already installed skipping karma-coffee-preprocessor@~0.1.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 18 verbose already installed skipping requirejs@~2.1.10 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 19 verbose already installed skipping karma-requirejs@~0.2.1 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-20 verbose already installed skipping karma@~0.10.9 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-21 verbose already installed skipping karma-phantomjs-launcher@~0.1.1 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+20 verbose already installed skipping karma-phantomjs-launcher@~0.1.1 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+21 verbose already installed skipping karma@~0.10.9 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 22 verbose already installed skipping grunt-karma@~0.7.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 23 verbose already installed skipping jshint@~2.4.1 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-24 verbose already installed skipping grunt-contrib-jshint@~0.8.0 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
-25 verbose already installed skipping grunt-contrib-watch@~0.5.3 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+24 verbose already installed skipping grunt-contrib-watch@~0.5.3 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
+25 verbose already installed skipping grunt-contrib-jshint@~0.8.0 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 26 verbose already installed skipping grunt-contrib-jasmine@0.5.1 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 27 verbose already installed skipping grunt-nodemon@~0.1.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
 28 verbose already installed skipping grunt-concurrent@~0.4.2 /Users/dwu/Desktop/hackreactor/fittr-too/App/www
