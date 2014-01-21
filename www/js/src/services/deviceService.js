@@ -8,22 +8,22 @@ angular.module('fittr.services')
   devices = [
       {
         deviceName: "FitBit",
-        imgUrl: "../img/js_logo.jpeg",
+        imgUrl: "img/ionic.png",
         apiUrl: ""
       },
       {
         deviceName: "Jawbone Up",
-        imgUrl: "../img/js_logo.jpeg",
+        imgUrl: "img/ionic.png",
         apiUrl: ""
       },
       {
         deviceName: "Moves",
-        imgUrl: "../img/js_logo.jpeg",
+        imgUrl: "img/ionic.png",
         apiUrl: ""
       },
       {
         deviceName: "Runkeeper",
-        imgUrl: "../img/js_logo.jpeg",
+        imgUrl: "img/ionic.png",
         apiUrl: ""
       }
     ];
