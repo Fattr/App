@@ -39,6 +39,7 @@
     <script src="js/src/controllers/controllers.js"></script>
     <script src="js/src/controllers/cardsController.js"></script>
     <script src="js/src/controllers/catBarController.js"></script>
+    <script src="js/src/controllers/indexController.js"></script>
     <script src="js/src/controllers/loginController.js"></script>
     <script src="js/src/controllers/mainController.js"></script>
     <script src="js/src/controllers/signupController.js"></script>
@@ -56,10 +57,12 @@
       Additional attributes set its look, nav-bar animation and icons
       Icons provided by Ionicons: http://ionicons.com/
     -->
+    <div ng-controller="IndexController">
     <nav-bar type="bar-dark"
              animation="nav-title-slide-ios7"
              back-button-type="button-icon"
-             back-button-icon="icon ion-arrow-left-c"></nav-bar>
+             back-button-icon="icon ion-arrow-left-c">
+    </nav-bar>
 
     <!--
       The views will be rendered in the <nav-view> directive below
