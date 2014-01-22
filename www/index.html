@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -39,7 +40,6 @@
     <script src="js/src/controllers/controllers.js"></script>
     <script src="js/src/controllers/cardsController.js"></script>
     <script src="js/src/controllers/catBarController.js"></script>
-    <script src="js/src/controllers/indexController.js"></script>
     <script src="js/src/controllers/loginController.js"></script>
     <script src="js/src/controllers/mainController.js"></script>
     <script src="js/src/controllers/signupController.js"></script>
@@ -52,24 +52,53 @@
   -->
   <body ng-app="fittr" animation="slide-left-right-ios7">
 
-    <!--
-      The nav bar that will be updated as we navigate between views
-      Additional attributes set its look, nav-bar animation and icons
-      Icons provided by Ionicons: http://ionicons.com/
-    -->
-    <div ng-controller="IndexController">
-    <nav-bar type="bar-dark"
-             animation="nav-title-slide-ios7"
-             back-button-type="button-icon"
-             back-button-icon="icon ion-arrow-left-c">
-    </nav-bar>
+    <side-menus>
+    <!-- CENTER CONTENT -->
+    <pane side-menu-content ng-controller="MainController">
+        <!--
+          The nav bar that will be updated as we navigate between views
+          Additional attributes set its look, nav-bar animation and icons
+          Icons provided by Ionicons: http://ionicons.com/
+        -->
+        <div class="bar bar-header bar-stable">
+          <button class="button button-icon icon ion-navicon" ng-click="toggleMenu()"></button>
+          <div class="h1 title">Main | Stream</div>
+        </div>
 
-    <!--
-      The views will be rendered in the <nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
-    <nav-view></nav-view>
+        <!--<nav-bar type="bar-positive"
+                 animation="nav-title-slide-ios7"
+                 back-button-type="button-icon"
+                 back-button-icon="icon ion-arrow-left-c"></nav-bar>-->
 
-  </body>
+        <!--
+          The views will be rendered in the <nav-view> directive below
+          Templates are in the /templates folder (but you could also
+          have templates inline in this html file if you'd like).
+        -->
+        <nav-view></nav-view>
+      </pane>
+
+      <!-- LEFT MENU -->
+      <side-menu side="left" ng-controller="MainController">
+        <div class="list">
+
+          <div class="item item-divider">
+            Menu
+          </div>
+
+          <a class="item" href="" ng-click="toggleMenu()">
+            Profile
+          </a>
+          <a class="item" href="" ng-click="toggleMenu()">
+            Settings
+          </a>
+          <a class="item" href="" ng-click="toggleMenu()">
+            Other stuff
+          </a>
+        </div>
+      </side-menu>
+
+    </side-menus>
+
+</body>
 </html>

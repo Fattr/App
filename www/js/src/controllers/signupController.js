@@ -1,8 +1,6 @@
 angular.module('fittr.controllers')
 
   .controller('SignupController', function($scope, $http, UserService, $state) {
-    // to indicate that we are no longer at the home page
-    $scope.setHome(false);
     $scope.title = "Sign Up";
     $scope.user = {};
 

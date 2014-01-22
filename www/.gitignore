@@ -1,4 +1,4 @@
-npm-debug.log
+../npm-debug.log
 .nodemonignore
 node_modules
 js/bower_components

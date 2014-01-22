@@ -23,4 +23,8 @@ angular.module('fittr.controllers')
       steps: 15000
     }
   ];
+
+  $scope.back = function() {
+    
+  };
 });
