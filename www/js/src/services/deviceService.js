@@ -18,7 +18,7 @@ angular.module('fittr.services')
       },
       {
         deviceName: "Moves",
-        imgUrl: "img/ionic.png",
+        imgUrl: "img/moves_logo.png",
         apiUrl: ""
       },
       {

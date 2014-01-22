@@ -12,15 +12,7 @@ body {
   background-color: #ccc;
 }
 
-input[type="email"], input[type="password"] {
-  padding: 6px;
-}
-input[type="email"].success, input[type="password"].success {
-  border: 2px solid green;
-}
-input[type="email"].error, input[type="password"].error {
-  border: 2px solid red;
-}
+
 
 .tile {
   border: 1px solid #ccc;
@@ -52,6 +44,7 @@ input[type="email"].error, input[type="password"].error {
 
 /* Signup Form
  * ========================================================================== */
+
 form[name="signupLoginForm"] {
   margin-top: 60px;
 }
@@ -61,6 +54,18 @@ form[name="signupLoginForm"] i.ion-email, i.ion-locked{
   font-size: 20px;
   color: #999;
 }
+input[type="email"], input[type="password"] {
+  padding: 6px;
+  font-size: 18px;
+  line-height: 27px;
+}
+input[type="email"].success, input[type="password"].success {
+  border: 2px solid green;
+}
+input[type="email"].error, input[type="password"].error {
+  border: 2px solid red;
+}
+
 .list-inset {
   background-color: #ccc;
 }
