@@ -7,5 +7,8 @@ angular.module('fittr.controllers')
   };
 
   $scope.catBarVis = true;
-  // $scope.
+  $scope.toggleSearch = function() {
+    $scope.catBarVis = !$scope.catBarVis;
+  };
+  
 });
