@@ -15,6 +15,8 @@ angular.module('fittr.services')
     return {
       // persist user details in memory
       currentUser: {},
+      // TODO: integrate with user object.  quick and dirty hack :/
+      sessionToken: '',
 
       signup: function(user) {
         console.log(user, apiKey);
@@ -80,6 +82,10 @@ angular.module('fittr.services')
 
       save: function(userData) {
         this.currentUser = userData;
+      },
+
+      setSessionToken: function(token) {
+        this.sessionToken = token;
       },
 
       saveToLocal: function(userData) {

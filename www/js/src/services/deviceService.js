@@ -3,13 +3,14 @@ angular.module('fittr.services')
 /**
  * A simple example service that returns some data.
  */
-.factory('DeviceService', function() {
+.factory('DeviceService', function(UserService) {
+  var baseUrl = "http://localhost:3000/fitbit";
   // Some fake testing data
   devices = [
       {
         deviceName: "FitBit",
         imgUrl: "img/fitbit_logos/1024x1024/png/fitbit-1024-blk-transparent.png",
-        apiUrl: ""
+        apiUrl: baseUrl
       },
       {
         deviceName: "Jawbone Up",
@@ -27,10 +28,21 @@ angular.module('fittr.services')
         apiUrl: ""
       }
     ];
+
+    services = [
+      {
+        serviceName: "Facebook",
+        imgUrl: "img/FB-f-Logo__blue_512.png",
+        apiUrl: ""
+      }
+    ];
   
   return {
-    all: function() {
+    allDevices: function() {
       return devices;
+    },
+    allServices: function() {
+      return services;
     },
     get: function(deviceId) {
       // Simple index lookup

@@ -43,6 +43,10 @@ angular.module('fittr.controllers')
           // clear form
           resetForm(ngFormController);
 
+          // store access_token in user object
+          UserService.setSessionToken(data._access_token);
+          console.log("session token: ", UserService.sessionToken);
+
           // ask UserService to grab user details from api
           UserService.retrieve(data._id, data._access_token)
             .then(function(data) {
