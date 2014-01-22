@@ -2,3 +2,6 @@
 .nodemonignore
 node_modules
 js/bower_components
+scss
+css/backup
+
