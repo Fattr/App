@@ -1,10 +1,15 @@
 /* Your app's CSS, go crazy, make it your own */
-
+body {
+  background-color: #ccc;
+}
 .ionic-logo {
   display: block;
   margin: 15px auto;
   width: 96px;
   height: 96px;
+}
+.pane {
+  background-color: #ccc;
 }
 
 input[type="email"], input[type="password"] {
@@ -20,4 +25,53 @@ input[type="email"].error, input[type="password"].error {
 .tile {
   border: 1px solid #ccc;
   height: 75px;
+}
+.mast-head {
+  background-color: #ccc;
+  color: #fff;
+  padding: 40px;
+}
+.mast-head {
+  font-weight: bold;
+  text-align: center;
+}
+.mast-head .title {
+  font-size: 30px;
+}
+.mast-head p {
+  font-size: 20px;
+  line-height: 25px;
+}
+.debug h3 {
+  margin-top: 30px;
+  text-align: center;
+}
+.button-container {
+  padding: 30px 40px;
+}
+
+/* Signup Form
+ * ========================================================================== */
+form[name="signupLoginForm"] {
+  margin-top: 60px;
+}
+form[name="signupLoginForm"] i.ion-email, i.ion-locked{
+  margin-right: 10px;
+  margin-left: 6px;
+  font-size: 20px;
+  color: #999;
+}
+.list-inset {
+  background-color: #ccc;
+}
+.list-inset .button.button-balanced {
+  margin-top: 20px;
+}
+.success {
+  color: rgba(39, 174, 96,1.0);
+  font-size: 24px;
+}
+.error {
+  color: rgba(192, 57, 43,1.0);
+  font-size: 24px;
 }

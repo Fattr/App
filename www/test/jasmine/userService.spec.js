@@ -4,73 +4,77 @@
 
 describe('User Service Specs', function() {
   var UserService;
+  var localStorageService;
+  var baseUrl = "http://localhost:3000/users";
 
-  beforeEach(module('fittr.services'));
-  beforeEach(inject(function(_UserService_) {
+  beforeEach(module('fittr.services', 'LocalStorageModule'));
+  beforeEach(inject(function(_UserService_, _localStorageService_) {
     UserService = _UserService_;
-    console.log("user service: ", UserService);
+    localStorageService = _localStorageService_;
   }));
 
   it('should not be null', function() {
-    expect(true).toBe(true);
+    expect(UserService).not.toBe(null);
   });
 
-  // xdescribe('signup method', function() {
+  describe('signup method', function() {
 
-  //   // do i test the http request?
+    // do i test the http request?
+    it('should return a promise object when invoked', function() {
+      var promise = UserService.signup();
 
-  //   it('should return a promise object when invoked', function() {
-  //     var promise = UserService.signup();
+      expect(typeof promise).toEqual('object');
+      expect(typeof promise.then).toEqual('function');
+    });
+  });
 
-  //     expect(typeof promise).toEqual('object');
-  //     expect(typeof promise.then).toEqual('function');
-  //   });
-  // });
+  describe('retrieve method', function() {
 
-  // xdescribe('retrieve method', function() {
+    // do i test the http request?
+    it('should return a promise object when invoked', function() {
+      var promise = UserService.retrieve();
 
-  //   // do i test the http request?
+      expect(typeof promise).toEqual('object');
+      expect(typeof promise.then).toEqual('function');
+    });
+  });
 
-  //   it('should return a promise object when invoked', function() {
-  //     var promise = UserService.retrieve();
+  describe('saving users', function() {
+    var user;
 
-  //     expect(typeof promise).toEqual('object');
-  //     expect(typeof promise.then).toEqual('function');
-  //   });
-  // });
+    beforeEach(function() {
+      user = {
+        'email':'karl@gmail.com',
+        '_id':'007',
+        'following':[],
+        'services':[],
+        'updatedAt':'2014-01-20T20:06:43.598Z',
+        'createdAt':'2014-01-20T20:06:43.598Z'
+      };
+    });
 
-  // describe('saving users', function() {
-  //   var user;
+    describe('save method', function() {
+      it('should save user details to user property', function() {
+        UserService.save(user);
+        expect(typeof UserService.currentUser).toEqual('object');
+        expect(UserService.currentUser.email).toEqual('karl@gmail.com');
+        expect(UserService.currentUser._id).toEqual('007');
+        expect(UserService.currentUser.services).toEqual([]);
+      });
+    });
 
-  //   beforeEach(function() {
-  //     user = {
-  //       'email':'karl@gmail.com',
-  //       '_id':'007',
-  //       'following':[],
-  //       'services':[],
-  //       'updatedAt':'2014-01-20T20:06:43.598Z',
-  //       'createdAt':'2014-01-20T20:06:43.598Z'
-  //     };
-  //   });
+    xdescribe('saveToLocal', function() {
+      it('should save user details to localStorage', function() {
+        var userFromLocal;
 
-  //   describe('save method', function() {
-  //     it('should save user details to user property', function() {
-  //       UserService.save(user);
-  //       expect(user).toEqual('object');
-  //       expect(user.email).toEqual('karl@gmail.com');
-  //       expect(user._id).toEqual('007');
-  //       expect(user.services).toEqual([]);
-  //     });
-  //   });
+        UserService.saveToLocal(user);
+        userFromLocal = UserService.retrieveFromLocal();
 
-  //   xdescribe('saveToLocal', function() {
-  //     it('should save user details to user property', function() {
-  //       UserService.saveToLocal(user);
-  //       expect(user).toEqual('object');
-  //       expect(user.email).toEqual();
-  //       expect(user.email).toEqual('');
-  //       expect(user.email).toEqual('');
-  //     });
-  //   });
-  // });
+        expect(userFromLocal).toEqual('object');
+        expect(userFromLocal.email).toEqual('karl@gmail.com');
+        expect(userFromLocal._id).toEqual('007');
+        expect(userFromLocal.services).toEqual('[]');
+      });
+    });
+  });
 });

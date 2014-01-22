@@ -21,7 +21,7 @@ angular.module('fittr.services')
         var creatingUser = $q.defer();
         
         // configure http to send app access token along with POST
-        $http.defaults.headers.post.apikey = apiKey;
+        $http.defaults.headers.common['fittr-api-key'] = apiKey;
         $http.post(baseUrl, user)
           .success(function(data, status, headers, config) {
             console.log("data: ", data, "status: ", status);
@@ -62,9 +62,10 @@ angular.module('fittr.services')
         // return creatingUser.promise;
       },
 
-      retrieve: function(userId) {
+      retrieve: function(userId, token) {
         var retrievingUser = $q.defer();
-        $http.defaults.headers.common.apikey = apiKey;
+        $http.defaults.headers.common['fittr-api-key'] = apiKey;
+        $http.defaults.headers.common['fittr-session-token'] = token;
         console.log("retrieve: ", userId);
         $http.get(baseUrl + "/" + userId)
           .success(function(data, status, headers, config) {
@@ -84,6 +85,9 @@ angular.module('fittr.services')
       saveToLocal: function(userData) {
         console.log("saving user into localStorage");
         localStorageService.add('currentUser', userData);
+      },
+      retrieveFromLocal: function() {
+        localStorageService.get('currentUser');
       }
     };
   };

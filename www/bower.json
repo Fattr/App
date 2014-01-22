@@ -18,6 +18,7 @@
   "dependencies": {
     "angular-facebook": "~0.2.2",
     "angular-local-storage": "*",
-    "angular-mocks": "~1.2.9"
+    "angular-mocks": "~1.2.9",
+    "oauth.io": "*"
   }
 }
