@@ -6,4 +6,9 @@ angular.module('fittr.controllers')
     $scope.sideMenuController.toggleLeft();
   };
 
+  $scope.catBarVis = true;
+  $scope.toggleSearch = function() {
+    $scope.catBarVis = !$scope.catBarVis;
+  };
+  
 });
