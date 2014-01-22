@@ -53,8 +53,8 @@ angular.module('fittr', ['ionic', 'ngRoute', 'LocalStorageModule', 'fittr.servic
     .state('main.stream', {
       url: '/stream',
       views: {
-        'catBar@': {
-          templateUrl: 'templates/catBar.html'
+        'searchBar@': {
+          templateUrl: 'templates/searchBar.html'
           // controller: 'CatBarController'
         },
         'topBar@': {
