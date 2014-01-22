@@ -1,27 +1,17 @@
 angular.module('fittr.controllers')
 
-  .controller('ConnectDevicesController', function($scope, DeviceService) {
+  .controller('ConnectDevicesController', function($scope, $http, DeviceService) {
     // TODO: move devices to a service
-    $scope.devices = DeviceService.all();
+    $scope.devices = DeviceService.allDevices();
+    $scope.services = DeviceService.allServices();
 
-    $scope.connectFitBit = function() {
-      OAuth.initialize('3xTGDgM-_y94I7n-9QQFTuycM-0');
-
-      // Oauth.redirect('fitbit', {authorize:{display:"touch"}}, '/connect-devices');
-
-      // OAuth.callback('fitbit', function(err, result) {
-      //   if (err) {
-      //     console.log(err); // do something with error
-      //     return;
-      //   }
-      //   console.log(result);
-      // });
-      OAuth.popup('fitbit', {authorize:{display:"touch"}}, function(error, result) { 
-        if (error) {
-          console.log(error);
-          return;
-        }
-        console.log(result);
-      });
-    };
+    // $scope.authFitBit = function() {
+    //   $http.get($scope.devices[0].apiUrl)
+    //     .success(function(data) {
+    //       console.log(data);
+    //     })
+    //     .error(function(reason) {
+    //       console.log(reason);
+    //     });
+    // };
   });

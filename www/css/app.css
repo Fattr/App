@@ -9,25 +9,16 @@ body {
   height: 96px;
 }
 .pane {
-  background-color: #ccc;
+  background-color: #303747;
 }
 
-input[type="email"], input[type="password"] {
-  padding: 6px;
-}
-input[type="email"].success, input[type="password"].success {
-  border: 2px solid green;
-}
-input[type="email"].error, input[type="password"].error {
-  border: 2px solid red;
-}
+
 
 .tile {
   border: 1px solid #ccc;
   height: 75px;
 }
 .mast-head {
-  background-color: #ccc;
   color: #fff;
   padding: 40px;
 }
@@ -43,6 +34,7 @@ input[type="email"].error, input[type="password"].error {
   line-height: 25px;
 }
 .debug h3 {
+  color: #fff;
   margin-top: 30px;
   text-align: center;
 }
@@ -52,6 +44,7 @@ input[type="email"].error, input[type="password"].error {
 
 /* Signup Form
  * ========================================================================== */
+
 form[name="signupLoginForm"] {
   margin-top: 60px;
 }
@@ -61,8 +54,21 @@ form[name="signupLoginForm"] i.ion-email, i.ion-locked{
   font-size: 20px;
   color: #999;
 }
+input[type="email"], input[type="password"] {
+  padding: 6px;
+  font-size: 18px;
+  line-height: 27px;
+}
+input[type="email"].success, input[type="password"].success {
+  border: 2px solid green;
+}
+input[type="email"].error, input[type="password"].error {
+  border: 2px solid red;
+}
+
+/* set the same as the .pane background-color */
 .list-inset {
-  background-color: #ccc;
+  background-color: #303747;
 }
 .list-inset .button.button-balanced {
   margin-top: 20px;
@@ -75,3 +81,9 @@ form[name="signupLoginForm"] i.ion-email, i.ion-locked{
   color: rgba(192, 57, 43,1.0);
   font-size: 24px;
 }
+
+/* Connect Devices Pages
+ * ========================================================================== */
+
+
+
